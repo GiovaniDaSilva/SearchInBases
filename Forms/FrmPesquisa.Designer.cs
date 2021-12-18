@@ -46,6 +46,10 @@ namespace SearchInBases.Forms
             this.btnResultados = new System.Windows.Forms.ToolStripButton();
             this.btnClear = new System.Windows.Forms.ToolStripButton();
             this.txtConsole = new System.Windows.Forms.RichTextBox();
+            this.btnLog = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -144,7 +148,6 @@ namespace SearchInBases.Forms
             this.txtSQL.CharWidth = 8;
             this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtSQL.IsReplaceMode = false;
             this.txtSQL.Location = new System.Drawing.Point(179, 147);
             this.txtSQL.Name = "txtSQL";
@@ -205,7 +208,11 @@ namespace SearchInBases.Forms
             // 
             this.toolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnConexoes,
+            this.toolStripSeparator1,
             this.btnResultados,
+            this.toolStripSeparator2,
+            this.btnLog,
+            this.toolStripSeparator3,
             this.btnClear});
             this.toolBar.Location = new System.Drawing.Point(0, 0);
             this.toolBar.Name = "toolBar";
@@ -251,9 +258,35 @@ namespace SearchInBases.Forms
             this.txtConsole.Location = new System.Drawing.Point(3, 8);
             this.txtConsole.Name = "txtConsole";
             this.txtConsole.ReadOnly = true;
-            this.txtConsole.Size = new System.Drawing.Size(923, 198);
+            this.txtConsole.Size = new System.Drawing.Size(923, 200);
             this.txtConsole.TabIndex = 2;
             this.txtConsole.Text = "";
+            // 
+            // btnLog
+            // 
+            this.btnLog.Image = ((System.Drawing.Image)(resources.GetObject("btnLog.Image")));
+            this.btnLog.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnLog.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLog.Name = "btnLog";
+            this.btnLog.Size = new System.Drawing.Size(63, 36);
+            this.btnLog.Text = "Log";
+            this.btnLog.ToolTipText = "Logs";
+            this.btnLog.Click += new System.EventHandler(this.btnLog_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 39);
             // 
             // FrmPesquisa
             // 
@@ -298,5 +331,9 @@ namespace SearchInBases.Forms
         private System.Windows.Forms.ToolStripButton btnResultados;
         private System.Windows.Forms.ToolStripButton btnClear;
         private FastColoredTextBoxNS.FastColoredTextBox txtSQL;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton btnLog;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }

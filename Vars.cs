@@ -9,6 +9,7 @@ namespace SearchInBases
     {
         public static string pathApp = AppDomain.CurrentDomain.BaseDirectory;
         public static string pathResultados = AppDomain.CurrentDomain.BaseDirectory + @"Resultados\";
+        public static string pathLog = AppDomain.CurrentDomain.BaseDirectory + "log.txt";
         public static string appName = "Search In Bases";
         public static string nameFileConfig = "config.json";
         public static string nameFileLog = "log.txt";

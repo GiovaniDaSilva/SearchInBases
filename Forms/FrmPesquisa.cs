@@ -165,8 +165,9 @@ namespace SearchInBases.Forms
             FastColoredTextBoxService.TextChanged(e, txtSQL);
         }
 
-        
-
-       
+        private void btnLog_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer", Vars.pathLog);
+        }
     }
 }
