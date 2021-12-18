@@ -15,7 +15,8 @@ namespace SearchInBases.Forms
 
         private PesquisaService _pesquisaService = new PesquisaService();
         private ConsoleService _consoleService;
-               
+
+
         public FrmPesquisa()
         {
             InitializeComponent();            
@@ -158,5 +159,14 @@ namespace SearchInBases.Forms
         {
             Process.Start("explorer", Vars.pathResultados);
         }
+
+        private void txtSQL_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
+        {
+            FastColoredTextBoxService.TextChanged(e, txtSQL);
+        }
+
+        
+
+       
     }
 }

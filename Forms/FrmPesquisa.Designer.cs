@@ -29,28 +29,30 @@ namespace SearchInBases.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPesquisa));
             this.panel1 = new System.Windows.Forms.Panel();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.lblStatus = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtSQL = new FastColoredTextBoxNS.FastColoredTextBox();
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.lblSQL = new System.Windows.Forms.Label();
             this.lblConexoes = new System.Windows.Forms.Label();
             this.cblConexoes = new System.Windows.Forms.CheckedListBox();
-            this.txtSQL = new System.Windows.Forms.RichTextBox();
             this.toolBar = new System.Windows.Forms.ToolStrip();
             this.btnConexoes = new System.Windows.Forms.ToolStripButton();
             this.btnResultados = new System.Windows.Forms.ToolStripButton();
-            this.txtConsole = new System.Windows.Forms.RichTextBox();
             this.btnClear = new System.Windows.Forms.ToolStripButton();
+            this.txtConsole = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSQL)).BeginInit();
             this.toolBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,7 +63,7 @@ namespace SearchInBases.Forms
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 633);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(840, 25);
+            this.panel1.Size = new System.Drawing.Size(937, 25);
             this.panel1.TabIndex = 0;
             // 
             // progressBar
@@ -69,7 +71,7 @@ namespace SearchInBases.Forms
             this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar.Location = new System.Drawing.Point(594, 2);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(236, 20);
+            this.progressBar.Size = new System.Drawing.Size(333, 20);
             this.progressBar.TabIndex = 1;
             // 
             // lblStatus
@@ -99,24 +101,60 @@ namespace SearchInBases.Forms
             // 
             this.splitContainer1.Panel2.Controls.Add(this.txtConsole);
             this.splitContainer1.Panel2MinSize = 50;
-            this.splitContainer1.Size = new System.Drawing.Size(840, 633);
+            this.splitContainer1.Size = new System.Drawing.Size(937, 633);
             this.splitContainer1.SplitterDistance = 431;
             this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 2;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.txtSQL);
             this.panel2.Controls.Add(this.btnPesquisar);
             this.panel2.Controls.Add(this.lblSQL);
             this.panel2.Controls.Add(this.lblConexoes);
             this.panel2.Controls.Add(this.cblConexoes);
-            this.panel2.Controls.Add(this.txtSQL);
             this.panel2.Controls.Add(this.toolBar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(838, 429);
+            this.panel2.Size = new System.Drawing.Size(935, 429);
             this.panel2.TabIndex = 0;
+            // 
+            // txtSQL
+            // 
+            this.txtSQL.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSQL.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.txtSQL.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*" +
+    "(?<range>:)\\s*(?<range>[^;]+);";
+            this.txtSQL.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.txtSQL.BackBrush = null;
+            this.txtSQL.CharHeight = 14;
+            this.txtSQL.CharWidth = 8;
+            this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtSQL.IsReplaceMode = false;
+            this.txtSQL.Location = new System.Drawing.Point(179, 147);
+            this.txtSQL.Name = "txtSQL";
+            this.txtSQL.Paddings = new System.Windows.Forms.Padding(0);
+            this.txtSQL.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.txtSQL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtSQL.ServiceColors")));
+            this.txtSQL.Size = new System.Drawing.Size(736, 274);
+            this.txtSQL.TabIndex = 9;
+            this.txtSQL.Zoom = 100;
+            this.txtSQL.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.txtSQL_TextChanged);
             // 
             // btnPesquisar
             // 
@@ -163,17 +201,6 @@ namespace SearchInBases.Forms
             this.cblConexoes.TabIndex = 5;
             this.cblConexoes.SelectedValueChanged += new System.EventHandler(this.cblConexoes_SelectedValueChanged);
             // 
-            // txtSQL
-            // 
-            this.txtSQL.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSQL.Location = new System.Drawing.Point(179, 147);
-            this.txtSQL.Name = "txtSQL";
-            this.txtSQL.Size = new System.Drawing.Size(648, 274);
-            this.txtSQL.TabIndex = 4;
-            this.txtSQL.Text = "";
-            // 
             // toolBar
             // 
             this.toolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -182,7 +209,7 @@ namespace SearchInBases.Forms
             this.btnClear});
             this.toolBar.Location = new System.Drawing.Point(0, 0);
             this.toolBar.Name = "toolBar";
-            this.toolBar.Size = new System.Drawing.Size(838, 39);
+            this.toolBar.Size = new System.Drawing.Size(935, 39);
             this.toolBar.TabIndex = 3;
             this.toolBar.Text = "toolStrip1";
             // 
@@ -206,18 +233,6 @@ namespace SearchInBases.Forms
             this.btnResultados.Text = "Resultados";
             this.btnResultados.Click += new System.EventHandler(this.btnResultados_Click);
             // 
-            // txtConsole
-            // 
-            this.txtConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtConsole.Location = new System.Drawing.Point(3, 8);
-            this.txtConsole.Name = "txtConsole";
-            this.txtConsole.ReadOnly = true;
-            this.txtConsole.Size = new System.Drawing.Size(826, 194);
-            this.txtConsole.TabIndex = 2;
-            this.txtConsole.Text = "";
-            // 
             // btnClear
             // 
             this.btnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnClear.Image")));
@@ -228,11 +243,23 @@ namespace SearchInBases.Forms
             this.btnClear.Text = "Clear";
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // txtConsole
+            // 
+            this.txtConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtConsole.Location = new System.Drawing.Point(3, 8);
+            this.txtConsole.Name = "txtConsole";
+            this.txtConsole.ReadOnly = true;
+            this.txtConsole.Size = new System.Drawing.Size(923, 198);
+            this.txtConsole.TabIndex = 2;
+            this.txtConsole.Text = "";
+            // 
             // FrmPesquisa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(840, 658);
+            this.ClientSize = new System.Drawing.Size(937, 658);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel1);
             this.Name = "FrmPesquisa";
@@ -246,6 +273,7 @@ namespace SearchInBases.Forms
             this.splitContainer1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSQL)).EndInit();
             this.toolBar.ResumeLayout(false);
             this.toolBar.PerformLayout();
             this.ResumeLayout(false);
@@ -263,12 +291,12 @@ namespace SearchInBases.Forms
         private System.Windows.Forms.ToolStrip toolBar;
         private System.Windows.Forms.ToolStripButton btnConexoes;
         private System.Windows.Forms.CheckedListBox cblConexoes;
-        private System.Windows.Forms.RichTextBox txtSQL;
         private System.Windows.Forms.Label lblConexoes;
         private System.Windows.Forms.Label lblSQL;
         private System.Windows.Forms.Button btnPesquisar;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.ToolStripButton btnResultados;
         private System.Windows.Forms.ToolStripButton btnClear;
+        private FastColoredTextBoxNS.FastColoredTextBox txtSQL;
     }
 }
