@@ -56,6 +56,8 @@ namespace SearchInBases.Services
             palavras.Add("begin");                        
             palavras.Add("end");
             palavras.Add("cast");
+            palavras.Add("year");
+            palavras.Add("format");
 
 
 

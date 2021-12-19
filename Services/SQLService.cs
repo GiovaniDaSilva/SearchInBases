@@ -18,7 +18,7 @@ namespace SearchInBases.Services
 
         public static bool permitirExecutarComando(SQLParams sqlParams) 
         {
-            Log.Add("Somente Consulta: " + somente_consulta +  "; Comando executado: " + sqlParams.getSQLWithFiltro());
+            Log.Add("Somente Consulta: " + somente_consulta +  "; Comando executado: " + sqlParams.GetSQL());
 
             InicializarListas();
 
@@ -41,7 +41,7 @@ namespace SearchInBases.Services
         private static bool validarSQlSomenteConsulta(SQLParams sqlParams)
         {
             bool sqlValido = true;
-            string sql = sqlParams.getSQLWithFiltro().ToUpper();
+            string sql = sqlParams.GetSQL().ToUpper();
             
             foreach(var proibido in palavras_proibidas)
             {
@@ -92,7 +92,7 @@ namespace SearchInBases.Services
         {
             bool sqlValido = true;
 
-            string sql = sqlParams.getSQLWithFiltro().ToUpper();
+            string sql = sqlParams.GetSQL().ToUpper();
 
             foreach (var obrigatoria in palavras_obrigatorias)
             {

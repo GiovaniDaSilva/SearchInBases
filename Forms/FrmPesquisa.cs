@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SearchInBases.Entity.SQLFiltro;
 
 namespace SearchInBases.Forms
 {
@@ -42,12 +43,13 @@ namespace SearchInBases.Forms
 
         private void FrmPesquisa_Load(object sender, EventArgs e)
         {
+            this.Text = Vars.appNameWithVersion;
             _consoleService = new ConsoleService(txtConsole);
             lblStatus.Text = status_parado;
 
             foreach (var conn in Vars.connections)
             {
-                cblConexoes.Items.Add(conn.connectionName, conn.habilitado);
+                lvConexoes.Items.Add(conn.connectionName, 0);
             }
         }
 
@@ -56,10 +58,11 @@ namespace SearchInBases.Forms
             try
             {
                 LimparConsole();
-
+                validarConexoesSelecionadas();
                 SQLParams sqlParams = montarSQLParams();
                 _pesquisaService.validarComandoSQL(sqlParams);
                 Task.Run(() => { _pesquisaService.Pesquisar(atualizaConsole, alterarStatusApp, sqlParams); });
+                txtConsole.Focus();
 
             }
             catch (Message.MessageException ex)
@@ -72,6 +75,14 @@ namespace SearchInBases.Forms
             }            
         }
 
+        private void validarConexoesSelecionadas()
+        {
+            if(!Vars.connections.Exists(c => c.habilitado))
+            {
+                throw new Message.MessageException("Selecione uma conexão para a busca.");
+            }
+        }
+
         private void LimparConsole()
         {
             txtConsole.Clear();
@@ -80,29 +91,20 @@ namespace SearchInBases.Forms
 
         private SQLParams montarSQLParams()
         {
-            return new SQLParams(txtSQL.Text, null);
-        }
+            enuStatusBase statusBase = enuStatusBase.Ambos;
+            if (rbAtiva.Checked)
+                statusBase = enuStatusBase.Ativa;
+            else if(rbInativa.Checked)
+                statusBase = enuStatusBase.Inativa;
 
-        private void cblConexoes_SelectedValueChanged(object sender, EventArgs e)
-        {
-            try
-            {                
-                if (cblConexoes.SelectedIndex <= -1) return;
+            enuAmbiente ambiente = enuAmbiente.Ambos;
+            if (rbInterno.Checked)
+                ambiente = enuAmbiente.Interno;
+            else if (rbProducao.Checked)
+                ambiente = enuAmbiente.Producao;
 
-                var nameConnSelected = cblConexoes.SelectedItem;                
-                foreach (var conn in Vars.connections)
-                {
-                    if (conn.connectionName.Equals(nameConnSelected))
-                    {
-                        conn.habilitado = cblConexoes.GetItemChecked(cblConexoes.SelectedIndex);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Message.Error("Ocorreu um problema ao selecionar a conexão");
-                ErroService.TratarErro(ex);
-            }            
+            SQLFiltro sqlFiltro = new SQLFiltro(statusBase, ambiente);
+            return new SQLParams(txtSQL.Text, sqlFiltro);
         }
 
         private void atualizaConsole(string message)
@@ -133,7 +135,7 @@ namespace SearchInBases.Forms
 
                 btnPesquisar.Enabled = habilitado;
                 txtSQL.Enabled = habilitado;
-                cblConexoes.Enabled = habilitado;
+                lvConexoes.Enabled = habilitado;
                 toolBar.Enabled = habilitado;
 
                 if (!habilitado)
@@ -168,6 +170,46 @@ namespace SearchInBases.Forms
         private void btnLog_Click(object sender, EventArgs e)
         {
             Process.Start("explorer", Vars.pathLog);
+        }
+
+        private void lvConexoes_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            try
+            {
+                if (lvConexoes.Items.Count <= 0) return;                
+
+                var nameConnsSelected = lvConexoes.Items;
+                foreach (var nameConn in nameConnsSelected)
+                {
+                    var itemView = (ListViewItem)nameConn;
+                    var conn = Vars.connections.Find(c => c.connectionName.Equals(itemView.Text));
+                    if (conn != null) 
+                        conn.habilitado = itemView.Checked;
+                }
+            }
+            catch (Exception ex)
+            {
+                Message.Error("Ocorreu um problema ao selecionar a conexão");
+                ErroService.TratarErro(ex);
+            }
+        }
+
+        private void lvConexoes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lvConexoes.SelectedItems.Count <= 0) return;
+
+            foreach (var conn in lvConexoes.SelectedItems)
+            {
+                var itemView = (ListViewItem)conn;
+                itemView.Checked = !itemView.Checked;
+            }
+
+        }
+
+        private void btnSobre_Click(object sender, EventArgs e)
+        {
+            FrmSobre frmSobre = new FrmSobre();
+            frmSobre.ShowDialog();
         }
     }
 }

@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SearchInBases.Entity
+﻿namespace SearchInBases.Entity
 {
     public class SQLParams
     {
         public string sql{ get; set; }
-        public SQLWhere filtro{ get; set; }
+        public SQLFiltro filtro{ get; set; }
 
-        public SQLParams(string sql, SQLWhere filtro)
+        public SQLParams(string sql, SQLFiltro filtro)
         {
-            this.sql = sql;
+            this.sql = sql.ToLower();
             this.filtro = filtro;
         }
 
-        public string getSQLWithFiltro()
+        public string GetSQL()
         {
             return sql;
         }       
@@ -26,8 +20,30 @@ namespace SearchInBases.Entity
 
 
 
-    public class SQLWhere
+    public class SQLFiltro
     {
-        public bool interno { get; set; }
+        public enuStatusBase statusBase;
+        public enuAmbiente ambiente;
+
+ 
+        public SQLFiltro(enuStatusBase statusBase, enuAmbiente ambiente)
+        {
+            this.statusBase = statusBase;
+            this.ambiente = ambiente;
+        }
+
+        public enum enuAmbiente
+        {
+            Interno = 0,
+            Producao = 1,
+            Ambos = 2
+        }
+
+        public enum enuStatusBase
+        {
+            Ativa = 0,
+            Inativa = 1,
+            Ambos = 2
+        }
     }
 }

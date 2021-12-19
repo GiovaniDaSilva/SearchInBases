@@ -24,17 +24,19 @@ namespace SearchInBases.Services
                               Action callbackStatusApp, 
                               SQLParams sqlParams)
         {
+            bool ocorreuErroNaConsulta = false;
             Vars.isPesquisando = true;
             callbackStatusApp();
             try
             {
                 Log.AddIniciandoPesquisa();
                 List<Connection> conexoesHabilitadas = Vars.connections.FindAll(c => c.habilitado);
-                tratarConexoesHabilitadas(conexoesHabilitadas);
-                ConnectionService.ExecutarSQL(callbackConsole, conexoesHabilitadas, sqlParams);
+                tratarConexoesHabilitadas(callbackConsole, conexoesHabilitadas);
+                ConnectionService.ExecutarSQL(callbackConsole, conexoesHabilitadas, sqlParams, ocorreuErroNaConsulta);
             }
             catch(Exception ex)
             {
+                ocorreuErroNaConsulta = true;
                 ErroService.TratarErro(ex);
             }
             finally
@@ -42,12 +44,18 @@ namespace SearchInBases.Services
                 Vars.isPesquisando = false;                
                 Log.AddPesquisaFinalizada();
                 callbackStatusApp();
-                Message.InfoPesquisaFinalizada();
+                Message.MessagemPesquisaFinalizada(ocorreuErroNaConsulta);
             }            
         }
 
         public void validarComandoSQL(SQLParams sqlParams)
-        {           
+        {
+            if (String.IsNullOrWhiteSpace(sqlParams.GetSQL()))
+            {
+                string messagem = "Informe um comando SQL válido.";
+                throw new Message.MessageException(messagem);
+            }
+
             if (!SQLService.permitirExecutarComando(sqlParams))
             {
                 string messagem = "Você não possui permissão para executar esse comando.";
@@ -69,13 +77,13 @@ namespace SearchInBases.Services
 
         
         // Privados
-        private static void tratarConexoesHabilitadas(List<Connection> conexoesHabilitadas)
+        private static void tratarConexoesHabilitadas(Action<string> callbackConsole, List<Connection> conexoesHabilitadas)
         {
             foreach (var conn in conexoesHabilitadas)
             {             
                 if (Utils.IsNullOrEmpty(conn.basesAuth))
                 {
-                    ConnectionService.inicializarBasesAuth(conn);
+                    ConnectionService.inicializarBasesAuth(callbackConsole, conn);
                 }                
             }
         }

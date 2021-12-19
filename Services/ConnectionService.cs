@@ -19,16 +19,18 @@ namespace SearchInBases.Services
         private static string erro_executar_sql = "Ocorreu um erro ao executar o comando SQL";
         private static string database_notfound = "Base de dados não localizada";
         public static bool _controlPrintFieldsName = false;
+        public static bool _ocorreuErroNaConsulta = false;
 
         #region "Publicos"
-        
-        public static void inicializarBasesAuth(Connection conn)
+
+        public static void inicializarBasesAuth(Action<string> callbackConsole, Connection conn)
         {
             if(!Utils.IsNullOrEmpty(conn.basesAuth)) conn.basesAuth.Clear();
-
-            conn.connection.Open();
+            
             try
-            {                           
+            {
+                conn.connection.Open();
+
                 using (var reader = MySQLConnectorService.ExecutarSQL(conn.connection, String.Format(SQLEnum.SQLAuth.select_instance, conn.baseAutenticador)))
                 {
                     while (reader.Read())
@@ -45,7 +47,10 @@ namespace SearchInBases.Services
                 }
             }catch 
             {
-                Log.addErroMessage("Não foi possível buscar as bases a partir do autenticador da conexão (" + conn.connectionName + ")");
+                _ocorreuErroNaConsulta = true;
+                var messagem = "Não foi possível buscar as bases a partir do autenticador da conexão (" + conn.connectionName + ")";
+                callbackConsole(messagem);
+                Log.addErroMessage(messagem);
                 throw;
             }
             finally
@@ -54,7 +59,7 @@ namespace SearchInBases.Services
             }            
         }
 
-        public  static void ExecutarSQL(Action<string> callback, List<Connection> conexoesHabilitadas, SQLParams sqlParams)
+        public  static void ExecutarSQL(Action<string> callback, List<Connection> conexoesHabilitadas, SQLParams sqlParams, bool ocorreuErroNaConsulta)
         {
             string nomeArquivoResultado = CsvService.CriarArquivo(sqlParams);
                        
@@ -83,6 +88,7 @@ namespace SearchInBases.Services
                 }
             }
 
+            ocorreuErroNaConsulta = _ocorreuErroNaConsulta;
             callback("Para acessar o resultado clique " +  RichFormatting.Link("aqui", nomeArquivoResultado));
         }
 
@@ -105,7 +111,7 @@ namespace SearchInBases.Services
                     threadConn.ChangeDatabase(baseAuth.databaseName);
                 }
                 catch
-                {
+                {                    
                     callbackConsole(RichFormatting.FontColor(baseAuth.databaseName, Color.DarkBlue) + " -> " + RichFormatting.FontColor(database_notfound, Color.Red));
                     // Database not found
                     Log.addWarnMessage("Base (" + baseAuth.databaseName + ") não encontrado na conexão (" + conn.connectionName + ")");
@@ -119,14 +125,12 @@ namespace SearchInBases.Services
                     {
                         callbackConsole(RichFormatting.FontColor(baseAuth.databaseName, Color.DarkBlue) + RichFormatting.Negrito(" -> ") + (reader.HasRows ? RichFormatting.FontColor(encontrou_ocorrencias, Color.DarkGreen) : RichFormatting.FontColor(nao_encontrou_ocorrencias, Color.DarkViolet)));
 
-                        if (!_controlPrintFieldsName)
+                        if (reader.HasRows && !_controlPrintFieldsName)
                         {
                             _controlPrintFieldsName = true;
                             CsvService.Add(nomeArquivoResultado, FieldsNameReaderToCsv(reader));
                         }
                         
-
-
                         while (reader.Read())
                         {
                             CsvService.Add(nomeArquivoResultado, FieldsReaderToCsv(baseAuth.databaseName, reader));
@@ -136,6 +140,7 @@ namespace SearchInBases.Services
                 }
                 catch (Exception ex)
                 {
+                    _ocorreuErroNaConsulta = true;
                     callbackConsole(RichFormatting.FontColor(baseAuth.databaseName, Color.DarkBlue) + " -> " + RichFormatting.FontColor(erro_executar_sql, Color.Red));
                     Log.addErroMessage("Não foi possível executar o comenado SQL na base (" + baseAuth.databaseName + ") da conexão (" + conn.connectionName + ")");
                     ErroService.TratarErro(ex);
@@ -197,7 +202,26 @@ namespace SearchInBases.Services
 
         private static List<BaseAuth> filtrarBasesAuth(List<BaseAuth> basesAuth, SQLParams sqlParams)
         {
-            return basesAuth;
+            var result = new List<BaseAuth>();
+            result.AddRange(basesAuth);
+
+            //Status
+            if (SQLFiltro.enuStatusBase.Ativa.Equals(sqlParams.filtro.statusBase))
+                result.RemoveAll(b => !b.ativo);
+
+            else if (SQLFiltro.enuStatusBase.Inativa.Equals(sqlParams.filtro.statusBase))
+                result.RemoveAll(b => b.ativo);
+
+
+            // Ambiente
+            if (SQLFiltro.enuAmbiente.Interno.Equals(sqlParams.filtro.ambiente))            
+                result.RemoveAll(b => !b.interno);
+
+            else if (SQLFiltro.enuAmbiente.Producao.Equals(sqlParams.filtro.ambiente))
+                result.RemoveAll(b => b.interno);
+
+
+            return result;
         }
         #endregion
     }

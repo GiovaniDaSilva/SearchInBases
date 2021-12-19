@@ -15,7 +15,7 @@ namespace SearchInBases.Services
 
         public static MySqlDataReader ExecutarSQL(MySqlConnection conn, SQLParams sqlParams)
         {
-            return ExecutarSQL(conn, sqlParams.getSQLWithFiltro());
+            return ExecutarSQL(conn, sqlParams.GetSQL());
         }
 
         public static MySqlDataReader ExecutarSQL(MySqlConnection conn, string sql)
