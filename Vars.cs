@@ -7,8 +7,8 @@ namespace SearchInBases
 {
     public static class Vars
     {
-        public static string appName = "Search In Bases";
-        public static string appVersion = "1.0.0";
+        public static string appName = "SearchInBases";        
+        public static string appVersion = "1.0.1";
         public static string appNameWithVersion = Vars.appName + "  v." + Vars.appVersion;
 
         public static string pathApp = AppDomain.CurrentDomain.BaseDirectory;

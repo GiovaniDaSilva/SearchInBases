@@ -1,5 +1,6 @@
 ﻿using SearchInBases.Entity;
 using SearchInBases.Forms;
+using System.Windows.Forms;
 
 namespace SearchInBases.Services
 {
@@ -9,6 +10,7 @@ namespace SearchInBases.Services
         {
             Vars.config = Config.Load();
             Vars.connections = Vars.config.getConnections();            
+            GitHubUpdater.CheckNewVersion();
         }
     }
 }

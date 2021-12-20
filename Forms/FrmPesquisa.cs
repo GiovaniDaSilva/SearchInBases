@@ -83,6 +83,12 @@ namespace SearchInBases.Forms
             }
         }
 
+        private void LimparForm()
+        {
+            txtSQL.Clear();
+            LimparConsole();            
+        }
+
         private void LimparConsole()
         {
             txtConsole.Clear();
@@ -137,6 +143,8 @@ namespace SearchInBases.Forms
                 txtSQL.Enabled = habilitado;
                 lvConexoes.Enabled = habilitado;
                 toolBar.Enabled = habilitado;
+                gbAmbiente.Enabled = habilitado;
+                gbBasesAtivas.Enabled = habilitado; 
 
                 if (!habilitado)
                 {
@@ -154,7 +162,7 @@ namespace SearchInBases.Forms
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            LimparConsole();
+            LimparForm();
         }
 
         private void btnResultados_Click(object sender, EventArgs e)

@@ -36,11 +36,11 @@ namespace SearchInBases.Forms
             this.lblStatus = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbAmbiente = new System.Windows.Forms.GroupBox();
             this.rbAmbosAmbiente = new System.Windows.Forms.RadioButton();
             this.rbProducao = new System.Windows.Forms.RadioButton();
             this.rbInterno = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbBasesAtivas = new System.Windows.Forms.GroupBox();
             this.rbAmbasAtiva = new System.Windows.Forms.RadioButton();
             this.rbInativa = new System.Windows.Forms.RadioButton();
             this.rbAtiva = new System.Windows.Forms.RadioButton();
@@ -67,8 +67,8 @@ namespace SearchInBases.Forms
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gbAmbiente.SuspendLayout();
+            this.gbBasesAtivas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtSQL)).BeginInit();
             this.toolBar.SuspendLayout();
             this.SuspendLayout();
@@ -125,8 +125,8 @@ namespace SearchInBases.Forms
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.groupBox2);
-            this.panel2.Controls.Add(this.groupBox1);
+            this.panel2.Controls.Add(this.gbAmbiente);
+            this.panel2.Controls.Add(this.gbBasesAtivas);
             this.panel2.Controls.Add(this.lvConexoes);
             this.panel2.Controls.Add(this.txtSQL);
             this.panel2.Controls.Add(this.btnPesquisar);
@@ -139,17 +139,17 @@ namespace SearchInBases.Forms
             this.panel2.Size = new System.Drawing.Size(962, 435);
             this.panel2.TabIndex = 0;
             // 
-            // groupBox2
+            // gbAmbiente
             // 
-            this.groupBox2.Controls.Add(this.rbAmbosAmbiente);
-            this.groupBox2.Controls.Add(this.rbProducao);
-            this.groupBox2.Controls.Add(this.rbInterno);
-            this.groupBox2.Location = new System.Drawing.Point(419, 42);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(252, 59);
-            this.groupBox2.TabIndex = 12;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Ambiente";
+            this.gbAmbiente.Controls.Add(this.rbAmbosAmbiente);
+            this.gbAmbiente.Controls.Add(this.rbProducao);
+            this.gbAmbiente.Controls.Add(this.rbInterno);
+            this.gbAmbiente.Location = new System.Drawing.Point(419, 42);
+            this.gbAmbiente.Name = "gbAmbiente";
+            this.gbAmbiente.Size = new System.Drawing.Size(252, 59);
+            this.gbAmbiente.TabIndex = 12;
+            this.gbAmbiente.TabStop = false;
+            this.gbAmbiente.Text = "Ambiente";
             // 
             // rbAmbosAmbiente
             // 
@@ -183,17 +183,17 @@ namespace SearchInBases.Forms
             this.rbInterno.Text = "Internas";
             this.rbInterno.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // gbBasesAtivas
             // 
-            this.groupBox1.Controls.Add(this.rbAmbasAtiva);
-            this.groupBox1.Controls.Add(this.rbInativa);
-            this.groupBox1.Controls.Add(this.rbAtiva);
-            this.groupBox1.Location = new System.Drawing.Point(688, 42);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(227, 59);
-            this.groupBox1.TabIndex = 11;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Bases Ativas";
+            this.gbBasesAtivas.Controls.Add(this.rbAmbasAtiva);
+            this.gbBasesAtivas.Controls.Add(this.rbInativa);
+            this.gbBasesAtivas.Controls.Add(this.rbAtiva);
+            this.gbBasesAtivas.Location = new System.Drawing.Point(688, 42);
+            this.gbBasesAtivas.Name = "gbBasesAtivas";
+            this.gbBasesAtivas.Size = new System.Drawing.Size(227, 59);
+            this.gbBasesAtivas.TabIndex = 11;
+            this.gbBasesAtivas.TabStop = false;
+            this.gbBasesAtivas.Text = "Bases Ativas";
             // 
             // rbAmbasAtiva
             // 
@@ -277,7 +277,6 @@ namespace SearchInBases.Forms
             this.txtSQL.CharWidth = 8;
             this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtSQL.IsReplaceMode = false;
             this.txtSQL.Location = new System.Drawing.Point(200, 147);
             this.txtSQL.Name = "txtSQL";
@@ -419,7 +418,7 @@ namespace SearchInBases.Forms
             this.txtConsole.Location = new System.Drawing.Point(3, 8);
             this.txtConsole.Name = "txtConsole";
             this.txtConsole.ReadOnly = true;
-            this.txtConsole.Size = new System.Drawing.Size(950, 196);
+            this.txtConsole.Size = new System.Drawing.Size(950, 198);
             this.txtConsole.TabIndex = 2;
             this.txtConsole.Text = "";
             // 
@@ -443,10 +442,10 @@ namespace SearchInBases.Forms
             this.splitContainer1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbAmbiente.ResumeLayout(false);
+            this.gbAmbiente.PerformLayout();
+            this.gbBasesAtivas.ResumeLayout(false);
+            this.gbBasesAtivas.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtSQL)).EndInit();
             this.toolBar.ResumeLayout(false);
             this.toolBar.PerformLayout();
@@ -476,11 +475,11 @@ namespace SearchInBases.Forms
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ListView lvConexoes;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbBasesAtivas;
         private System.Windows.Forms.RadioButton rbAmbasAtiva;
         private System.Windows.Forms.RadioButton rbInativa;
         private System.Windows.Forms.RadioButton rbAtiva;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbAmbiente;
         private System.Windows.Forms.RadioButton rbAmbosAmbiente;
         private System.Windows.Forms.RadioButton rbProducao;
         private System.Windows.Forms.RadioButton rbInterno;
