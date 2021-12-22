@@ -145,6 +145,8 @@ namespace SearchInBases.Forms
                 toolBar.Enabled = habilitado;
                 gbAmbiente.Enabled = habilitado;
                 gbBasesAtivas.Enabled = habilitado; 
+                btnHistorico.Enabled = habilitado;
+                btnFormater.Enabled = habilitado;
 
                 if (!habilitado)
                 {
