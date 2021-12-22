@@ -36,6 +36,8 @@ namespace SearchInBases.Forms
             this.lblStatus = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnFormater = new System.Windows.Forms.Button();
+            this.btnHistorico = new System.Windows.Forms.Button();
             this.gbAmbiente = new System.Windows.Forms.GroupBox();
             this.rbAmbosAmbiente = new System.Windows.Forms.RadioButton();
             this.rbProducao = new System.Windows.Forms.RadioButton();
@@ -61,6 +63,7 @@ namespace SearchInBases.Forms
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.btnClear = new System.Windows.Forms.ToolStripButton();
             this.txtConsole = new System.Windows.Forms.RichTextBox();
+            this.ttHistorico = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -80,7 +83,7 @@ namespace SearchInBases.Forms
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 642);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(964, 25);
+            this.panel1.Size = new System.Drawing.Size(994, 25);
             this.panel1.TabIndex = 0;
             // 
             // progressBar
@@ -88,7 +91,7 @@ namespace SearchInBases.Forms
             this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar.Location = new System.Drawing.Point(594, 2);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(360, 20);
+            this.progressBar.Size = new System.Drawing.Size(390, 20);
             this.progressBar.TabIndex = 1;
             // 
             // lblStatus
@@ -118,13 +121,15 @@ namespace SearchInBases.Forms
             // 
             this.splitContainer1.Panel2.Controls.Add(this.txtConsole);
             this.splitContainer1.Panel2MinSize = 50;
-            this.splitContainer1.Size = new System.Drawing.Size(964, 642);
+            this.splitContainer1.Size = new System.Drawing.Size(994, 642);
             this.splitContainer1.SplitterDistance = 437;
             this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 2;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnFormater);
+            this.panel2.Controls.Add(this.btnHistorico);
             this.panel2.Controls.Add(this.gbAmbiente);
             this.panel2.Controls.Add(this.gbBasesAtivas);
             this.panel2.Controls.Add(this.lvConexoes);
@@ -136,8 +141,42 @@ namespace SearchInBases.Forms
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(962, 435);
+            this.panel2.Size = new System.Drawing.Size(992, 435);
             this.panel2.TabIndex = 0;
+            // 
+            // btnFormater
+            // 
+            this.btnFormater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFormater.BackColor = System.Drawing.SystemColors.Control;
+            this.btnFormater.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnFormater.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFormater.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnFormater.Image = ((System.Drawing.Image)(resources.GetObject("btnFormater.Image")));
+            this.btnFormater.Location = new System.Drawing.Point(953, 180);
+            this.btnFormater.Name = "btnFormater";
+            this.btnFormater.Size = new System.Drawing.Size(30, 27);
+            this.btnFormater.TabIndex = 14;
+            this.btnFormater.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.ttHistorico.SetToolTip(this.btnFormater, "Formatador");
+            this.btnFormater.UseVisualStyleBackColor = false;
+            this.btnFormater.Click += new System.EventHandler(this.btnFormater_Click);
+            // 
+            // btnHistorico
+            // 
+            this.btnHistorico.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnHistorico.BackColor = System.Drawing.SystemColors.Control;
+            this.btnHistorico.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnHistorico.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHistorico.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnHistorico.Image = ((System.Drawing.Image)(resources.GetObject("btnHistorico.Image")));
+            this.btnHistorico.Location = new System.Drawing.Point(953, 147);
+            this.btnHistorico.Name = "btnHistorico";
+            this.btnHistorico.Size = new System.Drawing.Size(30, 27);
+            this.btnHistorico.TabIndex = 13;
+            this.btnHistorico.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.ttHistorico.SetToolTip(this.btnHistorico, "Histórico");
+            this.btnHistorico.UseVisualStyleBackColor = false;
+            this.btnHistorico.Click += new System.EventHandler(this.btnHistorico_Click);
             // 
             // gbAmbiente
             // 
@@ -283,7 +322,7 @@ namespace SearchInBases.Forms
             this.txtSQL.Paddings = new System.Windows.Forms.Padding(0);
             this.txtSQL.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.txtSQL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtSQL.ServiceColors")));
-            this.txtSQL.Size = new System.Drawing.Size(742, 280);
+            this.txtSQL.Size = new System.Drawing.Size(747, 280);
             this.txtSQL.TabIndex = 9;
             this.txtSQL.Zoom = 100;
             this.txtSQL.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.txtSQL_TextChanged);
@@ -291,6 +330,7 @@ namespace SearchInBases.Forms
             // btnPesquisar
             // 
             this.btnPesquisar.BackColor = System.Drawing.SystemColors.Control;
+            this.btnPesquisar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPesquisar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPesquisar.Image = ((System.Drawing.Image)(resources.GetObject("btnPesquisar.Image")));
             this.btnPesquisar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -335,7 +375,7 @@ namespace SearchInBases.Forms
             this.btnClear});
             this.toolBar.Location = new System.Drawing.Point(0, 0);
             this.toolBar.Name = "toolBar";
-            this.toolBar.Size = new System.Drawing.Size(962, 39);
+            this.toolBar.Size = new System.Drawing.Size(992, 39);
             this.toolBar.TabIndex = 3;
             this.toolBar.Text = "toolStrip1";
             // 
@@ -418,7 +458,7 @@ namespace SearchInBases.Forms
             this.txtConsole.Location = new System.Drawing.Point(3, 8);
             this.txtConsole.Name = "txtConsole";
             this.txtConsole.ReadOnly = true;
-            this.txtConsole.Size = new System.Drawing.Size(950, 198);
+            this.txtConsole.Size = new System.Drawing.Size(980, 188);
             this.txtConsole.TabIndex = 2;
             this.txtConsole.Text = "";
             // 
@@ -426,7 +466,7 @@ namespace SearchInBases.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(964, 667);
+            this.ClientSize = new System.Drawing.Size(994, 667);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -485,5 +525,8 @@ namespace SearchInBases.Forms
         private System.Windows.Forms.RadioButton rbInterno;
         private System.Windows.Forms.ToolStripButton btnSobre;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.Button btnHistorico;
+        private System.Windows.Forms.ToolTip ttHistorico;
+        private System.Windows.Forms.Button btnFormater;
     }
 }

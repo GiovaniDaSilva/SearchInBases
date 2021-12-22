@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BasicSQLFormatter" Version="1.0.3" />
     <PackageReference Include="FastColoredTextBox.Net5" Version="2.16.26" />
     <PackageReference Include="MySqlConnector" Version="2.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

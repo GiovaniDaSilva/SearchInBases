@@ -7,23 +7,35 @@ namespace SearchInBases
 {
     public static class Vars
     {
+        //App
         public static string appName = "SearchInBases";        
-        public static string appVersion = "1.0.1";
+        public static string appVersion = "1.0.2";
         public static string appNameWithVersion = Vars.appName + "  v." + Vars.appVersion;
-
         public static string pathApp = AppDomain.CurrentDomain.BaseDirectory;
-        public static string pathResultados = AppDomain.CurrentDomain.BaseDirectory + @"Resultados\";
-        public static string pathLog = AppDomain.CurrentDomain.BaseDirectory + "log.txt";        
-        public static string nameFileConfig = "config.json";
-        public static string nameFileLog = "log.txt";
-        public static string nameFileResultado = "Resultado{0}.csv";
-        
+
+        public static List<Connection> connections;
         public static bool somenteConsulta = true;
         public static bool isPesquisando;
 
-        public static Config config = new Config();
-        public static List<Connection> connections;
+        //Log
+        public static string nameFileLog = "log.txt";
+        public static string pathLog = AppDomain.CurrentDomain.BaseDirectory + nameFileLog;
 
+        //Resultados
+        public static string nameFileResultado = "Resultado{0}.csv";
+        public static string pathResultados = AppDomain.CurrentDomain.BaseDirectory + @"Resultados\";
+
+        //Config
+        public static Config config = new Config();
+        public static string nameFileConfig = "config.json";
+        public static string pathConfig = AppDomain.CurrentDomain.BaseDirectory + nameFileConfig;
+
+        //Historico
+        public static Historico historico;
+        public static string nameFileHistorico = "historico.json";        
+        public static string pathHistorico = AppDomain.CurrentDomain.BaseDirectory + nameFileHistorico;
+
+        //Git
         public static string url_perfil_git = "https://github.com/GiovaniDaSilva";
         public static string url_projeto_git = url_perfil_git + "/SearchInBases";
     }

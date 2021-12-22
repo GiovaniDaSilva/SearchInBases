@@ -1,4 +1,5 @@
-﻿using SearchInBases.Entity;
+﻿using RichTextBoxHTMLFormat;
+using SearchInBases.Entity;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,6 +8,7 @@ namespace SearchInBases.Services
 {
     public class PesquisaService
     {
+        private string nomeArquivoResultado;
 
         #region "Publicos"        
         public void AbrirJsonConfig()
@@ -32,7 +34,11 @@ namespace SearchInBases.Services
                 Log.AddIniciandoPesquisa();
                 List<Connection> conexoesHabilitadas = Vars.connections.FindAll(c => c.habilitado);
                 tratarConexoesHabilitadas(callbackConsole, conexoesHabilitadas);
-                ConnectionService.ExecutarSQL(callbackConsole, conexoesHabilitadas, sqlParams, ocorreuErroNaConsulta);
+
+                nomeArquivoResultado = CsvService.CriarArquivo(sqlParams);
+                ConnectionService.ExecutarSQL(callbackConsole, AdicionarResultadoCsv,  conexoesHabilitadas, sqlParams, ocorreuErroNaConsulta);
+
+                callbackConsole("Para acessar o resultado clique " + RichFormatting.Link("aqui", nomeArquivoResultado));
             }
             catch(Exception ex)
             {
@@ -43,9 +49,21 @@ namespace SearchInBases.Services
             {
                 Vars.isPesquisando = false;                
                 Log.AddPesquisaFinalizada();
+                AdicionarConsultaHistorico(sqlParams);
                 callbackStatusApp();
                 Message.MessagemPesquisaFinalizada(ocorreuErroNaConsulta);
             }            
+        }
+
+        private void AdicionarResultadoCsv(string texto)
+        {
+            CsvService.Add(nomeArquivoResultado, texto);
+        }
+
+        private void AdicionarConsultaHistorico(SQLParams sqlParams)
+        {            
+            Vars.historico.consultas.Add(new DadosConsulta(sqlParams));
+            HistoricoService.Save();
         }
 
         public void validarComandoSQL(SQLParams sqlParams)

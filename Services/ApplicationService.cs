@@ -9,7 +9,8 @@ namespace SearchInBases.Services
         public static void InicializarAplicacao()
         {
             Vars.config = Config.Load();
-            Vars.connections = Vars.config.getConnections();            
+            Vars.connections = Vars.config.getConnections();       
+            HistoricoService.Load();
             GitHubUpdater.CheckNewVersion();
         }
     }

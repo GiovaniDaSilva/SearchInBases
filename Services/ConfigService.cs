@@ -39,7 +39,7 @@ namespace SearchInBases.Services
 
         public static string GetConfigFile()
         {
-            return Path.Combine(Vars.pathApp, Vars.nameFileConfig);
+            return Vars.pathConfig;
         }
 
         public static Config Load()

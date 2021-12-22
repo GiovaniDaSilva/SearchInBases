@@ -18,8 +18,8 @@ namespace SearchInBases.Services
         private static string nao_encontrou_ocorrencias = "Não encontrou ocorrências";
         private static string erro_executar_sql = "Ocorreu um erro ao executar o comando SQL";
         private static string database_notfound = "Base de dados não localizada";
-        public static bool _controlPrintFieldsName = false;
-        public static bool _ocorreuErroNaConsulta = false;
+        public static bool _controlPrintFieldsName;
+        public static bool _ocorreuErroNaConsulta;
 
         #region "Publicos"
 
@@ -46,8 +46,7 @@ namespace SearchInBases.Services
                     }
                 }
             }catch 
-            {
-                _ocorreuErroNaConsulta = true;
+            {               
                 var messagem = "Não foi possível buscar as bases a partir do autenticador da conexão (" + conn.connectionName + ")";
                 callbackConsole(messagem);
                 Log.addErroMessage(messagem);
@@ -59,21 +58,26 @@ namespace SearchInBases.Services
             }            
         }
 
-        public  static void ExecutarSQL(Action<string> callback, List<Connection> conexoesHabilitadas, SQLParams sqlParams, bool ocorreuErroNaConsulta)
+        public  static void ExecutarSQL(Action<string> callbackConsole, 
+                                        Action<string> callbackCsv,  
+                                        List<Connection> conexoesHabilitadas, 
+                                        SQLParams sqlParams, 
+                                        bool ocorreuErroNaConsulta)
         {
-            string nomeArquivoResultado = CsvService.CriarArquivo(sqlParams);
-                       
+
+            _ocorreuErroNaConsulta = false;
+            _controlPrintFieldsName = false;
+
             foreach (var conn in conexoesHabilitadas)
             {
                 List<Task> threadsProcessando = new List<Task>();                
-                List<MySqlConnection> threadsConn = new List<MySqlConnection>();
-
+                List<MySqlConnection> threadsConn = new List<MySqlConnection>();                
                 try
                 {
                     foreach (var baseAuth in filtrarBasesAuth(conn.basesAuth, sqlParams))
                     {
                         threadsProcessando.Add(Task.Run(() => {
-                            ExecutarSQLThread(callback, sqlParams, nomeArquivoResultado, conn, threadsConn, baseAuth);
+                            ExecutarSQLThread(callbackConsole, sqlParams, callbackCsv, conn, threadsConn, baseAuth);
                         }));
                     }
 
@@ -89,7 +93,7 @@ namespace SearchInBases.Services
             }
 
             ocorreuErroNaConsulta = _ocorreuErroNaConsulta;
-            callback("Para acessar o resultado clique " +  RichFormatting.Link("aqui", nomeArquivoResultado));
+            
         }
 
         #endregion
@@ -97,7 +101,12 @@ namespace SearchInBases.Services
 
         #region "Privados"
         
-        private static void ExecutarSQLThread(Action<string> callbackConsole, SQLParams sqlParams, string nomeArquivoResultado, Connection conn, List<MySqlConnection> threadsConn, BaseAuth baseAuth)
+        private static void ExecutarSQLThread(Action<string> callbackConsole, 
+                                              SQLParams sqlParams, 
+                                              Action<string> callbackCsv, 
+                                              Connection conn, 
+                                              List<MySqlConnection> threadsConn, 
+                                              BaseAuth baseAuth)
         {
             // Gera uma connection para cada thread
             var threadConn = MySQLConnectorService.GetMySqlConnection(conn.mySqlConnector);
@@ -128,12 +137,12 @@ namespace SearchInBases.Services
                         if (reader.HasRows && !_controlPrintFieldsName)
                         {
                             _controlPrintFieldsName = true;
-                            CsvService.Add(nomeArquivoResultado, FieldsNameReaderToCsv(reader));
+                            callbackCsv(FieldsNameReaderToCsv(reader));
                         }
                         
                         while (reader.Read())
                         {
-                            CsvService.Add(nomeArquivoResultado, FieldsReaderToCsv(baseAuth.databaseName, reader));
+                            callbackCsv(FieldsReaderToCsv(baseAuth.databaseName, reader));
                         }
                     }
 

@@ -219,5 +219,24 @@ namespace SearchInBases.Forms
             FrmSobre frmSobre = new FrmSobre();
             frmSobre.ShowDialog();
         }
+
+        private void btnHistorico_Click(object sender, EventArgs e)
+        {
+            FrmHistorico frmHistorico = new FrmHistorico();
+            string sql = frmHistorico.RetornaSQLHistorico();
+            
+            txtSQL.Clear();
+            if (!String.IsNullOrEmpty(sql))
+            {
+                txtSQL.Text = sql;  
+            }
+        }
+
+        private void btnFormater_Click(object sender, EventArgs e)
+        {
+            string sql = txtSQL.Text;
+            txtSQL.Clear();
+            txtSQL.AppendText(SQLService.Formatar(sql));
+        }
     }
 }

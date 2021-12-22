@@ -1,4 +1,5 @@
-﻿using SearchInBases.Entity;
+﻿using BasicSQLFormatter;
+using SearchInBases.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -105,6 +106,11 @@ namespace SearchInBases.Services
             }
 
             return sqlValido;
+        }
+
+        public static string Formatar(string sql)
+        {
+            return new SQLFormatter(sql).Format().Trim();
         }
     }
 }

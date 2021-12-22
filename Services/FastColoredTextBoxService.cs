@@ -94,7 +94,8 @@ namespace SearchInBases.Services
             palavras.Add("order");
             palavras.Add("return");
             palavras.Add("on");
-            
+            palavras.Add("and");
+
             string aux = retornarPalavras(palavras);
 
             return $"\\b({aux})\\b|#region\\b|#endregion\\b";
