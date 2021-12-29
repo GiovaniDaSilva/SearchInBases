@@ -7,6 +7,6 @@ A consulta é realizada em multi threads, fazendo com que a busca se torne rápi
 O Resultado das consultas são salvos em arquivos (.csv), facilitando a consulta e filtro dos dados retornado.
 
 <h2>Tela Principal</h2>
-<img src="https://github.com/GiovaniDaSilva/SearchInBases/blob/main/SearchInBases/Images/App.png">
+<img src="https://github.com/GiovaniDaSilva/SearchInBases/blob/master/SearchInBases/Images/App.png">
 
 
