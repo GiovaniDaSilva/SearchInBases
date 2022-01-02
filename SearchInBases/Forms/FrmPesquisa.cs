@@ -1,4 +1,5 @@
 ﻿using SearchInBases.Entity;
+using SearchInBases.Formularios;
 using SearchInBases.Services;
 using System;
 using System.Diagnostics;
@@ -16,7 +17,7 @@ namespace SearchInBases.Forms
 
         private PesquisaService _pesquisaService = new PesquisaService();
         private ConsoleService _consoleService;
-
+        private string nomeArquivoResultado;
 
         public FrmPesquisa()
         {
@@ -28,11 +29,16 @@ namespace SearchInBases.Forms
             splitContainer1.Panel2.Visible = !splitContainer1.Panel2.Visible;                        
         }
 
-        private void btnConexoes_Click(object sender, EventArgs e)
+        private void btnConfig_Click(object sender, EventArgs e)
         {
             try
             {
-                _pesquisaService.AbrirJsonConfig();
+                //_pesquisaService.AbrirJsonConfig();
+                FrmConfiguracao frmConfig = new FrmConfiguracao();
+                frmConfig.ShowDialog();
+
+                AtualizarListConn();
+
             }
             catch (Exception ex)
             {
@@ -47,6 +53,12 @@ namespace SearchInBases.Forms
             _consoleService = new ConsoleService(txtConsole);
             lblStatus.Text = status_parado;
 
+            AtualizarListConn();
+        }
+
+        private void AtualizarListConn()
+        {
+            lvConexoes.Items.Clear();
             foreach (var conn in Vars.connections)
             {
                 lvConexoes.Items.Add(conn.connectionName, 0);
@@ -61,7 +73,8 @@ namespace SearchInBases.Forms
                 validarConexoesSelecionadas();
                 SQLParams sqlParams = montarSQLParams();
                 _pesquisaService.validarComandoSQL(sqlParams);
-                Task.Run(() => { _pesquisaService.Pesquisar(atualizaConsole, alterarStatusApp, sqlParams); });
+                nomeArquivoResultado = CsvService.CriarArquivo(sqlParams);
+                Task.Run(() => { _pesquisaService.Pesquisar(atualizaConsole, alterarStatusApp, sqlParams, AdicionarResultadoCsv, nomeArquivoResultado); });
                 txtConsole.Focus();
 
             }
@@ -73,6 +86,15 @@ namespace SearchInBases.Forms
             {
                 ErroService.TratarErro(ex);                
             }            
+        }
+
+        private void AdicionarResultadoCsv(string texto)
+        {
+            this.Invoke(new MethodInvoker(() =>
+            {
+                CsvService.Add(nomeArquivoResultado, texto);
+            }));
+            
         }
 
         private void validarConexoesSelecionadas()

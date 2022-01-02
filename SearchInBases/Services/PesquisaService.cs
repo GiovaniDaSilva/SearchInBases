@@ -7,8 +7,7 @@ using System.Diagnostics;
 namespace SearchInBases.Services
 {
     public class PesquisaService
-    {
-        private string nomeArquivoResultado;
+    {        
 
         #region "Publicos"        
         public void AbrirJsonConfig()
@@ -24,7 +23,10 @@ namespace SearchInBases.Services
 
         public void Pesquisar(Action<string> callbackConsole,
                               Action callbackStatusApp, 
-                              SQLParams sqlParams)
+                              SQLParams sqlParams,
+                              Action<string> callbackCsv,
+                              string nomeArquivoResultado
+                              )
         {
             bool ocorreuErroNaConsulta = false;
             Vars.isPesquisando = true;
@@ -35,9 +37,8 @@ namespace SearchInBases.Services
                 List<Connection> conexoesHabilitadas = Vars.connections.FindAll(c => c.habilitado);
                 tratarConexoesHabilitadas(callbackConsole, conexoesHabilitadas);
 
-                nomeArquivoResultado = CsvService.CriarArquivo(sqlParams);
-                ConnectionService.ExecutarSQL(callbackConsole, AdicionarResultadoCsv,  conexoesHabilitadas, sqlParams, ocorreuErroNaConsulta);
-
+                
+                ConnectionService.ExecutarSQL(callbackConsole, callbackCsv,  conexoesHabilitadas, sqlParams, ocorreuErroNaConsulta);
                 callbackConsole("Para acessar o resultado clique " + RichFormatting.Link("aqui", nomeArquivoResultado));
             }
             catch(Exception ex)
@@ -53,12 +54,7 @@ namespace SearchInBases.Services
                 callbackStatusApp();
                 Message.MessagemPesquisaFinalizada(ocorreuErroNaConsulta);
             }            
-        }
-
-        private void AdicionarResultadoCsv(string texto)
-        {
-            CsvService.Add(nomeArquivoResultado, texto);
-        }
+        }    
 
         private void AdicionarConsultaHistorico(SQLParams sqlParams)
         {            

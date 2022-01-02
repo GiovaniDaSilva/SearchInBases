@@ -12,9 +12,9 @@ namespace SearchInBases
         public static void MessagemPesquisaFinalizada(bool ocorreuErroNaConsulta)
         {
             if(!ocorreuErroNaConsulta)
-                MessageBox.Show("Pesquisa finalizada com Sucesso.", titulo, MessageBoxButtons.OK, MessageBoxIcon.Information); 
+                MessageBox.Show("Pesquisa finalizada com sucesso.", titulo, MessageBoxButtons.OK, MessageBoxIcon.Information); 
             else
-                MessageBox.Show("Pesquisa finalizada com Erro.", titulo, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Pesquisa finalizada com erro.", titulo, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
 

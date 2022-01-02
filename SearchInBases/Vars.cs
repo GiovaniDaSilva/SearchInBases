@@ -9,7 +9,7 @@ namespace SearchInBases
     {
         //App
         public static string appName = "SearchInBases";        
-        public static string appVersion = "1.0.2";
+        public static string appVersion = "1.0.3";
         public static string appNameWithVersion = Vars.appName + "  v." + Vars.appVersion;
         public static string pathApp = AppDomain.CurrentDomain.BaseDirectory;
 
@@ -38,6 +38,11 @@ namespace SearchInBases
         //Git
         public static string url_perfil_git = "https://github.com/GiovaniDaSilva";
         public static string url_projeto_git = url_perfil_git + "/SearchInBases";
+
+        public static void AtualizarConnections()
+        {
+            connections = config.ToConnections();
+        }
     }
 
 }

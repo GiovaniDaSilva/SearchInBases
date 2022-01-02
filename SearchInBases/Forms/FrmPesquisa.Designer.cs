@@ -53,14 +53,10 @@ namespace SearchInBases.Forms
             this.lblSQL = new System.Windows.Forms.Label();
             this.lblConexoes = new System.Windows.Forms.Label();
             this.toolBar = new System.Windows.Forms.ToolStrip();
-            this.btnConexoes = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnConfig = new System.Windows.Forms.ToolStripButton();
             this.btnResultados = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnLog = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSobre = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.btnClear = new System.Windows.Forms.ToolStripButton();
             this.txtConsole = new System.Windows.Forms.RichTextBox();
             this.ttHistorico = new System.Windows.Forms.ToolTip(this.components);
@@ -150,7 +146,6 @@ namespace SearchInBases.Forms
             this.btnFormater.BackColor = System.Drawing.SystemColors.Control;
             this.btnFormater.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnFormater.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnFormater.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnFormater.Image = ((System.Drawing.Image)(resources.GetObject("btnFormater.Image")));
             this.btnFormater.Location = new System.Drawing.Point(953, 180);
             this.btnFormater.Name = "btnFormater";
@@ -167,7 +162,6 @@ namespace SearchInBases.Forms
             this.btnHistorico.BackColor = System.Drawing.SystemColors.Control;
             this.btnHistorico.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnHistorico.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnHistorico.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnHistorico.Image = ((System.Drawing.Image)(resources.GetObject("btnHistorico.Image")));
             this.btnHistorico.Location = new System.Drawing.Point(953, 147);
             this.btnHistorico.Name = "btnHistorico";
@@ -180,10 +174,11 @@ namespace SearchInBases.Forms
             // 
             // gbAmbiente
             // 
+            this.gbAmbiente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.gbAmbiente.Controls.Add(this.rbAmbosAmbiente);
             this.gbAmbiente.Controls.Add(this.rbProducao);
             this.gbAmbiente.Controls.Add(this.rbInterno);
-            this.gbAmbiente.Location = new System.Drawing.Point(419, 42);
+            this.gbAmbiente.Location = new System.Drawing.Point(449, 42);
             this.gbAmbiente.Name = "gbAmbiente";
             this.gbAmbiente.Size = new System.Drawing.Size(252, 59);
             this.gbAmbiente.TabIndex = 12;
@@ -224,10 +219,11 @@ namespace SearchInBases.Forms
             // 
             // gbBasesAtivas
             // 
+            this.gbBasesAtivas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.gbBasesAtivas.Controls.Add(this.rbAmbasAtiva);
             this.gbBasesAtivas.Controls.Add(this.rbInativa);
             this.gbBasesAtivas.Controls.Add(this.rbAtiva);
-            this.gbBasesAtivas.Location = new System.Drawing.Point(688, 42);
+            this.gbBasesAtivas.Location = new System.Drawing.Point(720, 42);
             this.gbBasesAtivas.Name = "gbBasesAtivas";
             this.gbBasesAtivas.Size = new System.Drawing.Size(227, 59);
             this.gbBasesAtivas.TabIndex = 11;
@@ -316,6 +312,7 @@ namespace SearchInBases.Forms
             this.txtSQL.CharWidth = 8;
             this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtSQL.IsReplaceMode = false;
             this.txtSQL.Location = new System.Drawing.Point(200, 147);
             this.txtSQL.Name = "txtSQL";
@@ -331,11 +328,12 @@ namespace SearchInBases.Forms
             // 
             this.btnPesquisar.BackColor = System.Drawing.SystemColors.Control;
             this.btnPesquisar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPesquisar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPesquisar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnPesquisar.Image = ((System.Drawing.Image)(resources.GetObject("btnPesquisar.Image")));
             this.btnPesquisar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnPesquisar.Location = new System.Drawing.Point(12, 42);
             this.btnPesquisar.Name = "btnPesquisar";
+            this.btnPesquisar.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnPesquisar.Size = new System.Drawing.Size(158, 74);
             this.btnPesquisar.TabIndex = 8;
             this.btnPesquisar.Text = "Pesquisar";
@@ -364,14 +362,10 @@ namespace SearchInBases.Forms
             // toolBar
             // 
             this.toolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnConexoes,
-            this.toolStripSeparator1,
+            this.btnConfig,
             this.btnResultados,
-            this.toolStripSeparator2,
             this.btnLog,
-            this.toolStripSeparator3,
             this.btnSobre,
-            this.toolStripSeparator4,
             this.btnClear});
             this.toolBar.Location = new System.Drawing.Point(0, 0);
             this.toolBar.Name = "toolBar";
@@ -379,20 +373,15 @@ namespace SearchInBases.Forms
             this.toolBar.TabIndex = 3;
             this.toolBar.Text = "toolStrip1";
             // 
-            // btnConexoes
+            // btnConfig
             // 
-            this.btnConexoes.Image = ((System.Drawing.Image)(resources.GetObject("btnConexoes.Image")));
-            this.btnConexoes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnConexoes.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnConexoes.Name = "btnConexoes";
-            this.btnConexoes.Size = new System.Drawing.Size(95, 36);
-            this.btnConexoes.Text = "Conexões";
-            this.btnConexoes.Click += new System.EventHandler(this.btnConexoes_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
+            this.btnConfig.Image = ((System.Drawing.Image)(resources.GetObject("btnConfig.Image")));
+            this.btnConfig.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnConfig.Name = "btnConfig";
+            this.btnConfig.Size = new System.Drawing.Size(95, 36);
+            this.btnConfig.Text = "Conexões";
+            this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
             // 
             // btnResultados
             // 
@@ -403,11 +392,6 @@ namespace SearchInBases.Forms
             this.btnResultados.Size = new System.Drawing.Size(100, 36);
             this.btnResultados.Text = "Resultados";
             this.btnResultados.Click += new System.EventHandler(this.btnResultados_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
             // 
             // btnLog
             // 
@@ -420,11 +404,6 @@ namespace SearchInBases.Forms
             this.btnLog.ToolTipText = "Logs";
             this.btnLog.Click += new System.EventHandler(this.btnLog_Click);
             // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 39);
-            // 
             // btnSobre
             // 
             this.btnSobre.Image = ((System.Drawing.Image)(resources.GetObject("btnSobre.Image")));
@@ -434,11 +413,6 @@ namespace SearchInBases.Forms
             this.btnSobre.Size = new System.Drawing.Size(73, 36);
             this.btnSobre.Text = "Sobre";
             this.btnSobre.Click += new System.EventHandler(this.btnSobre_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 39);
             // 
             // btnClear
             // 
@@ -458,7 +432,7 @@ namespace SearchInBases.Forms
             this.txtConsole.Location = new System.Drawing.Point(3, 8);
             this.txtConsole.Name = "txtConsole";
             this.txtConsole.ReadOnly = true;
-            this.txtConsole.Size = new System.Drawing.Size(980, 188);
+            this.txtConsole.Size = new System.Drawing.Size(980, 198);
             this.txtConsole.TabIndex = 2;
             this.txtConsole.Text = "";
             // 
@@ -501,7 +475,7 @@ namespace SearchInBases.Forms
         private System.Windows.Forms.RichTextBox txtConsole;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ToolStrip toolBar;
-        private System.Windows.Forms.ToolStripButton btnConexoes;
+        private System.Windows.Forms.ToolStripButton btnConfig;
         private System.Windows.Forms.Label lblConexoes;
         private System.Windows.Forms.Label lblSQL;
         private System.Windows.Forms.Button btnPesquisar;
@@ -509,10 +483,7 @@ namespace SearchInBases.Forms
         private System.Windows.Forms.ToolStripButton btnResultados;
         private System.Windows.Forms.ToolStripButton btnClear;
         private FastColoredTextBoxNS.FastColoredTextBox txtSQL;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton btnLog;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ListView lvConexoes;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.GroupBox gbBasesAtivas;
@@ -524,7 +495,6 @@ namespace SearchInBases.Forms
         private System.Windows.Forms.RadioButton rbProducao;
         private System.Windows.Forms.RadioButton rbInterno;
         private System.Windows.Forms.ToolStripButton btnSobre;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.Button btnHistorico;
         private System.Windows.Forms.ToolTip ttHistorico;
         private System.Windows.Forms.Button btnFormater;

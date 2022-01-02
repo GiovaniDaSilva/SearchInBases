@@ -17,15 +17,28 @@ namespace SearchInBases.Services
             public string server = "";
             public string user = "";
             public string password = "";
+
+            public ConfigConn()
+            {
+            }
+            public ConfigConn(string connName, string baseAuth, string server, string user, string password)
+            {
+                this.connName = connName;
+                this.baseAuth = baseAuth;
+                this.server = server;
+                this.user = user;
+                this.password = password;
+            }
+
         }
 
-        internal List<Connection> getConnections()
-        {            
+        public List<Connection> ToConnections()
+        {
             List<Connection> conns = new List<Connection>();
 
             if (configConn is null) return conns;
 
-            foreach(var conn in configConn)
+            foreach (var conn in configConn)
             {
                 conns.Add(new Connection(conn.connName,
                                         conn.baseAuth,
@@ -36,6 +49,7 @@ namespace SearchInBases.Services
 
             return conns;
         }
+
 
         public static string GetConfigFile()
         {
