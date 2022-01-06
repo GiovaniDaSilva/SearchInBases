@@ -61,6 +61,7 @@ namespace SearchInBases.Forms
             lvConexoes.Items.Clear();
             foreach (var conn in Vars.connections)
             {
+                conn.habilitado = false;
                 lvConexoes.Items.Add(conn.connectionName, 0);
             }
         }

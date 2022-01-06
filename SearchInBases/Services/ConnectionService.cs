@@ -25,43 +25,42 @@ namespace SearchInBases.Services
 
         public static void inicializarBasesAuth(Action<string> callbackConsole, Connection conn)
         {
-            if(!Utils.IsNullOrEmpty(conn.basesAuth)) conn.basesAuth.Clear();
-            
+            if (!Utils.IsNullOrEmpty(conn.basesAuth)) conn.basesAuth.Clear();
+
             try
             {
-                conn.connection.Open();
-
-                using (var reader = MySQLConnectorService.ExecutarSQL(conn.connection, String.Format(SQLEnum.SQLAuth.select_instance, conn.baseAutenticador)))
+                using (var myConn = MySQLConnectorService.GetMySqlConnection(conn.mySqlConnector))
                 {
-                    while (reader.Read())
+                    myConn.Open();
+                    using (var reader = MySQLConnectorService.ExecutarSQL(myConn, String.Format(SQLEnum.SQLAuth.select_instance, conn.baseAutenticador)))
                     {
-                        if (Utils.IsNull(conn.basesAuth)) conn.basesAuth = new();
+                        while (reader.Read())
+                        {
+                            if (Utils.IsNull(conn.basesAuth)) conn.basesAuth = new();
 
-                        BaseAuth baseAuth = new BaseAuth(reader.GetString((int)SQLEnum.SQLAuthInstance.ID),
-                            reader.GetString((int)SQLEnum.SQLAuthInstance.DATABASE_NAME),
-                            reader.GetBoolean((int)SQLEnum.SQLAuthInstance.INTERNAL),
-                            reader.GetBoolean((int)SQLEnum.SQLAuthInstance.ACTIVE));
+                            BaseAuth baseAuth = new BaseAuth(reader.GetString((int)SQLEnum.SQLAuthInstance.ID),
+                                reader.GetString((int)SQLEnum.SQLAuthInstance.DATABASE_NAME),
+                                reader.GetBoolean((int)SQLEnum.SQLAuthInstance.INTERNAL),
+                                reader.GetBoolean((int)SQLEnum.SQLAuthInstance.ACTIVE));
 
-                        conn.basesAuth.Add(baseAuth);
+                            conn.basesAuth.Add(baseAuth);
+                        }
                     }
                 }
-            }catch 
-            {               
+            }
+            catch
+            {
                 var messagem = "Não foi possível buscar as bases a partir do autenticador da conexão (" + conn.connectionName + ")";
                 callbackConsole(messagem);
                 Log.addErroMessage(messagem);
                 throw;
-            }
-            finally
-            {
-               conn.connection.Close();
             }            
         }
 
-        public  static void ExecutarSQL(Action<string> callbackConsole, 
-                                        Action<string> callbackCsv,  
-                                        List<Connection> conexoesHabilitadas, 
-                                        SQLParams sqlParams, 
+        public static void ExecutarSQL(Action<string> callbackConsole,
+                                        Action<string> callbackCsv,
+                                        List<Connection> conexoesHabilitadas,
+                                        SQLParams sqlParams,
                                         bool ocorreuErroNaConsulta)
         {
 
@@ -70,13 +69,14 @@ namespace SearchInBases.Services
 
             foreach (var conn in conexoesHabilitadas)
             {
-                List<Task> threadsProcessando = new List<Task>();                
-                List<MySqlConnection> threadsConn = new List<MySqlConnection>();                
+                List<Task> threadsProcessando = new List<Task>();
+                List<MySqlConnection> threadsConn = new List<MySqlConnection>();
                 try
                 {
                     foreach (var baseAuth in filtrarBasesAuth(conn.basesAuth, sqlParams))
                     {
-                        threadsProcessando.Add(Task.Run(() => {
+                        threadsProcessando.Add(Task.Run(() =>
+                        {
                             ExecutarSQLThread(callbackConsole, sqlParams, callbackCsv, conn, threadsConn, baseAuth);
                         }));
                     }
@@ -93,53 +93,56 @@ namespace SearchInBases.Services
             }
 
             ocorreuErroNaConsulta = _ocorreuErroNaConsulta;
-            
+
         }
 
         #endregion
 
 
         #region "Privados"
-        
-        private static void ExecutarSQLThread(Action<string> callbackConsole, 
-                                              SQLParams sqlParams, 
-                                              Action<string> callbackCsv, 
-                                              Connection conn, 
-                                              List<MySqlConnection> threadsConn, 
+
+        private static void ExecutarSQLThread(Action<string> callbackConsole,
+                                              SQLParams sqlParams,
+                                              Action<string> callbackCsv,
+                                              Connection conn,
+                                              List<MySqlConnection> threadsConn,
                                               BaseAuth baseAuth)
         {
-            // Gera uma connection para cada thread
-            var threadConn = MySQLConnectorService.GetMySqlConnection(conn.mySqlConnector);
-            threadsConn.Add(threadConn);
-
-            threadConn.Open();
             try
             {
-                try
+                // Gera uma connection para cada thread
+                using (var threadConn = MySQLConnectorService.GetMySqlConnection(conn.mySqlConnector))
                 {
-                    threadConn.ChangeDatabase(baseAuth.databaseName);
-                }
-                catch
-                {                    
-                    callbackConsole(RichFormatting.FontColor(baseAuth.databaseName, Color.DarkBlue) + " -> " + RichFormatting.FontColor(database_notfound, Color.Red));
-                    // Database not found
-                    Log.addWarnMessage("Base (" + baseAuth.databaseName + ") não encontrado na conexão (" + conn.connectionName + ")");
-                    return;
-                }
 
-                try
-                {
+                    threadsConn.Add(threadConn);
+
+                    threadConn.Open();
+
+                    try
+                    {
+                        threadConn.ChangeDatabase(baseAuth.databaseName);
+                    }
+                    catch
+                    {
+                        callbackConsole(ComumCallbackConsole(conn.connectionName, baseAuth.databaseName) + " -> " + RichFormatting.FontColor(database_notfound, Color.Red));
+                        // Database not found
+                        Log.addWarnMessage("Base (" + baseAuth.databaseName + ") não encontrado na conexão (" + conn.connectionName + ")");
+                        return;
+                    }
+
+
                     // Executa o comando e salva o retorno no CSV
                     using (var reader = MySQLConnectorService.ExecutarSQL(threadConn, sqlParams))
                     {
-                        callbackConsole(RichFormatting.FontColor(baseAuth.databaseName, Color.DarkBlue) + RichFormatting.Negrito(" -> ") + (reader.HasRows ? RichFormatting.FontColor(encontrou_ocorrencias, Color.DarkGreen) : RichFormatting.FontColor(nao_encontrou_ocorrencias, Color.DarkViolet)));
+                        callbackConsole(ComumCallbackConsole(conn.connectionName, baseAuth.databaseName) +
+                            (reader.HasRows ? RichFormatting.FontColor(encontrou_ocorrencias, Color.DarkGreen) : RichFormatting.FontColor(nao_encontrou_ocorrencias, Color.DarkViolet)));
 
                         if (reader.HasRows && !_controlPrintFieldsName)
                         {
                             _controlPrintFieldsName = true;
                             callbackCsv(FieldsNameReaderToCsv(reader));
                         }
-                        
+
                         while (reader.Read())
                         {
                             callbackCsv(FieldsReaderToCsv(baseAuth.databaseName, reader));
@@ -147,19 +150,22 @@ namespace SearchInBases.Services
                     }
 
                 }
-                catch (Exception ex)
-                {
-                    _ocorreuErroNaConsulta = true;
-                    callbackConsole(RichFormatting.FontColor(baseAuth.databaseName, Color.DarkBlue) + " -> " + RichFormatting.FontColor(erro_executar_sql, Color.Red));
-                    Log.addErroMessage("Não foi possível executar o comenado SQL na base (" + baseAuth.databaseName + ") da conexão (" + conn.connectionName + ")");
-                    ErroService.TratarErro(ex);
-                    return;
-                }
+
             }
-            finally
+            catch (Exception ex)
             {
-                threadConn.Close();
+                _ocorreuErroNaConsulta = true;
+                callbackConsole(ComumCallbackConsole(conn.connectionName, baseAuth.databaseName) + " -> " + RichFormatting.FontColor(erro_executar_sql, Color.Red));
+                Log.addErroMessage("Não foi possível executar o comenado SQL na base (" + baseAuth.databaseName + ") da conexão (" + conn.connectionName + ")");
+                ErroService.TratarErro(ex);
+                return;
             }
+        }
+
+        private static string ComumCallbackConsole(string connName, string baseName)
+        {
+            return RichFormatting.FontColor(connName, Color.DarkMagenta) + RichFormatting.Negrito(" -> ") +
+                                        RichFormatting.FontColor(baseName, Color.DarkBlue) + RichFormatting.Negrito(" -> ");
         }
 
         private static string FieldsNameReaderToCsv(MySqlDataReader reader)
@@ -223,7 +229,7 @@ namespace SearchInBases.Services
 
 
             // Ambiente
-            if (SQLFiltro.enuAmbiente.Interno.Equals(sqlParams.filtro.ambiente))            
+            if (SQLFiltro.enuAmbiente.Interno.Equals(sqlParams.filtro.ambiente))
                 result.RemoveAll(b => !b.interno);
 
             else if (SQLFiltro.enuAmbiente.Producao.Equals(sqlParams.filtro.ambiente))

@@ -312,7 +312,6 @@ namespace SearchInBases.Forms
             this.txtSQL.CharWidth = 8;
             this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtSQL.IsReplaceMode = false;
             this.txtSQL.Location = new System.Drawing.Point(200, 147);
             this.txtSQL.Name = "txtSQL";
@@ -379,8 +378,8 @@ namespace SearchInBases.Forms
             this.btnConfig.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnConfig.Name = "btnConfig";
-            this.btnConfig.Size = new System.Drawing.Size(95, 36);
-            this.btnConfig.Text = "Conexões";
+            this.btnConfig.Size = new System.Drawing.Size(115, 36);
+            this.btnConfig.Text = "Configuração";
             this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
             // 
             // btnResultados
@@ -432,7 +431,7 @@ namespace SearchInBases.Forms
             this.txtConsole.Location = new System.Drawing.Point(3, 8);
             this.txtConsole.Name = "txtConsole";
             this.txtConsole.ReadOnly = true;
-            this.txtConsole.Size = new System.Drawing.Size(980, 198);
+            this.txtConsole.Size = new System.Drawing.Size(980, 200);
             this.txtConsole.TabIndex = 2;
             this.txtConsole.Text = "";
             // 

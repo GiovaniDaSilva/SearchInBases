@@ -8,8 +8,19 @@ namespace SearchInBases.Services
         
         public static MySqlConnection GetMySqlConnection(SearchInBases.Entity.MySQLConnector mySqlConnector)
         {
-            string stringConn = $"Server={mySqlConnector.server};User ID={mySqlConnector.user};Password={mySqlConnector.password}";
-            return new MySqlConnection(stringConn);
+         
+            MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder()
+            {
+                Server = mySqlConnector.server.ToLower(),                
+                UserID = mySqlConnector.user.ToLower(),
+                Password = mySqlConnector.password,
+                Pooling = false,
+                SslMode = MySqlSslMode.None
+            };
+
+            string connString = builder.ConnectionString;
+
+            return new MySqlConnection(connString);
         }
 
 
