@@ -15,7 +15,8 @@ namespace SearchInBases.Services
                 UserID = mySqlConnector.user.ToLower(),
                 Password = mySqlConnector.password,
                 Pooling = false,
-                SslMode = MySqlSslMode.None
+                SslMode = MySqlSslMode.None,
+                AllowPublicKeyRetrieval = true,
             };
 
             string connString = builder.ConnectionString;
