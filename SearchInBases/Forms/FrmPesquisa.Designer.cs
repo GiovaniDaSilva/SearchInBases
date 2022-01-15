@@ -77,25 +77,27 @@ namespace SearchInBases.Forms
             this.panel1.Controls.Add(this.progressBar);
             this.panel1.Controls.Add(this.lblStatus);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 642);
+            this.panel1.Location = new System.Drawing.Point(0, 856);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(994, 25);
+            this.panel1.Size = new System.Drawing.Size(1136, 33);
             this.panel1.TabIndex = 0;
             // 
             // progressBar
             // 
             this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar.Location = new System.Drawing.Point(594, 2);
+            this.progressBar.Location = new System.Drawing.Point(679, 3);
+            this.progressBar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(390, 20);
+            this.progressBar.Size = new System.Drawing.Size(446, 27);
             this.progressBar.TabIndex = 1;
             // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(4, 6);
+            this.lblStatus.Location = new System.Drawing.Point(5, 8);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(104, 15);
+            this.lblStatus.Size = new System.Drawing.Size(132, 20);
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "Status da pesquisa";
             // 
@@ -105,6 +107,7 @@ namespace SearchInBases.Forms
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -116,10 +119,11 @@ namespace SearchInBases.Forms
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.txtConsole);
+            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
             this.splitContainer1.Panel2MinSize = 50;
-            this.splitContainer1.Size = new System.Drawing.Size(994, 642);
-            this.splitContainer1.SplitterDistance = 437;
-            this.splitContainer1.SplitterWidth = 2;
+            this.splitContainer1.Size = new System.Drawing.Size(1136, 856);
+            this.splitContainer1.SplitterDistance = 582;
+            this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 2;
             // 
             // panel2
@@ -136,8 +140,9 @@ namespace SearchInBases.Forms
             this.panel2.Controls.Add(this.toolBar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(992, 435);
+            this.panel2.Size = new System.Drawing.Size(1134, 580);
             this.panel2.TabIndex = 0;
             // 
             // btnFormater
@@ -147,9 +152,10 @@ namespace SearchInBases.Forms
             this.btnFormater.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnFormater.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFormater.Image = ((System.Drawing.Image)(resources.GetObject("btnFormater.Image")));
-            this.btnFormater.Location = new System.Drawing.Point(953, 180);
+            this.btnFormater.Location = new System.Drawing.Point(1089, 240);
+            this.btnFormater.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnFormater.Name = "btnFormater";
-            this.btnFormater.Size = new System.Drawing.Size(30, 27);
+            this.btnFormater.Size = new System.Drawing.Size(34, 36);
             this.btnFormater.TabIndex = 14;
             this.btnFormater.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ttHistorico.SetToolTip(this.btnFormater, "Formatador");
@@ -163,9 +169,10 @@ namespace SearchInBases.Forms
             this.btnHistorico.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnHistorico.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnHistorico.Image = ((System.Drawing.Image)(resources.GetObject("btnHistorico.Image")));
-            this.btnHistorico.Location = new System.Drawing.Point(953, 147);
+            this.btnHistorico.Location = new System.Drawing.Point(1089, 196);
+            this.btnHistorico.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnHistorico.Name = "btnHistorico";
-            this.btnHistorico.Size = new System.Drawing.Size(30, 27);
+            this.btnHistorico.Size = new System.Drawing.Size(34, 36);
             this.btnHistorico.TabIndex = 13;
             this.btnHistorico.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ttHistorico.SetToolTip(this.btnHistorico, "Histórico");
@@ -178,9 +185,11 @@ namespace SearchInBases.Forms
             this.gbAmbiente.Controls.Add(this.rbAmbosAmbiente);
             this.gbAmbiente.Controls.Add(this.rbProducao);
             this.gbAmbiente.Controls.Add(this.rbInterno);
-            this.gbAmbiente.Location = new System.Drawing.Point(449, 42);
+            this.gbAmbiente.Location = new System.Drawing.Point(513, 56);
+            this.gbAmbiente.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gbAmbiente.Name = "gbAmbiente";
-            this.gbAmbiente.Size = new System.Drawing.Size(252, 59);
+            this.gbAmbiente.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gbAmbiente.Size = new System.Drawing.Size(288, 79);
             this.gbAmbiente.TabIndex = 12;
             this.gbAmbiente.TabStop = false;
             this.gbAmbiente.Text = "Ambiente";
@@ -189,9 +198,10 @@ namespace SearchInBases.Forms
             // 
             this.rbAmbosAmbiente.AutoSize = true;
             this.rbAmbosAmbiente.Checked = true;
-            this.rbAmbosAmbiente.Location = new System.Drawing.Point(180, 22);
+            this.rbAmbosAmbiente.Location = new System.Drawing.Point(206, 29);
+            this.rbAmbosAmbiente.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rbAmbosAmbiente.Name = "rbAmbosAmbiente";
-            this.rbAmbosAmbiente.Size = new System.Drawing.Size(63, 19);
+            this.rbAmbosAmbiente.Size = new System.Drawing.Size(77, 24);
             this.rbAmbosAmbiente.TabIndex = 5;
             this.rbAmbosAmbiente.TabStop = true;
             this.rbAmbosAmbiente.Text = "Ambos";
@@ -200,9 +210,10 @@ namespace SearchInBases.Forms
             // rbProducao
             // 
             this.rbProducao.AutoSize = true;
-            this.rbProducao.Location = new System.Drawing.Point(98, 22);
+            this.rbProducao.Location = new System.Drawing.Point(112, 29);
+            this.rbProducao.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rbProducao.Name = "rbProducao";
-            this.rbProducao.Size = new System.Drawing.Size(76, 19);
+            this.rbProducao.Size = new System.Drawing.Size(93, 24);
             this.rbProducao.TabIndex = 4;
             this.rbProducao.Text = "Produção";
             this.rbProducao.UseVisualStyleBackColor = true;
@@ -210,9 +221,10 @@ namespace SearchInBases.Forms
             // rbInterno
             // 
             this.rbInterno.AutoSize = true;
-            this.rbInterno.Location = new System.Drawing.Point(25, 22);
+            this.rbInterno.Location = new System.Drawing.Point(29, 29);
+            this.rbInterno.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rbInterno.Name = "rbInterno";
-            this.rbInterno.Size = new System.Drawing.Size(67, 19);
+            this.rbInterno.Size = new System.Drawing.Size(82, 24);
             this.rbInterno.TabIndex = 3;
             this.rbInterno.Text = "Internas";
             this.rbInterno.UseVisualStyleBackColor = true;
@@ -223,9 +235,11 @@ namespace SearchInBases.Forms
             this.gbBasesAtivas.Controls.Add(this.rbAmbasAtiva);
             this.gbBasesAtivas.Controls.Add(this.rbInativa);
             this.gbBasesAtivas.Controls.Add(this.rbAtiva);
-            this.gbBasesAtivas.Location = new System.Drawing.Point(720, 42);
+            this.gbBasesAtivas.Location = new System.Drawing.Point(823, 56);
+            this.gbBasesAtivas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gbBasesAtivas.Name = "gbBasesAtivas";
-            this.gbBasesAtivas.Size = new System.Drawing.Size(227, 59);
+            this.gbBasesAtivas.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gbBasesAtivas.Size = new System.Drawing.Size(259, 79);
             this.gbBasesAtivas.TabIndex = 11;
             this.gbBasesAtivas.TabStop = false;
             this.gbBasesAtivas.Text = "Bases Ativas";
@@ -234,9 +248,10 @@ namespace SearchInBases.Forms
             // 
             this.rbAmbasAtiva.AutoSize = true;
             this.rbAmbasAtiva.Checked = true;
-            this.rbAmbasAtiva.Location = new System.Drawing.Point(156, 22);
+            this.rbAmbasAtiva.Location = new System.Drawing.Point(178, 29);
+            this.rbAmbasAtiva.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rbAmbasAtiva.Name = "rbAmbasAtiva";
-            this.rbAmbasAtiva.Size = new System.Drawing.Size(63, 19);
+            this.rbAmbasAtiva.Size = new System.Drawing.Size(77, 24);
             this.rbAmbasAtiva.TabIndex = 2;
             this.rbAmbasAtiva.TabStop = true;
             this.rbAmbasAtiva.Text = "Ambos";
@@ -245,9 +260,10 @@ namespace SearchInBases.Forms
             // rbInativa
             // 
             this.rbInativa.AutoSize = true;
-            this.rbInativa.Location = new System.Drawing.Point(85, 22);
+            this.rbInativa.Location = new System.Drawing.Point(97, 29);
+            this.rbInativa.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rbInativa.Name = "rbInativa";
-            this.rbInativa.Size = new System.Drawing.Size(65, 19);
+            this.rbInativa.Size = new System.Drawing.Size(80, 24);
             this.rbInativa.TabIndex = 1;
             this.rbInativa.Text = "Inativas";
             this.rbInativa.UseVisualStyleBackColor = true;
@@ -255,9 +271,10 @@ namespace SearchInBases.Forms
             // rbAtiva
             // 
             this.rbAtiva.AutoSize = true;
-            this.rbAtiva.Location = new System.Drawing.Point(22, 22);
+            this.rbAtiva.Location = new System.Drawing.Point(25, 29);
+            this.rbAtiva.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rbAtiva.Name = "rbAtiva";
-            this.rbAtiva.Size = new System.Drawing.Size(57, 19);
+            this.rbAtiva.Size = new System.Drawing.Size(70, 24);
             this.rbAtiva.TabIndex = 0;
             this.rbAtiva.Text = "Ativas";
             this.rbAtiva.UseVisualStyleBackColor = true;
@@ -270,10 +287,11 @@ namespace SearchInBases.Forms
             this.lvConexoes.CheckBoxes = true;
             this.lvConexoes.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lvConexoes.HideSelection = false;
-            this.lvConexoes.Location = new System.Drawing.Point(12, 147);
+            this.lvConexoes.Location = new System.Drawing.Point(14, 196);
+            this.lvConexoes.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lvConexoes.MultiSelect = false;
             this.lvConexoes.Name = "lvConexoes";
-            this.lvConexoes.Size = new System.Drawing.Size(158, 280);
+            this.lvConexoes.Size = new System.Drawing.Size(180, 372);
             this.lvConexoes.SmallImageList = this.imageList1;
             this.lvConexoes.TabIndex = 10;
             this.lvConexoes.UseCompatibleStateImageBehavior = false;
@@ -306,19 +324,21 @@ namespace SearchInBases.Forms
         '\''};
             this.txtSQL.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*" +
     "(?<range>:)\\s*(?<range>[^;]+);";
-            this.txtSQL.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.txtSQL.AutoScrollMinSize = new System.Drawing.Size(31, 18);
             this.txtSQL.BackBrush = null;
-            this.txtSQL.CharHeight = 14;
-            this.txtSQL.CharWidth = 8;
+            this.txtSQL.CharHeight = 18;
+            this.txtSQL.CharWidth = 10;
             this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtSQL.IsReplaceMode = false;
-            this.txtSQL.Location = new System.Drawing.Point(200, 147);
+            this.txtSQL.Location = new System.Drawing.Point(229, 196);
+            this.txtSQL.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtSQL.Name = "txtSQL";
             this.txtSQL.Paddings = new System.Windows.Forms.Padding(0);
             this.txtSQL.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.txtSQL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtSQL.ServiceColors")));
-            this.txtSQL.Size = new System.Drawing.Size(747, 280);
+            this.txtSQL.Size = new System.Drawing.Size(854, 373);
             this.txtSQL.TabIndex = 9;
             this.txtSQL.Zoom = 100;
             this.txtSQL.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.txtSQL_TextChanged);
@@ -330,10 +350,11 @@ namespace SearchInBases.Forms
             this.btnPesquisar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnPesquisar.Image = ((System.Drawing.Image)(resources.GetObject("btnPesquisar.Image")));
             this.btnPesquisar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPesquisar.Location = new System.Drawing.Point(12, 42);
+            this.btnPesquisar.Location = new System.Drawing.Point(14, 56);
+            this.btnPesquisar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnPesquisar.Name = "btnPesquisar";
-            this.btnPesquisar.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnPesquisar.Size = new System.Drawing.Size(158, 74);
+            this.btnPesquisar.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
+            this.btnPesquisar.Size = new System.Drawing.Size(181, 99);
             this.btnPesquisar.TabIndex = 8;
             this.btnPesquisar.Text = "Pesquisar";
             this.btnPesquisar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -343,23 +364,24 @@ namespace SearchInBases.Forms
             // lblSQL
             // 
             this.lblSQL.AutoSize = true;
-            this.lblSQL.Location = new System.Drawing.Point(220, 129);
+            this.lblSQL.Location = new System.Drawing.Point(251, 172);
             this.lblSQL.Name = "lblSQL";
-            this.lblSQL.Size = new System.Drawing.Size(28, 15);
+            this.lblSQL.Size = new System.Drawing.Size(35, 20);
             this.lblSQL.TabIndex = 7;
             this.lblSQL.Text = "SQL";
             // 
             // lblConexoes
             // 
             this.lblConexoes.AutoSize = true;
-            this.lblConexoes.Location = new System.Drawing.Point(12, 129);
+            this.lblConexoes.Location = new System.Drawing.Point(14, 172);
             this.lblConexoes.Name = "lblConexoes";
-            this.lblConexoes.Size = new System.Drawing.Size(59, 15);
+            this.lblConexoes.Size = new System.Drawing.Size(73, 20);
             this.lblConexoes.TabIndex = 6;
             this.lblConexoes.Text = "Conexões";
             // 
             // toolBar
             // 
+            this.toolBar.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnConfig,
             this.btnResultados,
@@ -368,7 +390,7 @@ namespace SearchInBases.Forms
             this.btnClear});
             this.toolBar.Location = new System.Drawing.Point(0, 0);
             this.toolBar.Name = "toolBar";
-            this.toolBar.Size = new System.Drawing.Size(992, 39);
+            this.toolBar.Size = new System.Drawing.Size(1134, 39);
             this.toolBar.TabIndex = 3;
             this.toolBar.Text = "toolStrip1";
             // 
@@ -378,7 +400,7 @@ namespace SearchInBases.Forms
             this.btnConfig.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnConfig.Name = "btnConfig";
-            this.btnConfig.Size = new System.Drawing.Size(115, 36);
+            this.btnConfig.Size = new System.Drawing.Size(134, 36);
             this.btnConfig.Text = "Configuração";
             this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
             // 
@@ -388,7 +410,7 @@ namespace SearchInBases.Forms
             this.btnResultados.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnResultados.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnResultados.Name = "btnResultados";
-            this.btnResultados.Size = new System.Drawing.Size(100, 36);
+            this.btnResultados.Size = new System.Drawing.Size(117, 36);
             this.btnResultados.Text = "Resultados";
             this.btnResultados.Click += new System.EventHandler(this.btnResultados_Click);
             // 
@@ -398,7 +420,7 @@ namespace SearchInBases.Forms
             this.btnLog.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnLog.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLog.Name = "btnLog";
-            this.btnLog.Size = new System.Drawing.Size(63, 36);
+            this.btnLog.Size = new System.Drawing.Size(70, 36);
             this.btnLog.Text = "Log";
             this.btnLog.ToolTipText = "Logs";
             this.btnLog.Click += new System.EventHandler(this.btnLog_Click);
@@ -409,7 +431,7 @@ namespace SearchInBases.Forms
             this.btnSobre.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSobre.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSobre.Name = "btnSobre";
-            this.btnSobre.Size = new System.Drawing.Size(73, 36);
+            this.btnSobre.Size = new System.Drawing.Size(84, 36);
             this.btnSobre.Text = "Sobre";
             this.btnSobre.Click += new System.EventHandler(this.btnSobre_Click);
             // 
@@ -419,30 +441,30 @@ namespace SearchInBases.Forms
             this.btnClear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(70, 36);
+            this.btnClear.Size = new System.Drawing.Size(79, 36);
             this.btnClear.Text = "Clear";
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // txtConsole
             // 
-            this.txtConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtConsole.Location = new System.Drawing.Point(3, 8);
+            this.txtConsole.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtConsole.Location = new System.Drawing.Point(10, 5);
+            this.txtConsole.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtConsole.Name = "txtConsole";
             this.txtConsole.ReadOnly = true;
-            this.txtConsole.Size = new System.Drawing.Size(980, 200);
+            this.txtConsole.Size = new System.Drawing.Size(1114, 259);
             this.txtConsole.TabIndex = 2;
             this.txtConsole.Text = "";
             // 
             // FrmPesquisa
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(994, 667);
+            this.ClientSize = new System.Drawing.Size(1136, 889);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FrmPesquisa";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Search In Bases";

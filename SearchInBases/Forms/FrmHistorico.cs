@@ -37,11 +37,12 @@ namespace SearchInBases.Forms
 
         private void FrmHistorico_Load(object sender, System.EventArgs e)
         {
+            this.MinimumSize = new System.Drawing.Size(600, 500);
+
             InicializarDadosGrid();
 
-            bindingSource = new();
+            bindingSource = new();            
             bindingSource.DataSource = dadosGrid;
-
             dgvHistorico.DataSource = bindingSource;            
             
             if (dgvHistorico.SelectedRows.Count > 0)
@@ -58,6 +59,8 @@ namespace SearchInBases.Forms
             {
                 dadosGrid.Add(new ColsGrid(consulta.data, consulta.sqlParams.sql));
             }
+
+            dadosGrid.Sort((x, y) => y.data.CompareTo(x.data));
         }
 
         private void dgvHistorico_Click(object sender, EventArgs e)

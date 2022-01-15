@@ -53,6 +53,8 @@ namespace SearchInBases.Forms
             _consoleService = new ConsoleService(txtConsole);
             lblStatus.Text = status_parado;
 
+            this.MinimumSize = new System.Drawing.Size(900, 600);
+
             AtualizarListConn();
         }
 

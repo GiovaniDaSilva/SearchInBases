@@ -28,6 +28,7 @@ namespace SearchInBases.Formularios
 
         private void FrmConfiguracao_Load(object sender, EventArgs e)
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             ConfiguracaoService.AtualizarListConn(lvConexoes);
         }
 

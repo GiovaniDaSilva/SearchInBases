@@ -58,12 +58,13 @@
             // toolBar
             // 
             this.toolBar.BackColor = System.Drawing.SystemColors.Control;
+            this.toolBar.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSalvar,
             this.btnCancelar});
             this.toolBar.Location = new System.Drawing.Point(0, 0);
             this.toolBar.Name = "toolBar";
-            this.toolBar.Size = new System.Drawing.Size(574, 39);
+            this.toolBar.Size = new System.Drawing.Size(656, 48);
             this.toolBar.TabIndex = 5;
             this.toolBar.Text = "toolStrip1";
             // 
@@ -75,7 +76,7 @@
             this.btnSalvar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalvar.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.btnSalvar.Name = "btnSalvar";
-            this.btnSalvar.Size = new System.Drawing.Size(42, 35);
+            this.btnSalvar.Size = new System.Drawing.Size(53, 44);
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
@@ -88,7 +89,7 @@
             this.btnCancelar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(57, 35);
+            this.btnCancelar.Size = new System.Drawing.Size(70, 44);
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -116,10 +117,11 @@
             this.tpConexoes.Controls.Add(this.lblNome);
             this.tpConexoes.Controls.Add(this.lvConexoes);
             this.tpConexoes.Controls.Add(this.lblConexoes);
-            this.tpConexoes.Location = new System.Drawing.Point(4, 24);
+            this.tpConexoes.Location = new System.Drawing.Point(4, 29);
+            this.tpConexoes.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tpConexoes.Name = "tpConexoes";
-            this.tpConexoes.Padding = new System.Windows.Forms.Padding(3);
-            this.tpConexoes.Size = new System.Drawing.Size(566, 335);
+            this.tpConexoes.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tpConexoes.Size = new System.Drawing.Size(648, 451);
             this.tpConexoes.TabIndex = 1;
             this.tpConexoes.Text = "Conexões";
             this.tpConexoes.UseVisualStyleBackColor = true;
@@ -128,9 +130,10 @@
             // 
             this.btnAdicionar.BackColor = System.Drawing.Color.Transparent;
             this.btnAdicionar.ForeColor = System.Drawing.Color.DarkGreen;
-            this.btnAdicionar.Location = new System.Drawing.Point(193, 279);
+            this.btnAdicionar.Location = new System.Drawing.Point(221, 372);
+            this.btnAdicionar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAdicionar.Name = "btnAdicionar";
-            this.btnAdicionar.Size = new System.Drawing.Size(158, 23);
+            this.btnAdicionar.Size = new System.Drawing.Size(181, 31);
             this.btnAdicionar.TabIndex = 24;
             this.btnAdicionar.Text = "Adicionar Conexão";
             this.btnAdicionar.UseVisualStyleBackColor = false;
@@ -140,9 +143,10 @@
             // 
             this.btnRemover.BackColor = System.Drawing.Color.Transparent;
             this.btnRemover.ForeColor = System.Drawing.Color.Red;
-            this.btnRemover.Location = new System.Drawing.Point(8, 279);
+            this.btnRemover.Location = new System.Drawing.Point(9, 372);
+            this.btnRemover.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnRemover.Name = "btnRemover";
-            this.btnRemover.Size = new System.Drawing.Size(158, 23);
+            this.btnRemover.Size = new System.Drawing.Size(181, 31);
             this.btnRemover.TabIndex = 23;
             this.btnRemover.Text = "Remover Selecionados";
             this.btnRemover.UseVisualStyleBackColor = false;
@@ -151,82 +155,87 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(193, 219);
+            this.label8.Location = new System.Drawing.Point(221, 292);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(39, 15);
+            this.label8.Size = new System.Drawing.Size(49, 20);
             this.label8.TabIndex = 22;
             this.label8.Text = "Senha";
             // 
             // txtSenha
             // 
-            this.txtSenha.Location = new System.Drawing.Point(193, 237);
+            this.txtSenha.Location = new System.Drawing.Point(221, 316);
+            this.txtSenha.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.PasswordChar = '*';
-            this.txtSenha.Size = new System.Drawing.Size(347, 23);
+            this.txtSenha.Size = new System.Drawing.Size(396, 27);
             this.txtSenha.TabIndex = 21;
             this.txtSenha.UseSystemPasswordChar = true;
             // 
             // txtUser
             // 
-            this.txtUser.Location = new System.Drawing.Point(193, 186);
+            this.txtUser.Location = new System.Drawing.Point(221, 248);
+            this.txtUser.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(347, 23);
+            this.txtUser.Size = new System.Drawing.Size(396, 27);
             this.txtUser.TabIndex = 19;
             // 
             // txtServer
             // 
-            this.txtServer.Location = new System.Drawing.Point(193, 134);
+            this.txtServer.Location = new System.Drawing.Point(221, 179);
+            this.txtServer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtServer.Name = "txtServer";
-            this.txtServer.Size = new System.Drawing.Size(347, 23);
+            this.txtServer.Size = new System.Drawing.Size(396, 27);
             this.txtServer.TabIndex = 17;
             // 
             // txtAutenticador
             // 
-            this.txtAutenticador.Location = new System.Drawing.Point(193, 84);
+            this.txtAutenticador.Location = new System.Drawing.Point(221, 112);
+            this.txtAutenticador.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtAutenticador.Name = "txtAutenticador";
-            this.txtAutenticador.Size = new System.Drawing.Size(347, 23);
+            this.txtAutenticador.Size = new System.Drawing.Size(396, 27);
             this.txtAutenticador.TabIndex = 15;
             // 
             // txtNome
             // 
-            this.txtNome.Location = new System.Drawing.Point(193, 33);
+            this.txtNome.Location = new System.Drawing.Point(221, 44);
+            this.txtNome.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(347, 23);
+            this.txtNome.Size = new System.Drawing.Size(396, 27);
             this.txtNome.TabIndex = 13;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(193, 168);
+            this.label7.Location = new System.Drawing.Point(221, 224);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(47, 15);
+            this.label7.Size = new System.Drawing.Size(59, 20);
             this.label7.TabIndex = 20;
             this.label7.Text = "Usuário";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(193, 116);
+            this.label6.Location = new System.Drawing.Point(221, 155);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(50, 15);
+            this.label6.Size = new System.Drawing.Size(64, 20);
             this.label6.TabIndex = 18;
             this.label6.Text = "Servidor";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(193, 66);
+            this.label5.Location = new System.Drawing.Point(221, 88);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(170, 15);
+            this.label5.Size = new System.Drawing.Size(216, 20);
             this.label5.TabIndex = 16;
             this.label5.Text = "Nome da base do autenticador";
             // 
             // lblNome
             // 
             this.lblNome.AutoSize = true;
-            this.lblNome.Location = new System.Drawing.Point(193, 15);
+            this.lblNome.Location = new System.Drawing.Point(221, 20);
             this.lblNome.Name = "lblNome";
-            this.lblNome.Size = new System.Drawing.Size(40, 15);
+            this.lblNome.Size = new System.Drawing.Size(50, 20);
             this.lblNome.TabIndex = 14;
             this.lblNome.Text = "Nome";
             // 
@@ -238,10 +247,11 @@
             this.lvConexoes.CheckBoxes = true;
             this.lvConexoes.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lvConexoes.HideSelection = false;
-            this.lvConexoes.Location = new System.Drawing.Point(8, 33);
+            this.lvConexoes.Location = new System.Drawing.Point(9, 44);
+            this.lvConexoes.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lvConexoes.MultiSelect = false;
             this.lvConexoes.Name = "lvConexoes";
-            this.lvConexoes.Size = new System.Drawing.Size(158, 227);
+            this.lvConexoes.Size = new System.Drawing.Size(180, 301);
             this.lvConexoes.SmallImageList = this.imageList1;
             this.lvConexoes.TabIndex = 12;
             this.lvConexoes.UseCompatibleStateImageBehavior = false;
@@ -251,30 +261,32 @@
             // lblConexoes
             // 
             this.lblConexoes.AutoSize = true;
-            this.lblConexoes.Location = new System.Drawing.Point(8, 15);
+            this.lblConexoes.Location = new System.Drawing.Point(9, 20);
             this.lblConexoes.Name = "lblConexoes";
-            this.lblConexoes.Size = new System.Drawing.Size(59, 15);
+            this.lblConexoes.Size = new System.Drawing.Size(73, 20);
             this.lblConexoes.TabIndex = 11;
             this.lblConexoes.Text = "Conexões";
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tpConexoes);
-            this.tabControl1.Location = new System.Drawing.Point(0, 55);
+            this.tabControl1.Location = new System.Drawing.Point(0, 73);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(574, 363);
+            this.tabControl1.Size = new System.Drawing.Size(656, 484);
             this.tabControl1.TabIndex = 6;
             // 
             // FrmConfiguracao
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(574, 418);
+            this.ClientSize = new System.Drawing.Size(656, 557);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolBar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmConfiguracao";
