@@ -7,9 +7,12 @@ namespace SearchInBases
 {
     public static class Vars
     {
+        /* 1.0.7
+         * add pool conexoes*/
+
         //App
         public static string appName = "SearchInBases";        
-        public static string appVersion = "1.0.6";
+        public static string appVersion = "1.0.7";
         public static string appNameWithVersion = Vars.appName + "  v." + Vars.appVersion;
         public static string pathApp = AppDomain.CurrentDomain.BaseDirectory;
 
