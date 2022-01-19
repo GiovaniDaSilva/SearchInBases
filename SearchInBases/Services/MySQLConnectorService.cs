@@ -13,10 +13,12 @@ namespace SearchInBases.Services
             {
                 Server = mySqlConnector.server.ToLower(),                
                 UserID = mySqlConnector.user.ToLower(),
-                Password = mySqlConnector.password,
-                Pooling = false,
+                Password = mySqlConnector.password,           
+                Pooling = true,
+                MaximumPoolSize = 20,                  
                 SslMode = MySqlSslMode.None,
                 AllowPublicKeyRetrieval = true,
+                ApplicationName = Vars.appName,
             };
 
             string connString = builder.ConnectionString;
