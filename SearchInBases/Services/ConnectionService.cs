@@ -90,6 +90,8 @@ namespace SearchInBases.Services
                     // Garante que todas as conexões sejam fechadas
                     FecharThreadsConn(threadsConn);
                 }
+
+                MySqlConnection.ClearAllPools();
             }
 
             ocorreuErroNaConsulta = _ocorreuErroNaConsulta;
@@ -236,8 +238,16 @@ namespace SearchInBases.Services
                 result.RemoveAll(b => b.interno);
 
 
+            //Bases filtradas
+            if(sqlParams.basesFiltradas.Count > 0)
+            {
+                result.RemoveAll(b => !sqlParams.basesFiltradas.Contains(b.databaseName) &&
+                                    !sqlParams.basesFiltradas.Contains(b.instance));
+            }
+
             return result;
         }
+
         #endregion
     }
 }

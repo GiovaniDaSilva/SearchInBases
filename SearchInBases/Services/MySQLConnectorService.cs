@@ -15,7 +15,7 @@ namespace SearchInBases.Services
                 UserID = mySqlConnector.user.ToLower(),
                 Password = mySqlConnector.password,           
                 Pooling = true,
-                MaximumPoolSize = 20,                  
+                MaximumPoolSize = 30,                  
                 SslMode = MySqlSslMode.None,
                 AllowPublicKeyRetrieval = true,
                 ApplicationName = Vars.appName,
@@ -28,7 +28,7 @@ namespace SearchInBases.Services
 
 
         public static MySqlDataReader ExecutarSQL(MySqlConnection conn, SQLParams sqlParams)
-        {
+        {  
             return ExecutarSQL(conn, sqlParams.GetSQL());
         }
 

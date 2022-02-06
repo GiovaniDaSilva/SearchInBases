@@ -1,7 +1,9 @@
-﻿using SearchInBases.Entity;
+﻿using FastColoredTextBoxNS;
+using SearchInBases.Entity;
 using SearchInBases.Formularios;
 using SearchInBases.Services;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -56,6 +58,7 @@ namespace SearchInBases.Forms
             this.MinimumSize = new System.Drawing.Size(900, 600);
 
             AtualizarListConn();
+            ExibirBaseFiltradas();
         }
 
         private void AtualizarListConn()
@@ -111,7 +114,15 @@ namespace SearchInBases.Forms
         private void LimparForm()
         {
             txtSQL.Clear();
-            LimparConsole();            
+            LimparConsole();
+            Vars.basesFiltradas.Clear();
+            ExibirBaseFiltradas();
+
+        }
+
+        private void ExibirBaseFiltradas()
+        {
+            lblBasesFiltradas.Visible = Vars.basesFiltradas.Count > 0;
         }
 
         private void LimparConsole()
@@ -135,7 +146,7 @@ namespace SearchInBases.Forms
                 ambiente = enuAmbiente.Producao;
 
             SQLFiltro sqlFiltro = new SQLFiltro(statusBase, ambiente);
-            return new SQLParams(txtSQL.Text, sqlFiltro);
+            return new SQLParams(txtSQL.Text, sqlFiltro, Vars.basesFiltradas);
         }
 
         private void atualizaConsole(string message)
@@ -264,6 +275,14 @@ namespace SearchInBases.Forms
             string sql = txtSQL.Text;
             txtSQL.Clear();
             txtSQL.AppendText(SQLService.Formatar(sql));
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FrmFilterBase frmFiltrarBase = new FrmFilterBase();
+            frmFiltrarBase.ShowDialog();
+
+            ExibirBaseFiltradas();
         }
     }
 }

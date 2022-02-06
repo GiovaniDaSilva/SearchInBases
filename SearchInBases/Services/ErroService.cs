@@ -10,8 +10,7 @@ namespace SearchInBases.Services
     {
         public static void TratarErro(Exception ex)
         {        
-            Log.addErroMessage(ex.Message);
-            Log.addErroMessage(ex.StackTrace);
+            Log.addErroMessage(ex.Message);            
         }
     }
 }

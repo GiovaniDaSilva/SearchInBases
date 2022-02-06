@@ -6,10 +6,7 @@ using System.Collections.Generic;
 namespace SearchInBases
 {
     public static class Vars
-    {
-        /* 1.0.7
-         * add pool conexoes*/
-
+    {    
         //App
         public static string appName = "SearchInBases";        
         public static string appVersion = "1.0.7";
@@ -41,6 +38,11 @@ namespace SearchInBases
         //Git
         public static string url_perfil_git = "https://github.com/GiovaniDaSilva";
         public static string url_projeto_git = url_perfil_git + "/SearchInBases";
+
+
+        //Filter
+        public static List<string> basesFiltradas { get; set; } = new List<string>();
+
 
         public static void AtualizarConnections()
         {

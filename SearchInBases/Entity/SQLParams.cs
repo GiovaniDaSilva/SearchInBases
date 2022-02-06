@@ -1,14 +1,19 @@
-﻿namespace SearchInBases.Entity
+﻿using System.Collections.Generic;
+
+namespace SearchInBases.Entity
 {
     public class SQLParams
     {
         public string sql{ get; set; }
         public SQLFiltro filtro{ get; set; }
 
-        public SQLParams(string sql, SQLFiltro filtro)
+        public List<string> basesFiltradas { get; set; }
+
+        public SQLParams(string sql, SQLFiltro filtro, List<string> basesFiltradas)
         {
-            this.sql = sql.ToLower();
+            this.sql = sql;
             this.filtro = filtro;
+            this.basesFiltradas = basesFiltradas;
         }
 
         public string GetSQL()
