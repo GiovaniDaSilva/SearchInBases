@@ -8,17 +8,17 @@ namespace SearchInBases.Services
         
         public static MySqlConnection GetMySqlConnection(SearchInBases.Entity.MySQLConnector mySqlConnector)
         {
-         
+
             MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder()
             {
-                Server = mySqlConnector.server.ToLower(),                
+                Server = mySqlConnector.server.ToLower(),
                 UserID = mySqlConnector.user.ToLower(),
-                Password = mySqlConnector.password,           
+                Password = mySqlConnector.password,
                 Pooling = true,
-                MaximumPoolSize = 30,                  
+                MaximumPoolSize = 50,
                 SslMode = MySqlSslMode.None,
                 AllowPublicKeyRetrieval = true,
-                ApplicationName = Vars.appName,
+                ApplicationName = Vars.appName,                
             };
 
             string connString = builder.ConnectionString;

@@ -36,7 +36,9 @@ namespace SearchInBases.Forms
             this.lblStatus = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnParar = new System.Windows.Forms.Button();
+            this.lblBasesFiltradas = new System.Windows.Forms.Label();
+            this.btnFiltrarBases = new System.Windows.Forms.Button();
             this.btnFormater = new System.Windows.Forms.Button();
             this.btnHistorico = new System.Windows.Forms.Button();
             this.gbAmbiente = new System.Windows.Forms.GroupBox();
@@ -61,7 +63,6 @@ namespace SearchInBases.Forms
             this.btnClear = new System.Windows.Forms.ToolStripButton();
             this.txtConsole = new System.Windows.Forms.RichTextBox();
             this.ttHistorico = new System.Windows.Forms.ToolTip(this.components);
-            this.lblBasesFiltradas = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -127,8 +128,9 @@ namespace SearchInBases.Forms
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnParar);
             this.panel2.Controls.Add(this.lblBasesFiltradas);
-            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.btnFiltrarBases);
             this.panel2.Controls.Add(this.btnFormater);
             this.panel2.Controls.Add(this.btnHistorico);
             this.panel2.Controls.Add(this.gbAmbiente);
@@ -145,23 +147,51 @@ namespace SearchInBases.Forms
             this.panel2.Size = new System.Drawing.Size(992, 434);
             this.panel2.TabIndex = 0;
             // 
-            // button1
+            // btnParar
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.SystemColors.Control;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(285, 42);
-            this.button1.Name = "button1";
-            this.button1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.button1.Size = new System.Drawing.Size(158, 59);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Filtrar Bases";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnParar.BackColor = System.Drawing.SystemColors.Control;
+            this.btnParar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnParar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnParar.Image = ((System.Drawing.Image)(resources.GetObject("btnParar.Image")));
+            this.btnParar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnParar.Location = new System.Drawing.Point(90, 52);
+            this.btnParar.Name = "btnParar";
+            this.btnParar.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
+            this.btnParar.Size = new System.Drawing.Size(158, 74);
+            this.btnParar.TabIndex = 17;
+            this.btnParar.Text = "Parar";
+            this.btnParar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnParar.UseVisualStyleBackColor = false;
+            this.btnParar.Click += new System.EventHandler(this.btnParar_Click);
+            // 
+            // lblBasesFiltradas
+            // 
+            this.lblBasesFiltradas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblBasesFiltradas.AutoSize = true;
+            this.lblBasesFiltradas.ForeColor = System.Drawing.Color.Firebrick;
+            this.lblBasesFiltradas.Location = new System.Drawing.Point(285, 101);
+            this.lblBasesFiltradas.Name = "lblBasesFiltradas";
+            this.lblBasesFiltradas.Size = new System.Drawing.Size(118, 15);
+            this.lblBasesFiltradas.TabIndex = 16;
+            this.lblBasesFiltradas.Text = "Possui bases filtradas";
+            // 
+            // btnFiltrarBases
+            // 
+            this.btnFiltrarBases.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFiltrarBases.BackColor = System.Drawing.SystemColors.Control;
+            this.btnFiltrarBases.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFiltrarBases.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnFiltrarBases.Image = ((System.Drawing.Image)(resources.GetObject("btnFiltrarBases.Image")));
+            this.btnFiltrarBases.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFiltrarBases.Location = new System.Drawing.Point(285, 42);
+            this.btnFiltrarBases.Name = "btnFiltrarBases";
+            this.btnFiltrarBases.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnFiltrarBases.Size = new System.Drawing.Size(158, 59);
+            this.btnFiltrarBases.TabIndex = 15;
+            this.btnFiltrarBases.Text = "Filtrar Bases";
+            this.btnFiltrarBases.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnFiltrarBases.UseVisualStyleBackColor = false;
+            this.btnFiltrarBases.Click += new System.EventHandler(this.btnFiltrarBases_Click);
             // 
             // btnFormater
             // 
@@ -335,7 +365,6 @@ namespace SearchInBases.Forms
             this.txtSQL.CharWidth = 8;
             this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtSQL.IsReplaceMode = false;
             this.txtSQL.Location = new System.Drawing.Point(200, 147);
             this.txtSQL.Name = "txtSQL";
@@ -458,17 +487,6 @@ namespace SearchInBases.Forms
             this.txtConsole.TabIndex = 2;
             this.txtConsole.Text = "";
             // 
-            // lblBasesFiltradas
-            // 
-            this.lblBasesFiltradas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblBasesFiltradas.AutoSize = true;
-            this.lblBasesFiltradas.ForeColor = System.Drawing.Color.Firebrick;
-            this.lblBasesFiltradas.Location = new System.Drawing.Point(285, 101);
-            this.lblBasesFiltradas.Name = "lblBasesFiltradas";
-            this.lblBasesFiltradas.Size = new System.Drawing.Size(118, 15);
-            this.lblBasesFiltradas.TabIndex = 16;
-            this.lblBasesFiltradas.Text = "Possui bases filtradas";
-            // 
             // FrmPesquisa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -531,7 +549,8 @@ namespace SearchInBases.Forms
         private System.Windows.Forms.Button btnHistorico;
         private System.Windows.Forms.ToolTip ttHistorico;
         private System.Windows.Forms.Button btnFormater;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnFiltrarBases;
         private System.Windows.Forms.Label lblBasesFiltradas;
+        private System.Windows.Forms.Button btnParar;
     }
 }

@@ -9,13 +9,14 @@ namespace SearchInBases
     {    
         //App
         public static string appName = "SearchInBases";        
-        public static string appVersion = "1.0.7";
+        public static string appVersion = "1.0.8";
         public static string appNameWithVersion = Vars.appName + "  v." + Vars.appVersion;
         public static string pathApp = AppDomain.CurrentDomain.BaseDirectory;
 
         public static List<Connection> connections;
         public static bool somenteConsulta = true;
         public static bool isPesquisando;
+        public static bool pararPesquisa;
 
         //Log
         public static string nameFileLog = "log.txt";

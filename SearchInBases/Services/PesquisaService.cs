@@ -3,6 +3,7 @@ using SearchInBases.Entity;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace SearchInBases.Services
 {
@@ -39,6 +40,9 @@ namespace SearchInBases.Services
 
                 
                 ConnectionService.ExecutarSQL(callbackConsole, callbackCsv,  conexoesHabilitadas, sqlParams, ocorreuErroNaConsulta);
+
+                if (Vars.pararPesquisa) callbackConsole(RichFormatting.FontColor("Pesquisa interrompida", Color.Red) );
+
                 callbackConsole("Para acessar o resultado clique " + RichFormatting.Link("aqui", nomeArquivoResultado));
             }
             catch(Exception ex)

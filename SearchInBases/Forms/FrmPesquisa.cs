@@ -56,6 +56,10 @@ namespace SearchInBases.Forms
             lblStatus.Text = status_parado;
 
             this.MinimumSize = new System.Drawing.Size(900, 600);
+            this.btnParar.Top = this.btnPesquisar.Top;
+            this.btnParar.Left = this.btnPesquisar.Left;
+            this.btnParar.Visible = false;
+
 
             AtualizarListConn();
             ExibirBaseFiltradas();
@@ -128,7 +132,7 @@ namespace SearchInBases.Forms
         private void LimparConsole()
         {
             txtConsole.Clear();
-            txtConsole.Controls.Clear();
+            txtConsole.Controls.Clear();           
         }
 
         private SQLParams montarSQLParams()
@@ -174,6 +178,8 @@ namespace SearchInBases.Forms
             this.Invoke(new MethodInvoker(() =>
             {
                 bool habilitado = !Vars.isPesquisando;
+                
+                Vars.pararPesquisa = habilitado;
 
                 btnPesquisar.Enabled = habilitado;
                 txtSQL.Enabled = habilitado;
@@ -183,11 +189,15 @@ namespace SearchInBases.Forms
                 gbBasesAtivas.Enabled = habilitado; 
                 btnHistorico.Enabled = habilitado;
                 btnFormater.Enabled = habilitado;
+                btnFiltrarBases.Enabled = habilitado;
+
+                
+                btnParar.Visible = !habilitado;
 
                 if (!habilitado)
                 {
                     IniciarProgresso();
-                    lblStatus.Text = status_processando;
+                    lblStatus.Text = status_processando;                    
                 }
                 else
                 {
@@ -277,12 +287,18 @@ namespace SearchInBases.Forms
             txtSQL.AppendText(SQLService.Formatar(sql));
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnFiltrarBases_Click(object sender, EventArgs e)
         {
             FrmFilterBase frmFiltrarBase = new FrmFilterBase();
             frmFiltrarBase.ShowDialog();
 
             ExibirBaseFiltradas();
+        }
+
+        private void btnParar_Click(object sender, EventArgs e)
+        {
+            Vars.pararPesquisa = true;
+            atualizaConsole("Parando threads...");
         }
     }
 }
