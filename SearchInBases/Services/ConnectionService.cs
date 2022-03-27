@@ -73,20 +73,31 @@ namespace SearchInBases.Services
                 List<MySqlConnection> threadsConn = new List<MySqlConnection>();
                 try
                 {
+                    var qtdMaxThreads = 10;
+                    var countThread = 0;
                     foreach (var baseAuth in filtrarBasesAuth(conn.basesAuth, sqlParams))
-                    {
-
-                        if (Vars.pararPesquisa) return;
-
-                        threadsProcessando.Add(Task.Run(() =>
+                    {                                    
+                        if(countThread < qtdMaxThreads)
                         {
-                            ExecutarSQLThread(callbackConsole, sqlParams, callbackCsv, conn, threadsConn, baseAuth);
-                        }));
-                    }
+                            if (Vars.pararPesquisa) return;
 
-                    //Aguarda a conclusão das threads de cada conexão
-                    AguardaProcessamentoThreads(conn, threadsProcessando);
+                            Task task = Task.Run(() =>
+                            {
+                                ExecutarSQLThread(callbackConsole, sqlParams, callbackCsv, conn, threadsConn, baseAuth);
+                            });
 
+                            threadsProcessando.Add(task);
+                            countThread++;
+                        }
+                        else
+                        {                    
+                            AguardaProcessamentoThreads(conn, threadsProcessando);
+                            threadsProcessando.Clear();
+                            countThread = 0;
+                        }                   
+                    }   
+                                        
+                    AguardaProcessamentoThreads(conn, threadsProcessando);                   
                 }
                 finally
                 {
@@ -118,8 +129,7 @@ namespace SearchInBases.Services
                 // Gera uma connection para cada thread
                 using (var threadConn = MySQLConnectorService.GetMySqlConnection(conn.mySqlConnector))
                 {
-                    if (Vars.pararPesquisa) return;
-
+                 
                     threadsConn.Add(threadConn);
                     threadConn.Open();
 
@@ -138,9 +148,7 @@ namespace SearchInBases.Services
 
                     // Executa o comando e salva o retorno no CSV
                     using (var reader = MySQLConnectorService.ExecutarSQL(threadConn, sqlParams))
-                    {
-                        if (Vars.pararPesquisa) return;
-
+                    {                      
                         callbackConsole(ComumCallbackConsole(conn.connectionName, baseAuth.databaseName) +
                             (reader.HasRows ? RichFormatting.FontColor(encontrou_ocorrencias, Color.DarkGreen) : RichFormatting.FontColor(nao_encontrou_ocorrencias, Color.DarkViolet)));
 
@@ -151,8 +159,7 @@ namespace SearchInBases.Services
                         }
 
                         while (reader.Read())
-                        {
-                            if (Vars.pararPesquisa) return;
+                        {                            
                             callbackCsv(FieldsReaderToCsv(baseAuth.databaseName, reader));
                         }
                     }
