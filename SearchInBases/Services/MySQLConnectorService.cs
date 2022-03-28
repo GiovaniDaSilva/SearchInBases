@@ -18,7 +18,8 @@ namespace SearchInBases.Services
                 MaximumPoolSize = 50,
                 SslMode = MySqlSslMode.None,
                 AllowPublicKeyRetrieval = true,
-                ApplicationName = Vars.appName,                
+                ApplicationName = Vars.appName,
+                DefaultCommandTimeout = 0,
             };
 
             string connString = builder.ConnectionString;
