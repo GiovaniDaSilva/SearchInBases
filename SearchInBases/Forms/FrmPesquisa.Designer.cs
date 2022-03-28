@@ -281,7 +281,7 @@ namespace SearchInBases.Forms
             this.gbBasesAtivas.Size = new System.Drawing.Size(227, 59);
             this.gbBasesAtivas.TabIndex = 11;
             this.gbBasesAtivas.TabStop = false;
-            this.gbBasesAtivas.Text = "Bases Ativas";
+            this.gbBasesAtivas.Text = "Bases";
             // 
             // rbAmbasAtiva
             // 
@@ -359,13 +359,12 @@ namespace SearchInBases.Forms
         '\''};
             this.txtSQL.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*" +
     "(?<range>:)\\s*(?<range>[^;]+);";
-            this.txtSQL.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.txtSQL.AutoScrollMinSize = new System.Drawing.Size(2, 14);
             this.txtSQL.BackBrush = null;
             this.txtSQL.CharHeight = 14;
             this.txtSQL.CharWidth = 8;
             this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtSQL.IsReplaceMode = false;
             this.txtSQL.Location = new System.Drawing.Point(200, 147);
             this.txtSQL.Name = "txtSQL";
