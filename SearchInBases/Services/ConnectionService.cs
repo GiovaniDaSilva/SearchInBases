@@ -60,11 +60,9 @@ namespace SearchInBases.Services
         public static void ExecutarSQL(Action<string> callbackConsole,
                                         Action<string> callbackCsv,
                                         List<Connection> conexoesHabilitadas,
-                                        SQLParams sqlParams,
-                                        bool ocorreuErroNaConsulta)
+                                        SQLParams sqlParams)
         {
-
-            _ocorreuErroNaConsulta = false;
+            
             _controlPrintFieldsName = false;
 
             foreach (var conn in conexoesHabilitadas)
@@ -73,13 +71,13 @@ namespace SearchInBases.Services
                 List<MySqlConnection> threadsConn = new List<MySqlConnection>();
                 try
                 {
-                    var qtdMaxThreads = 10;
-                    var countThread = 0;
+                    int qtdMaxThreads = 20;
+                    int countThread = 0;
                     foreach (var baseAuth in filtrarBasesAuth(conn.basesAuth, sqlParams))
                     {                                    
                         if(countThread < qtdMaxThreads)
                         {
-                            if (Vars.pararPesquisa) return;
+                            if (Vars.pararPesquisa) break;
 
                             Task task = Task.Run(() =>
                             {
@@ -87,13 +85,27 @@ namespace SearchInBases.Services
                             });
 
                             threadsProcessando.Add(task);
-                            countThread++;
+                            countThread++;                          
                         }
                         else
-                        {                    
-                            AguardaProcessamentoThreads(conn, threadsProcessando);
-                            threadsProcessando.Clear();
-                            countThread = 0;
+                        {
+                            DateTime data = DateTime.Now;
+                            while (countThread >= qtdMaxThreads)
+                            {
+                                if (data.Second != DateTime.Now.Second)
+                                {
+                                    Debug.Print("Aguardando processamento das threads da " + conn.connectionName);
+                                    
+                                    int countThreadCompleted = threadsProcessando.FindAll(t => t.IsCompleted).Count;
+                                    if (countThreadCompleted > 0)
+                                        countThread -= countThreadCompleted;
+
+
+                                    data = DateTime.Now;
+                                }
+                            }
+
+                            threadsProcessando.RemoveAll(t => t.IsCompleted);                            
                         }                   
                     }   
                                         
@@ -107,9 +119,7 @@ namespace SearchInBases.Services
 
                 MySqlConnection.ClearAllPools();
             }
-
-            ocorreuErroNaConsulta = _ocorreuErroNaConsulta;
-
+            
         }
 
         #endregion
@@ -204,7 +214,7 @@ namespace SearchInBases.Services
                 if (data.Second != DateTime.Now.Second)
                 {
                     Debug.Print("Aguardando processamento das threads da " + conn.connectionName);
-                    data = DateTime.Now;                 
+                    data = DateTime.Now;                    
                 }
             }
         }

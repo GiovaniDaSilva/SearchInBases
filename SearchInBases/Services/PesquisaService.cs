@@ -29,6 +29,7 @@ namespace SearchInBases.Services
                               string nomeArquivoResultado
                               )
         {
+            DateTime dtInicio = DateTime.Now;
             bool ocorreuErroNaConsulta = false;
             Vars.isPesquisando = true;
             callbackStatusApp();
@@ -39,10 +40,16 @@ namespace SearchInBases.Services
                 tratarConexoesHabilitadas(callbackConsole, conexoesHabilitadas);
 
                 
-                ConnectionService.ExecutarSQL(callbackConsole, callbackCsv,  conexoesHabilitadas, sqlParams, ocorreuErroNaConsulta);
+                ConnectionService.ExecutarSQL(callbackConsole, callbackCsv,  conexoesHabilitadas, sqlParams);
 
-                if (Vars.pararPesquisa) callbackConsole(RichFormatting.FontColor("Pesquisa interrompida", Color.Red) );
+                if (Vars.pararPesquisa)
+                {
+                    string msg = "Pesquisa interrompida";
+                    callbackConsole(RichFormatting.FontColor(msg, Color.Red));
+                    Log.addWarnMessage(msg);
+                }
 
+                Log.AddMessage("Arquivo com resultado: " + nomeArquivoResultado);
                 callbackConsole("Para acessar o resultado clique " + RichFormatting.Link("aqui", nomeArquivoResultado));
             }
             catch(Exception ex)
@@ -56,7 +63,7 @@ namespace SearchInBases.Services
                 Log.AddPesquisaFinalizada();
                 AdicionarConsultaHistorico(sqlParams);
                 callbackStatusApp();
-                Message.MessagemPesquisaFinalizada(ocorreuErroNaConsulta);
+                Message.MessagemPesquisaFinalizada(ocorreuErroNaConsulta, dtInicio);
             }            
         }    
 

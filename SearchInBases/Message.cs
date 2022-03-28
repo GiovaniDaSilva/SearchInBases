@@ -7,14 +7,15 @@ namespace SearchInBases
     {
             private static string titulo = Vars.appName;
 
-
         
-        public static void MessagemPesquisaFinalizada(bool ocorreuErroNaConsulta)
+        public static void MessagemPesquisaFinalizada(bool ocorreuErroNaConsulta, DateTime dtInicio)
         {
-            if(!ocorreuErroNaConsulta)
-                MessageBox.Show("Pesquisa finalizada com sucesso.", titulo, MessageBoxButtons.OK, MessageBoxIcon.Information); 
-            else
-                MessageBox.Show("Pesquisa finalizada com erro.", titulo, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            DateTime dtFim = DateTime.Now;
+            TimeSpan timeSpan = dtFim.Subtract(dtInicio);
+            string tempoPesquisa = "Tempo: " + timeSpan.Hours.ToString("00") + ":" + timeSpan.Minutes.ToString("00") + ":" + timeSpan.Seconds.ToString("00");
+            string msg = $"Pesquisa finalizada com {(!ocorreuErroNaConsulta ? "sucesso" : "erro")}. " + tempoPesquisa;            
+            MessageBox.Show(msg, titulo, MessageBoxButtons.OK, !ocorreuErroNaConsulta ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
+            Log.AddMessage(msg);
         }
 
 

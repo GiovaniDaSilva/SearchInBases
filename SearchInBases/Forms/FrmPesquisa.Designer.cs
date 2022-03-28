@@ -286,12 +286,10 @@ namespace SearchInBases.Forms
             // rbAmbasAtiva
             // 
             this.rbAmbasAtiva.AutoSize = true;
-            this.rbAmbasAtiva.Checked = true;
             this.rbAmbasAtiva.Location = new System.Drawing.Point(156, 22);
             this.rbAmbasAtiva.Name = "rbAmbasAtiva";
             this.rbAmbasAtiva.Size = new System.Drawing.Size(63, 19);
             this.rbAmbasAtiva.TabIndex = 2;
-            this.rbAmbasAtiva.TabStop = true;
             this.rbAmbasAtiva.Text = "Ambos";
             this.rbAmbasAtiva.UseVisualStyleBackColor = true;
             // 
@@ -308,10 +306,12 @@ namespace SearchInBases.Forms
             // rbAtiva
             // 
             this.rbAtiva.AutoSize = true;
+            this.rbAtiva.Checked = true;
             this.rbAtiva.Location = new System.Drawing.Point(22, 22);
             this.rbAtiva.Name = "rbAtiva";
             this.rbAtiva.Size = new System.Drawing.Size(57, 19);
             this.rbAtiva.TabIndex = 0;
+            this.rbAtiva.TabStop = true;
             this.rbAtiva.Text = "Ativas";
             this.rbAtiva.UseVisualStyleBackColor = true;
             // 
@@ -365,6 +365,7 @@ namespace SearchInBases.Forms
             this.txtSQL.CharWidth = 8;
             this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtSQL.IsReplaceMode = false;
             this.txtSQL.Location = new System.Drawing.Point(200, 147);
             this.txtSQL.Name = "txtSQL";
