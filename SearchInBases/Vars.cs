@@ -1,4 +1,5 @@
-﻿using SearchInBases.Entity;
+﻿
+using SearchInBases.Entity;
 using SearchInBases.Services;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace SearchInBases
     {    
         //App
         public static string appName = "SearchInBases";        
-        public static string appVersion = "1.0.8";
+        public static string appVersion = "1.0.9";
         public static string appNameWithVersion = Vars.appName + "  v." + Vars.appVersion;
         public static string pathApp = AppDomain.CurrentDomain.BaseDirectory;
 
