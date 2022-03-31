@@ -30,7 +30,7 @@ namespace SearchInBases.Services
 
         public static MySqlDataReader ExecutarSQL(MySqlConnection conn, SQLParams sqlParams)
         {  
-            return ExecutarSQL(conn, sqlParams.GetSQL());
+            return ExecutarSQL(conn, sqlParams.sqlDescript);
         }
 
         public static MySqlDataReader ExecutarSQL(MySqlConnection conn, string sql)

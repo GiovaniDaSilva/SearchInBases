@@ -19,7 +19,10 @@ namespace SearchInBases.Formularios
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
-        {         
+        {
+            Vars.config.sqlSecurity.key_descripto_sql = txtKeySQL.Text.Trim();
+            Vars.keySQL = Utils.Decrypt(Vars.config.sqlSecurity.key_descripto_sql);
+
             Vars.config.Save();
             Vars.AtualizarConnections();
 
@@ -29,6 +32,9 @@ namespace SearchInBases.Formularios
         private void FrmConfiguracao_Load(object sender, EventArgs e)
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
+
+            txtKeySQL.Text = Vars.config.sqlSecurity.key_descripto_sql;
+
             ConfiguracaoService.AtualizarListConn(lvConexoes);
         }
 

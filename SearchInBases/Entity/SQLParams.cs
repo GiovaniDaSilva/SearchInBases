@@ -5,6 +5,8 @@ namespace SearchInBases.Entity
     public class SQLParams
     {
         public string sql{ get; set; }
+        public string sqlDescript { get; set; }
+
         public SQLFiltro filtro{ get; set; }
 
         public List<string> basesFiltradas { get; set; }
@@ -15,11 +17,6 @@ namespace SearchInBases.Entity
             this.filtro = filtro;
             this.basesFiltradas = basesFiltradas;
         }
-
-        public string GetSQL()
-        {
-            return sql;
-        }       
     }
 
 

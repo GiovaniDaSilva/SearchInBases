@@ -9,7 +9,8 @@ namespace SearchInBases.Services
     {
         public List<ConfigConn> configConn;
 
-        
+        public SQLSecurity sqlSecurity;
+
         public class ConfigConn
         {
             public string connName = "localhost";
@@ -28,8 +29,12 @@ namespace SearchInBases.Services
                 this.server = server;
                 this.user = user;
                 this.password = password;
-            }
+            }      
+        }
 
+        public class SQLSecurity
+        {
+            public string key_descripto_sql = "";
         }
 
         public List<Connection> ToConnections()
@@ -72,6 +77,12 @@ namespace SearchInBases.Services
             {
                 config.configConn = new();
                 config.configConn.Add(new ConfigConn());
+                config.Save();
+            }
+
+            if (config.sqlSecurity == null)
+            {
+                config.sqlSecurity = new SQLSecurity();
                 config.Save();
             }
 

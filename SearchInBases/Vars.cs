@@ -45,6 +45,8 @@ namespace SearchInBases
         //Filter
         public static List<string> basesFiltradas { get; set; } = new List<string>();
 
+        //Sql
+        public static string keySQL = "";
 
         public static void AtualizarConnections()
         {

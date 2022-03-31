@@ -29,7 +29,7 @@ namespace SearchInBases
             {
                 File.Create(arquivo).Close();                
                 File.AppendAllText(arquivo, String.Format(padrao, data) + Environment.NewLine);
-                File.AppendAllText(arquivo, "SQL Excutado: " + sqlParams.GetSQL() + Environment.NewLine);
+                File.AppendAllText(arquivo, "SQL Excutado: " + sqlParams.sql + Environment.NewLine);
                 File.AppendAllText(arquivo, Environment.NewLine);
             }
 

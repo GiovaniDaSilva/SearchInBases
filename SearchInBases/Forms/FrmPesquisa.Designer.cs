@@ -36,6 +36,7 @@ namespace SearchInBases.Forms
             this.lblStatus = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnHelp = new System.Windows.Forms.Button();
             this.btnParar = new System.Windows.Forms.Button();
             this.lblBasesFiltradas = new System.Windows.Forms.Label();
             this.btnFiltrarBases = new System.Windows.Forms.Button();
@@ -128,6 +129,7 @@ namespace SearchInBases.Forms
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnHelp);
             this.panel2.Controls.Add(this.btnParar);
             this.panel2.Controls.Add(this.lblBasesFiltradas);
             this.panel2.Controls.Add(this.btnFiltrarBases);
@@ -146,6 +148,22 @@ namespace SearchInBases.Forms
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(992, 434);
             this.panel2.TabIndex = 0;
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnHelp.BackColor = System.Drawing.SystemColors.Control;
+            this.btnHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnHelp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
+            this.btnHelp.Location = new System.Drawing.Point(953, 213);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(30, 27);
+            this.btnHelp.TabIndex = 18;
+            this.btnHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.ttHistorico.SetToolTip(this.btnHelp, "Formatador");
+            this.btnHelp.UseVisualStyleBackColor = false;
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
             // btnParar
             // 
@@ -359,7 +377,7 @@ namespace SearchInBases.Forms
         '\''};
             this.txtSQL.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*" +
     "(?<range>:)\\s*(?<range>[^;]+);";
-            this.txtSQL.AutoScrollMinSize = new System.Drawing.Size(2, 14);
+            this.txtSQL.AutoScrollMinSize = new System.Drawing.Size(27, 14);
             this.txtSQL.BackBrush = null;
             this.txtSQL.CharHeight = 14;
             this.txtSQL.CharWidth = 8;
@@ -552,5 +570,6 @@ namespace SearchInBases.Forms
         private System.Windows.Forms.Button btnFiltrarBases;
         private System.Windows.Forms.Label lblBasesFiltradas;
         private System.Windows.Forms.Button btnParar;
+        private System.Windows.Forms.Button btnHelp;
     }
 }

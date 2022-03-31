@@ -19,7 +19,7 @@ namespace SearchInBases.Services
 
         public static bool permitirExecutarComando(SQLParams sqlParams) 
         {
-            Log.Add("Somente Consulta: " + somente_consulta +  "; Comando executado: " + sqlParams.GetSQL());
+            Log.Add("Somente Consulta: " + somente_consulta +  "; Comando executado: " + sqlParams.sql);
 
             InicializarListas();
 
@@ -42,7 +42,7 @@ namespace SearchInBases.Services
         private static bool validarSQlSomenteConsulta(SQLParams sqlParams)
         {
             bool sqlValido = true;
-            string sql = sqlParams.GetSQL().ToUpper();
+            string sql = sqlParams.sql.ToUpper();
             
             foreach(var proibido in palavras_proibidas)
             {
@@ -93,7 +93,7 @@ namespace SearchInBases.Services
         {
             bool sqlValido = true;
 
-            string sql = sqlParams.GetSQL().ToUpper();
+            string sql = sqlParams.sql.ToUpper();
 
             foreach (var obrigatoria in palavras_obrigatorias)
             {
@@ -108,9 +108,49 @@ namespace SearchInBases.Services
             return sqlValido;
         }
 
+        public static string GetDescriptoCol(string nome, bool isWhere = false)
+        {
+            string key = Vars.keySQL;
+            if (String.IsNullOrEmpty(key))
+                return nome;
+
+            string alias = $"as {nome}";
+
+            return $"CONVERT(AES_DECRYPT(unhex({nome}), '{key}'), char(1000)) {(!isWhere ? alias : "")}";
+        }
+
         public static string Formatar(string sql)
         {
             return new SQLFormatter(sql).Format().Trim();
+        }
+
+        public static string TratarParamCamposCripto(string sql)
+        {
+            bool existeCampoCripto = GetExisteCampoCripto(sql);
+
+            while (existeCampoCripto)
+            {
+                var idxIni = sql.IndexOf("[");
+                var idxFim = sql.IndexOf("]") + 1;
+                string campoCript = sql.Substring(idxIni, idxFim - idxIni).Replace("[", "").Replace("]", "");
+
+                bool isWhere = campoCript.Substring(campoCript.Length - 1, 1).Contains(":");
+
+                if (isWhere) campoCript = campoCript.Replace(":", "");
+                
+                string campoDescrip = SQLService.GetDescriptoCol(campoCript, isWhere);
+
+                sql = sql.Replace("[" + campoCript + (isWhere ? ":" : "") + "]", campoDescrip);
+                existeCampoCripto = GetExisteCampoCripto(sql);
+            }
+
+
+            return sql;
+        }
+
+        private static bool GetExisteCampoCripto(string sql)
+        {
+            return sql.Contains("[") && sql.Contains("]");
         }
     }
 }

@@ -83,6 +83,8 @@ namespace SearchInBases.Forms
                 validarConexoesSelecionadas();
                 SQLParams sqlParams = montarSQLParams();
                 _pesquisaService.validarComandoSQL(sqlParams);
+                sqlParams.sqlDescript = SQLService.TratarParamCamposCripto(sqlParams.sql);
+
                 nomeArquivoResultado = CsvService.CriarArquivo(sqlParams);
                 Task.Run(() => { _pesquisaService.Pesquisar(atualizaConsole, alterarStatusApp, sqlParams, AdicionarResultadoCsv, nomeArquivoResultado); });
                 txtConsole.Focus();
@@ -94,9 +96,11 @@ namespace SearchInBases.Forms
             }
             catch (Exception ex)
             {
-                ErroService.TratarErro(ex);                
+                ErroService.TratarErro(ex);
+                Message.Error("Erro ao executar comando");
             }            
         }
+     
 
         private void AdicionarResultadoCsv(string texto)
         {
@@ -299,6 +303,12 @@ namespace SearchInBases.Forms
         {
             Vars.pararPesquisa = true;
             atualizaConsole("Parando threads...");
+        }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            FrmHelp frmHelp = new FrmHelp();
+            frmHelp.ShowDialog();
         }
     }
 }

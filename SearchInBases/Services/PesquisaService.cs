@@ -75,7 +75,7 @@ namespace SearchInBases.Services
 
         public void validarComandoSQL(SQLParams sqlParams)
         {
-            if (String.IsNullOrWhiteSpace(sqlParams.GetSQL()))
+            if (String.IsNullOrWhiteSpace(sqlParams.sql))
             {
                 string messagem = "Informe um comando SQL válido.";
                 throw new Message.MessageException(messagem);
