@@ -194,6 +194,7 @@ namespace SearchInBases.Forms
                 btnHistorico.Enabled = habilitado;
                 btnFormater.Enabled = habilitado;
                 btnFiltrarBases.Enabled = habilitado;
+                btnHelp.Enabled = habilitado;  
 
                 
                 btnParar.Visible = !habilitado;
