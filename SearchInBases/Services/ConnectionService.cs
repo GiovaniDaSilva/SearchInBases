@@ -78,35 +78,15 @@ namespace SearchInBases.Services
                         if(countThread < qtdMaxThreads)
                         {
                             if (Vars.pararPesquisa) break;
-
-                            Task task = Task.Run(() =>
-                            {
-                                ExecutarSQLThread(callbackConsole, sqlParams, callbackCsv, conn, threadsConn, baseAuth);
-                            });
-
-                            threadsProcessando.Add(task);
-                            countThread++;                          
+                            ExecutarTaskAsync(callbackConsole, callbackCsv, sqlParams, conn, threadsProcessando, threadsConn, baseAuth);
+                            countThread++;
                         }
                         else
                         {
-                            DateTime data = DateTime.Now;
-                            while (countThread >= qtdMaxThreads)
-                            {
-                                if (data.Second != DateTime.Now.Second)
-                                {
-                                    Debug.Print("Aguardando processamento das threads da " + conn.connectionName);
-                                    
-                                    int countThreadCompleted = threadsProcessando.FindAll(t => t.IsCompleted).Count;
-                                    if (countThreadCompleted > 0)
-                                        countThread -= countThreadCompleted;
-
-
-                                    data = DateTime.Now;
-                                }
-                            }
-
-                            threadsProcessando.RemoveAll(t => t.IsCompleted);                            
-                        }                   
+                            countThread = AguardandoLiberarThread(conn, threadsProcessando, qtdMaxThreads, countThread);
+                            ExecutarTaskAsync(callbackConsole, callbackCsv, sqlParams, conn, threadsProcessando, threadsConn, baseAuth);
+                            countThread++;
+                        }
                     }   
                                         
                     AguardaProcessamentoThreads(conn, threadsProcessando);                   
@@ -120,6 +100,36 @@ namespace SearchInBases.Services
                 MySqlConnection.ClearAllPools();
             }
             
+        }
+
+        private static int AguardandoLiberarThread(Connection conn, List<Task> threadsProcessando, int qtdMaxThreads, int countThread)
+        {
+            DateTime data = DateTime.Now;
+            while (countThread >= qtdMaxThreads)
+            {
+                if (data.Second != DateTime.Now.Second)
+                {
+                    Debug.Print("Aguardando liberar thread na conexão " + conn.connectionName);
+                    int countThreadCompleted = threadsProcessando.FindAll(t => t.IsCompleted).Count;
+                    if (countThreadCompleted > 0)
+                        countThread -= countThreadCompleted;
+
+                    data = DateTime.Now;
+                }
+            }
+
+            threadsProcessando.RemoveAll(t => t.IsCompleted);
+            return countThread;
+        }
+
+        private static void ExecutarTaskAsync(Action<string> callbackConsole, Action<string> callbackCsv, SQLParams sqlParams, Connection conn, List<Task> threadsProcessando, List<MySqlConnection> threadsConn, BaseAuth baseAuth)
+        {
+            Task task = Task.Run(() =>
+            {
+                ExecutarSQLThread(callbackConsole, sqlParams, callbackCsv, conn, threadsConn, baseAuth);
+            });
+
+            threadsProcessando.Add(task);
         }
 
         #endregion

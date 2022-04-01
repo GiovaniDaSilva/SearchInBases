@@ -114,7 +114,10 @@ namespace SearchInBases.Services
             if (String.IsNullOrEmpty(key))
                 return nome;
 
-            string alias = $"as {nome}";
+            string alias = nome;
+            if (alias.Contains("."))          
+                alias = alias.Substring(alias.IndexOf(".") + 1);          
+            alias = $"as {alias}";
 
             return $"CONVERT(AES_DECRYPT(unhex({nome}), '{key}'), char(1000)) {(!isWhere ? alias : "")}";
         }
