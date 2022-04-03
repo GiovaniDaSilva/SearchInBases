@@ -384,6 +384,7 @@ namespace SearchInBases.Forms
             this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.txtSQL.IsReplaceMode = false;
+            this.txtSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.txtSQL.Location = new System.Drawing.Point(200, 147);
             this.txtSQL.Name = "txtSQL";
             this.txtSQL.Paddings = new System.Windows.Forms.Padding(0);
@@ -392,7 +393,6 @@ namespace SearchInBases.Forms
             this.txtSQL.Size = new System.Drawing.Size(747, 279);
             this.txtSQL.TabIndex = 9;
             this.txtSQL.Zoom = 100;
-            this.txtSQL.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.txtSQL_TextChanged);
             // 
             // btnPesquisar
             // 

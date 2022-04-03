@@ -94,9 +94,6 @@ namespace SearchInBases.Forms
             return new ColsGrid(DateTime.Now, "");
         }
 
-        private void txtSQL_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
-        {
-            FastColoredTextBoxService.TextChanged(e, txtSQL);
-        }
+      
     }
 }

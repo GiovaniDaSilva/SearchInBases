@@ -116,8 +116,8 @@
             this.txtSQL.CharWidth = 8;
             this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtSQL.IsReplaceMode = false;
+            this.txtSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.txtSQL.Location = new System.Drawing.Point(12, 261);
             this.txtSQL.Name = "txtSQL";
             this.txtSQL.Paddings = new System.Windows.Forms.Padding(0);
@@ -126,8 +126,7 @@
             this.txtSQL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtSQL.ServiceColors")));
             this.txtSQL.Size = new System.Drawing.Size(874, 184);
             this.txtSQL.TabIndex = 10;
-            this.txtSQL.Zoom = 100;
-            this.txtSQL.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.txtSQL_TextChanged);
+            this.txtSQL.Zoom = 100;            
             // 
             // FrmHistorico
             // 
