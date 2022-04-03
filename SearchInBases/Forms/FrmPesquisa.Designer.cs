@@ -147,7 +147,7 @@ namespace SearchInBases.Forms
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(992, 434);
-            this.panel2.TabIndex = 0;
+            this.panel2.TabIndex = 0;            
             // 
             // btnHelp
             // 
@@ -384,7 +384,6 @@ namespace SearchInBases.Forms
             this.txtSQL.CommentPrefix = "--";
             this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtSQL.IsReplaceMode = false;
             this.txtSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.txtSQL.LeftBracket = '(';
@@ -520,6 +519,7 @@ namespace SearchInBases.Forms
             this.Name = "FrmPesquisa";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Search In Bases";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmPesquisa_FormClosing);
             this.Load += new System.EventHandler(this.FrmPesquisa_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

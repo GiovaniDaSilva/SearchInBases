@@ -307,5 +307,14 @@ namespace SearchInBases.Forms
             frmHelp.ShowDialog();
         }
 
+        private void FrmPesquisa_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Vars.isPesquisando)
+            {
+                Message.Info("Pesquisa em andamento... Pare a consulta ou aguarde a conclusão.");
+                e.Cancel = true;
+            }
+                
+        }
     }
 }
