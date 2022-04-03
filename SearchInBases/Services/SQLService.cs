@@ -68,18 +68,18 @@ namespace SearchInBases.Services
         private static void InicializarListaPalavrasProibidas()
         {
             palavras_proibidas.Clear();
-            palavras_proibidas.Add("drop");
-            palavras_proibidas.Add("create");
-            palavras_proibidas.Add("alter");
-            palavras_proibidas.Add("delete");
-            palavras_proibidas.Add("insert");
-            palavras_proibidas.Add("add");
-            palavras_proibidas.Add("remove");
+            palavras_proibidas.Add("drop ");
+            palavras_proibidas.Add("create ");
+            palavras_proibidas.Add("alter ");
+            palavras_proibidas.Add("delete ");
+            palavras_proibidas.Add("insert ");
+            palavras_proibidas.Add("add ");
+            palavras_proibidas.Add("remove ");
             palavras_proibidas.Add("commit");
             palavras_proibidas.Add("rollback");
-            palavras_proibidas.Add("kill");
-            palavras_proibidas.Add("database");
-            palavras_proibidas.Add("execute");
+            palavras_proibidas.Add("kill ");
+            palavras_proibidas.Add("database ");
+            palavras_proibidas.Add("execute ");
             
         }
 
