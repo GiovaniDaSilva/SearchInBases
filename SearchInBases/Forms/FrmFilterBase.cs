@@ -17,8 +17,13 @@ namespace SearchInBases.Forms
 
             if(Vars.basesFiltradas.Count > 0)
             {
-                Vars.basesFiltradas.ForEach(b => txtFilter.AppendText(b + Environment.NewLine));
+                Vars.basesFiltradas.ForEach(b => AppendBase(b));
             }
+        }
+
+        private void AppendBase(string b)
+        {
+            txtFilter.AppendText(b + Environment.NewLine);
         }
 
         private void btnUtilizar_Click(object sender, EventArgs e)
@@ -44,7 +49,27 @@ namespace SearchInBases.Forms
 
         private void btnLimpar_Click(object sender, EventArgs e)
         {
+            LimparBases();
+        }
+
+        private void LimparBases()
+        {
             txtFilter.Clear();
+        }
+
+        private void btnImportar_Click(object sender, EventArgs e)
+        {
+            if (Vars.basesUltimaConsulta.Count == 0)
+                Message.Info("Realize uma pesquisa antes de importar as bases da última consulta");
+
+            LimparBases();
+
+            foreach(var baseUltCon in Vars.basesUltimaConsulta){                
+                if (rbTodos.Checked 
+                    || (rbComOcorre.Checked && baseUltCon.encontrouRegistro) 
+                    || (rbSemOcorre.Checked && !baseUltCon.encontrouRegistro))
+                    AppendBase(baseUltCon.databaseName);                                
+            }
         }
     }
 }

@@ -21,8 +21,6 @@ namespace SearchInBases.Services
         public static bool _controlPrintFieldsName;
         public static bool _ocorreuErroNaConsulta;
 
-        #region "Publicos"
-
         public static void inicializarBasesAuth(Action<string> callbackConsole, Connection conn)
         {
             if (!Utils.IsNullOrEmpty(conn.basesAuth)) conn.basesAuth.Clear();
@@ -64,6 +62,7 @@ namespace SearchInBases.Services
         {
             
             _controlPrintFieldsName = false;
+            Vars.basesUltimaConsulta.Clear();
 
             foreach (var conn in conexoesHabilitadas)
             {
@@ -78,13 +77,13 @@ namespace SearchInBases.Services
                         if(countThread < qtdMaxThreads)
                         {
                             if (Vars.pararPesquisa) break;
-                            ExecutarTaskAsync(callbackConsole, callbackCsv, sqlParams, conn, threadsProcessando, threadsConn, baseAuth);
+                            ExecutarTaskAsync(callbackConsole, callbackCsv, CallbackBaseExecutada, sqlParams, conn, threadsProcessando, threadsConn, baseAuth);
                             countThread++;
                         }
                         else
                         {
                             countThread = AguardandoLiberarThread(conn, threadsProcessando, qtdMaxThreads, countThread);
-                            ExecutarTaskAsync(callbackConsole, callbackCsv, sqlParams, conn, threadsProcessando, threadsConn, baseAuth);
+                            ExecutarTaskAsync(callbackConsole, callbackCsv, CallbackBaseExecutada, sqlParams, conn, threadsProcessando, threadsConn, baseAuth);
                             countThread++;
                         }
                     }   
@@ -102,6 +101,10 @@ namespace SearchInBases.Services
             
         }
 
+        private static void CallbackBaseExecutada(BaseUltimaConsulta baseUltimaConsulta)
+        {
+            Vars.basesUltimaConsulta.Add(baseUltimaConsulta);
+        }
         private static int AguardandoLiberarThread(Connection conn, List<Task> threadsProcessando, int qtdMaxThreads, int countThread)
         {
             DateTime data = DateTime.Now;
@@ -122,30 +125,31 @@ namespace SearchInBases.Services
             return countThread;
         }
 
-        private static void ExecutarTaskAsync(Action<string> callbackConsole, Action<string> callbackCsv, SQLParams sqlParams, Connection conn, List<Task> threadsProcessando, List<MySqlConnection> threadsConn, BaseAuth baseAuth)
+        private static void ExecutarTaskAsync(Action<string> callbackConsole, Action<string> callbackCsv, Action<BaseUltimaConsulta> callbackBaseExecutada, SQLParams sqlParams, Connection conn, List<Task> threadsProcessando, List<MySqlConnection> threadsConn, BaseAuth baseAuth)
         {
             Task task = Task.Run(() =>
             {
-                ExecutarSQLThread(callbackConsole, sqlParams, callbackCsv, conn, threadsConn, baseAuth);
+                ExecutarSQLThread(callbackConsole, sqlParams, callbackCsv, callbackBaseExecutada, conn, threadsConn, baseAuth);
             });
 
             threadsProcessando.Add(task);
         }
 
-        #endregion
 
-
-        #region "Privados"
 
         private static void ExecutarSQLThread(Action<string> callbackConsole,
                                               SQLParams sqlParams,
                                               Action<string> callbackCsv,
+                                              Action<BaseUltimaConsulta> callbackBaseExecutada,
                                               Connection conn,
                                               List<MySqlConnection> threadsConn,
                                               BaseAuth baseAuth)
         {
             try
             {
+
+                bool temRegistro = false;
+
                 // Gera uma connection para cada thread
                 using (var threadConn = MySQLConnectorService.GetMySqlConnection(conn.mySqlConnector))
                 {
@@ -168,11 +172,13 @@ namespace SearchInBases.Services
 
                     // Executa o comando e salva o retorno no CSV
                     using (var reader = MySQLConnectorService.ExecutarSQL(threadConn, sqlParams))
-                    {                      
-                        callbackConsole(ComumCallbackConsole(conn.connectionName, baseAuth.databaseName) +
-                            (reader.HasRows ? RichFormatting.FontColor(encontrou_ocorrencias, Color.DarkGreen) : RichFormatting.FontColor(nao_encontrou_ocorrencias, Color.DarkViolet)));
+                    {        
+                        temRegistro = reader.HasRows;
 
-                        if (reader.HasRows && !_controlPrintFieldsName)
+                        callbackConsole(ComumCallbackConsole(conn.connectionName, baseAuth.databaseName) +
+                            (temRegistro ? RichFormatting.FontColor(encontrou_ocorrencias, Color.DarkGreen) : RichFormatting.FontColor(nao_encontrou_ocorrencias, Color.DarkViolet)));
+
+                        if (temRegistro && !_controlPrintFieldsName)
                         {
                             _controlPrintFieldsName = true;
                             callbackCsv(FieldsNameReaderToCsv(reader));
@@ -185,6 +191,9 @@ namespace SearchInBases.Services
                     }
 
                     threadConn.Close();
+
+                    BaseUltimaConsulta baseUltimaConsulta = new BaseUltimaConsulta(baseAuth.instance, baseAuth.databaseName, temRegistro);
+                    callbackBaseExecutada(baseUltimaConsulta);
                 }
 
             }
@@ -282,6 +291,5 @@ namespace SearchInBases.Services
             return result;
         }
 
-        #endregion
     }
 }

@@ -34,14 +34,20 @@
             this.txtFilter = new FastColoredTextBoxNS.FastColoredTextBox();
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnConfirmar = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbTodos = new System.Windows.Forms.RadioButton();
+            this.rbComOcorre = new System.Windows.Forms.RadioButton();
+            this.rbSemOcorre = new System.Windows.Forms.RadioButton();
+            this.btnImportar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilter)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(30, 11);
+            this.label1.Location = new System.Drawing.Point(21, 76);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(281, 15);
             this.label1.TabIndex = 0;
@@ -71,14 +77,13 @@
             this.txtFilter.CharWidth = 8;
             this.txtFilter.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtFilter.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtFilter.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtFilter.IsReplaceMode = false;
-            this.txtFilter.Location = new System.Drawing.Point(12, 35);
+            this.txtFilter.Location = new System.Drawing.Point(21, 94);
             this.txtFilter.Name = "txtFilter";
             this.txtFilter.Paddings = new System.Windows.Forms.Padding(0);
             this.txtFilter.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.txtFilter.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtFilter.ServiceColors")));
-            this.txtFilter.Size = new System.Drawing.Size(502, 338);
+            this.txtFilter.Size = new System.Drawing.Size(465, 383);
             this.txtFilter.TabIndex = 1;
             this.txtFilter.Zoom = 100;
             // 
@@ -89,7 +94,7 @@
             this.btnLimpar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnLimpar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLimpar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpar.Image")));
-            this.btnLimpar.Location = new System.Drawing.Point(484, 5);
+            this.btnLimpar.Location = new System.Drawing.Point(492, 94);
             this.btnLimpar.Name = "btnLimpar";
             this.btnLimpar.Size = new System.Drawing.Size(30, 27);
             this.btnLimpar.TabIndex = 14;
@@ -101,7 +106,7 @@
             // 
             this.btnConfirmar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnConfirmar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnConfirmar.Location = new System.Drawing.Point(30, 379);
+            this.btnConfirmar.Location = new System.Drawing.Point(39, 492);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.btnConfirmar.Size = new System.Drawing.Size(91, 32);
@@ -110,11 +115,67 @@
             this.btnConfirmar.UseVisualStyleBackColor = true;
             this.btnConfirmar.Click += new System.EventHandler(this.btnUtilizar_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rbSemOcorre);
+            this.groupBox1.Controls.Add(this.rbComOcorre);
+            this.groupBox1.Controls.Add(this.rbTodos);
+            this.groupBox1.Location = new System.Drawing.Point(21, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(333, 52);
+            this.groupBox1.TabIndex = 16;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Importar da ultima consulta";
+            // 
+            // rbTodos
+            // 
+            this.rbTodos.AutoSize = true;
+            this.rbTodos.Checked = true;
+            this.rbTodos.Location = new System.Drawing.Point(18, 22);
+            this.rbTodos.Name = "rbTodos";
+            this.rbTodos.Size = new System.Drawing.Size(56, 19);
+            this.rbTodos.TabIndex = 0;
+            this.rbTodos.TabStop = true;
+            this.rbTodos.Text = "Todos";
+            this.rbTodos.UseVisualStyleBackColor = true;
+            // 
+            // rbComOcorre
+            // 
+            this.rbComOcorre.AutoSize = true;
+            this.rbComOcorre.Location = new System.Drawing.Point(97, 22);
+            this.rbComOcorre.Name = "rbComOcorre";
+            this.rbComOcorre.Size = new System.Drawing.Size(110, 19);
+            this.rbComOcorre.TabIndex = 1;
+            this.rbComOcorre.Text = "Com ocorrência";
+            this.rbComOcorre.UseVisualStyleBackColor = true;
+            // 
+            // rbSemOcorre
+            // 
+            this.rbSemOcorre.AutoSize = true;
+            this.rbSemOcorre.Location = new System.Drawing.Point(213, 22);
+            this.rbSemOcorre.Name = "rbSemOcorre";
+            this.rbSemOcorre.Size = new System.Drawing.Size(107, 19);
+            this.rbSemOcorre.TabIndex = 2;
+            this.rbSemOcorre.Text = "Sem ocorrência";
+            this.rbSemOcorre.UseVisualStyleBackColor = true;
+            // 
+            // btnImportar
+            // 
+            this.btnImportar.Location = new System.Drawing.Point(360, 19);
+            this.btnImportar.Name = "btnImportar";
+            this.btnImportar.Size = new System.Drawing.Size(75, 44);
+            this.btnImportar.TabIndex = 18;
+            this.btnImportar.Text = "Importar";
+            this.btnImportar.UseVisualStyleBackColor = true;
+            this.btnImportar.Click += new System.EventHandler(this.btnImportar_Click);
+            // 
             // FrmFilterBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(526, 423);
+            this.ClientSize = new System.Drawing.Size(526, 536);
+            this.Controls.Add(this.btnImportar);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.btnLimpar);
             this.Controls.Add(this.txtFilter);
@@ -128,6 +189,8 @@
             this.Text = "Filtrar Bases";
             this.Load += new System.EventHandler(this.FrmFilterBase_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtFilter)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -139,5 +202,10 @@
         private FastColoredTextBoxNS.FastColoredTextBox txtFilter;
         private System.Windows.Forms.Button btnLimpar;
         private System.Windows.Forms.Button btnConfirmar;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rbSemOcorre;
+        private System.Windows.Forms.RadioButton rbComOcorre;
+        private System.Windows.Forms.RadioButton rbTodos;
+        private System.Windows.Forms.Button btnImportar;
     }
 }

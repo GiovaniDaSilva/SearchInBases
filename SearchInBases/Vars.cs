@@ -44,6 +44,7 @@ namespace SearchInBases
 
         //Filter
         public static List<string> basesFiltradas { get; set; } = new List<string>();
+        public static List<BaseUltimaConsulta> basesUltimaConsulta { get; set; } = new List<BaseUltimaConsulta>();
 
         //Sql
         public static string keySQL = "";
