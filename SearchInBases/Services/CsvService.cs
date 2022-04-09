@@ -1,4 +1,5 @@
-﻿using SearchInBases.Enum;
+﻿using MySqlConnector;
+using SearchInBases.Enum;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -34,9 +35,10 @@ namespace SearchInBases
             {                                         
                 File.Create(arquivo).Close();
                 using (StreamWriter sw = new StreamWriter(File.Open(arquivo, FileMode.Open), Encoding.UTF8))
-                {                    
+                {
+                    var sqlLine = sqlParams.sql.Replace(Environment.NewLine, " ");
                     sw.WriteLine(String.Format(padrao, data));
-                    sw.WriteLine("SQL Excutado: " + sqlParams.sql);
+                    sw.WriteLine("SQL Excutado: " + sqlLine);
                     sw.WriteLine("Resultado Esperado: " + GetEnumDescription(Vars.resultadoEsperado));
                     sw.WriteLine("Ambiente: " + GetEnumDescription(sqlParams.filtro.ambiente));
                     sw.WriteLine("Bases: " + GetEnumDescription(sqlParams.filtro.statusBase));

@@ -174,19 +174,30 @@ namespace SearchInBases.Services
                     using (var reader = MySQLConnectorService.ExecutarSQL(threadConn, sqlParams))
                     {        
                         temRegistro = reader.HasRows;
+                        EResultado resultadoEsperado = Vars.resultadoEsperado;
 
                         callbackConsole(ComumCallbackConsole(conn.connectionName, baseAuth.databaseName) +
                             (temRegistro ? RichFormatting.FontColor(encontrou_ocorrencias, Color.DarkGreen) : RichFormatting.FontColor(nao_encontrou_ocorrencias, Color.DarkViolet)));
+                     
 
-                        if (temRegistro && !_controlPrintFieldsName)
+                        if (!EResultado.SemOcorre.Equals(resultadoEsperado)) //com ocorre ou ambos
                         {
-                            _controlPrintFieldsName = true;
-                            callbackCsv(FieldsNameReaderToCsv(reader));
-                        }
+                            if (temRegistro)                            
+                                PrintFieldsNameCsv(callbackCsv, reader, true);                            
 
-                        while (reader.Read())
-                        {                            
-                            callbackCsv(FieldsReaderToCsv(baseAuth.databaseName, reader));
+                            if (temRegistro)
+                            {
+                                while (reader.Read())                            
+                                    callbackCsv(FieldsReaderToCsv(baseAuth.databaseName, reader));    
+                                
+                            }else if(EResultado.Ambos.Equals(resultadoEsperado))
+                                callbackCsv(FieldsSemOcorreToCsv(baseAuth));
+
+                        }
+                        else if(!temRegistro) // somentes sem ocorrencia
+                        {
+                            PrintFieldsNameCsv(callbackCsv, reader, false);
+                            callbackCsv(FieldsSemOcorreToCsv(baseAuth));
                         }
                     }
 
@@ -207,6 +218,28 @@ namespace SearchInBases.Services
             }
         }
 
+        private static void PrintFieldsNameCsv(Action<string> callbackCsv, MySqlDataReader reader, bool comFieldsReader)
+        {
+            if (!_controlPrintFieldsName)
+            {
+                _controlPrintFieldsName = true;
+                if(comFieldsReader)
+                    callbackCsv(FieldsNameReaderToCsv(reader));
+                else
+                    callbackCsv(FieldsNameSemOcorreToCsv());
+            }
+        }
+
+        private static string FieldsSemOcorreToCsv(BaseAuth baseAuth)
+        {
+            return $"{baseAuth.databaseName};Não";
+        }
+
+        private static string FieldsNameSemOcorreToCsv()
+        {
+            return "DatabaseName;PossuiDados";
+        }
+
         private static string ComumCallbackConsole(string connName, string baseName)
         {
             return RichFormatting.FontColor(connName, Color.DarkMagenta) + RichFormatting.Negrito(" -> ") +
@@ -215,7 +248,7 @@ namespace SearchInBases.Services
 
         private static string FieldsNameReaderToCsv(MySqlDataReader reader)
         {
-            string lineResult = "DatabaseName";
+            string lineResult = "DatabaseName;PossuiDados";
 
             for (int i = 0; i < reader.FieldCount; i++)
             {
@@ -251,6 +284,9 @@ namespace SearchInBases.Services
         private static string FieldsReaderToCsv(string databaseName, MySqlConnector.MySqlDataReader reader)
         {
             string lineResult = databaseName;
+
+            //PossuiResultado
+            lineResult += ";Sim";
 
             for (int i = 0; i < reader.FieldCount; i++)
             {
