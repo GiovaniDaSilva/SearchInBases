@@ -73,7 +73,7 @@ namespace SearchInBases.Services
             HistoricoService.Save();
         }
 
-        public void validarComandoSQL(SQLParams sqlParams)
+        public void ValidarComandoSQL(SQLParams sqlParams)
         {
             if (String.IsNullOrWhiteSpace(sqlParams.sql))
             {

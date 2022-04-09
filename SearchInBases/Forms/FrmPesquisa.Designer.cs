@@ -36,20 +36,24 @@ namespace SearchInBases.Forms
             this.lblStatus = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.gbResultado = new System.Windows.Forms.GroupBox();
+            this.rbResultadoSemOcorre = new System.Windows.Forms.RadioButton();
+            this.rbResultadoComOcorre = new System.Windows.Forms.RadioButton();
+            this.rbResultadoAmbos = new System.Windows.Forms.RadioButton();
             this.btnHelp = new System.Windows.Forms.Button();
             this.btnParar = new System.Windows.Forms.Button();
-            this.lblBasesFiltradas = new System.Windows.Forms.Label();
-            this.btnFiltrarBases = new System.Windows.Forms.Button();
-            this.btnFormater = new System.Windows.Forms.Button();
-            this.btnHistorico = new System.Windows.Forms.Button();
-            this.gbAmbiente = new System.Windows.Forms.GroupBox();
-            this.rbAmbosAmbiente = new System.Windows.Forms.RadioButton();
-            this.rbProducao = new System.Windows.Forms.RadioButton();
-            this.rbInterno = new System.Windows.Forms.RadioButton();
             this.gbBasesAtivas = new System.Windows.Forms.GroupBox();
             this.rbAmbasAtiva = new System.Windows.Forms.RadioButton();
             this.rbInativa = new System.Windows.Forms.RadioButton();
             this.rbAtiva = new System.Windows.Forms.RadioButton();
+            this.gbAmbiente = new System.Windows.Forms.GroupBox();
+            this.rbAmbosAmbiente = new System.Windows.Forms.RadioButton();
+            this.rbProducao = new System.Windows.Forms.RadioButton();
+            this.rbInterno = new System.Windows.Forms.RadioButton();
+            this.lblBasesFiltradas = new System.Windows.Forms.Label();
+            this.btnFiltrarBases = new System.Windows.Forms.Button();
+            this.btnFormater = new System.Windows.Forms.Button();
+            this.btnHistorico = new System.Windows.Forms.Button();
             this.lvConexoes = new System.Windows.Forms.ListView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.txtSQL = new FastColoredTextBoxNS.FastColoredTextBox();
@@ -70,8 +74,9 @@ namespace SearchInBases.Forms
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.gbAmbiente.SuspendLayout();
+            this.gbResultado.SuspendLayout();
             this.gbBasesAtivas.SuspendLayout();
+            this.gbAmbiente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtSQL)).BeginInit();
             this.toolBar.SuspendLayout();
             this.SuspendLayout();
@@ -81,7 +86,7 @@ namespace SearchInBases.Forms
             this.panel1.Controls.Add(this.progressBar);
             this.panel1.Controls.Add(this.lblStatus);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 642);
+            this.panel1.Location = new System.Drawing.Point(0, 649);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(994, 25);
             this.panel1.TabIndex = 0;
@@ -122,21 +127,22 @@ namespace SearchInBases.Forms
             this.splitContainer1.Panel2.Controls.Add(this.txtConsole);
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(9, 4, 9, 4);
             this.splitContainer1.Panel2MinSize = 50;
-            this.splitContainer1.Size = new System.Drawing.Size(994, 642);
-            this.splitContainer1.SplitterDistance = 436;
+            this.splitContainer1.Size = new System.Drawing.Size(994, 649);
+            this.splitContainer1.SplitterDistance = 439;
             this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 2;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.gbResultado);
             this.panel2.Controls.Add(this.btnHelp);
             this.panel2.Controls.Add(this.btnParar);
+            this.panel2.Controls.Add(this.gbBasesAtivas);
+            this.panel2.Controls.Add(this.gbAmbiente);
             this.panel2.Controls.Add(this.lblBasesFiltradas);
             this.panel2.Controls.Add(this.btnFiltrarBases);
             this.panel2.Controls.Add(this.btnFormater);
             this.panel2.Controls.Add(this.btnHistorico);
-            this.panel2.Controls.Add(this.gbAmbiente);
-            this.panel2.Controls.Add(this.gbBasesAtivas);
             this.panel2.Controls.Add(this.lvConexoes);
             this.panel2.Controls.Add(this.txtSQL);
             this.panel2.Controls.Add(this.btnPesquisar);
@@ -146,8 +152,53 @@ namespace SearchInBases.Forms
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(992, 434);
-            this.panel2.TabIndex = 0;            
+            this.panel2.Size = new System.Drawing.Size(992, 437);
+            this.panel2.TabIndex = 0;
+            // 
+            // gbResultado
+            // 
+            this.gbResultado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbResultado.Controls.Add(this.rbResultadoSemOcorre);
+            this.gbResultado.Controls.Add(this.rbResultadoComOcorre);
+            this.gbResultado.Controls.Add(this.rbResultadoAmbos);
+            this.gbResultado.Location = new System.Drawing.Point(375, 42);
+            this.gbResultado.Name = "gbResultado";
+            this.gbResultado.Size = new System.Drawing.Size(155, 84);
+            this.gbResultado.TabIndex = 19;
+            this.gbResultado.TabStop = false;
+            this.gbResultado.Text = "Resultado Esperado";
+            // 
+            // rbResultadoSemOcorre
+            // 
+            this.rbResultadoSemOcorre.AutoSize = true;
+            this.rbResultadoSemOcorre.Location = new System.Drawing.Point(25, 59);
+            this.rbResultadoSemOcorre.Name = "rbResultadoSemOcorre";
+            this.rbResultadoSemOcorre.Size = new System.Drawing.Size(109, 19);
+            this.rbResultadoSemOcorre.TabIndex = 5;
+            this.rbResultadoSemOcorre.Text = "Sem Ocorrência";
+            this.rbResultadoSemOcorre.UseVisualStyleBackColor = true;
+            // 
+            // rbResultadoComOcorre
+            // 
+            this.rbResultadoComOcorre.AutoSize = true;
+            this.rbResultadoComOcorre.Checked = true;
+            this.rbResultadoComOcorre.Location = new System.Drawing.Point(25, 40);
+            this.rbResultadoComOcorre.Name = "rbResultadoComOcorre";
+            this.rbResultadoComOcorre.Size = new System.Drawing.Size(112, 19);
+            this.rbResultadoComOcorre.TabIndex = 4;
+            this.rbResultadoComOcorre.TabStop = true;
+            this.rbResultadoComOcorre.Text = "Com Ocorrência";
+            this.rbResultadoComOcorre.UseVisualStyleBackColor = true;
+            // 
+            // rbResultadoAmbos
+            // 
+            this.rbResultadoAmbos.AutoSize = true;
+            this.rbResultadoAmbos.Location = new System.Drawing.Point(25, 22);
+            this.rbResultadoAmbos.Name = "rbResultadoAmbos";
+            this.rbResultadoAmbos.Size = new System.Drawing.Size(63, 19);
+            this.rbResultadoAmbos.TabIndex = 3;
+            this.rbResultadoAmbos.Text = "Ambos";
+            this.rbResultadoAmbos.UseVisualStyleBackColor = true;
             // 
             // btnHelp
             // 
@@ -172,7 +223,7 @@ namespace SearchInBases.Forms
             this.btnParar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnParar.Image = ((System.Drawing.Image)(resources.GetObject("btnParar.Image")));
             this.btnParar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnParar.Location = new System.Drawing.Point(90, 52);
+            this.btnParar.Location = new System.Drawing.Point(12, 52);
             this.btnParar.Name = "btnParar";
             this.btnParar.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnParar.Size = new System.Drawing.Size(158, 74);
@@ -182,12 +233,102 @@ namespace SearchInBases.Forms
             this.btnParar.UseVisualStyleBackColor = false;
             this.btnParar.Click += new System.EventHandler(this.btnParar_Click);
             // 
+            // gbBasesAtivas
+            // 
+            this.gbBasesAtivas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbBasesAtivas.Controls.Add(this.rbAmbasAtiva);
+            this.gbBasesAtivas.Controls.Add(this.rbInativa);
+            this.gbBasesAtivas.Controls.Add(this.rbAtiva);
+            this.gbBasesAtivas.Location = new System.Drawing.Point(676, 42);
+            this.gbBasesAtivas.Name = "gbBasesAtivas";
+            this.gbBasesAtivas.Size = new System.Drawing.Size(114, 84);
+            this.gbBasesAtivas.TabIndex = 11;
+            this.gbBasesAtivas.TabStop = false;
+            this.gbBasesAtivas.Text = "Bases";
+            // 
+            // rbAmbasAtiva
+            // 
+            this.rbAmbasAtiva.AutoSize = true;
+            this.rbAmbasAtiva.Location = new System.Drawing.Point(22, 21);
+            this.rbAmbasAtiva.Name = "rbAmbasAtiva";
+            this.rbAmbasAtiva.Size = new System.Drawing.Size(63, 19);
+            this.rbAmbasAtiva.TabIndex = 2;
+            this.rbAmbasAtiva.Text = "Ambos";
+            this.rbAmbasAtiva.UseVisualStyleBackColor = true;
+            // 
+            // rbInativa
+            // 
+            this.rbInativa.AutoSize = true;
+            this.rbInativa.Location = new System.Drawing.Point(22, 59);
+            this.rbInativa.Name = "rbInativa";
+            this.rbInativa.Size = new System.Drawing.Size(60, 19);
+            this.rbInativa.TabIndex = 1;
+            this.rbInativa.Text = "Inativa";
+            this.rbInativa.UseVisualStyleBackColor = true;
+            // 
+            // rbAtiva
+            // 
+            this.rbAtiva.AutoSize = true;
+            this.rbAtiva.Checked = true;
+            this.rbAtiva.Location = new System.Drawing.Point(22, 39);
+            this.rbAtiva.Name = "rbAtiva";
+            this.rbAtiva.Size = new System.Drawing.Size(52, 19);
+            this.rbAtiva.TabIndex = 0;
+            this.rbAtiva.TabStop = true;
+            this.rbAtiva.Text = "Ativa";
+            this.rbAtiva.UseVisualStyleBackColor = true;
+            // 
+            // gbAmbiente
+            // 
+            this.gbAmbiente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbAmbiente.Controls.Add(this.rbAmbosAmbiente);
+            this.gbAmbiente.Controls.Add(this.rbProducao);
+            this.gbAmbiente.Controls.Add(this.rbInterno);
+            this.gbAmbiente.Location = new System.Drawing.Point(546, 42);
+            this.gbAmbiente.Name = "gbAmbiente";
+            this.gbAmbiente.Size = new System.Drawing.Size(115, 84);
+            this.gbAmbiente.TabIndex = 12;
+            this.gbAmbiente.TabStop = false;
+            this.gbAmbiente.Text = "Ambiente";
+            // 
+            // rbAmbosAmbiente
+            // 
+            this.rbAmbosAmbiente.AutoSize = true;
+            this.rbAmbosAmbiente.Checked = true;
+            this.rbAmbosAmbiente.Location = new System.Drawing.Point(17, 21);
+            this.rbAmbosAmbiente.Name = "rbAmbosAmbiente";
+            this.rbAmbosAmbiente.Size = new System.Drawing.Size(63, 19);
+            this.rbAmbosAmbiente.TabIndex = 5;
+            this.rbAmbosAmbiente.TabStop = true;
+            this.rbAmbosAmbiente.Text = "Ambos";
+            this.rbAmbosAmbiente.UseVisualStyleBackColor = true;
+            // 
+            // rbProducao
+            // 
+            this.rbProducao.AutoSize = true;
+            this.rbProducao.Location = new System.Drawing.Point(17, 59);
+            this.rbProducao.Name = "rbProducao";
+            this.rbProducao.Size = new System.Drawing.Size(76, 19);
+            this.rbProducao.TabIndex = 4;
+            this.rbProducao.Text = "Produção";
+            this.rbProducao.UseVisualStyleBackColor = true;
+            // 
+            // rbInterno
+            // 
+            this.rbInterno.AutoSize = true;
+            this.rbInterno.Location = new System.Drawing.Point(17, 39);
+            this.rbInterno.Name = "rbInterno";
+            this.rbInterno.Size = new System.Drawing.Size(63, 19);
+            this.rbInterno.TabIndex = 3;
+            this.rbInterno.Text = "Interno";
+            this.rbInterno.UseVisualStyleBackColor = true;
+            // 
             // lblBasesFiltradas
             // 
             this.lblBasesFiltradas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBasesFiltradas.AutoSize = true;
             this.lblBasesFiltradas.ForeColor = System.Drawing.Color.Firebrick;
-            this.lblBasesFiltradas.Location = new System.Drawing.Point(285, 101);
+            this.lblBasesFiltradas.Location = new System.Drawing.Point(200, 101);
             this.lblBasesFiltradas.Name = "lblBasesFiltradas";
             this.lblBasesFiltradas.Size = new System.Drawing.Size(118, 15);
             this.lblBasesFiltradas.TabIndex = 16;
@@ -201,7 +342,7 @@ namespace SearchInBases.Forms
             this.btnFiltrarBases.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnFiltrarBases.Image = ((System.Drawing.Image)(resources.GetObject("btnFiltrarBases.Image")));
             this.btnFiltrarBases.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFiltrarBases.Location = new System.Drawing.Point(285, 42);
+            this.btnFiltrarBases.Location = new System.Drawing.Point(200, 42);
             this.btnFiltrarBases.Name = "btnFiltrarBases";
             this.btnFiltrarBases.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnFiltrarBases.Size = new System.Drawing.Size(158, 59);
@@ -243,96 +384,6 @@ namespace SearchInBases.Forms
             this.btnHistorico.UseVisualStyleBackColor = false;
             this.btnHistorico.Click += new System.EventHandler(this.btnHistorico_Click);
             // 
-            // gbAmbiente
-            // 
-            this.gbAmbiente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbAmbiente.Controls.Add(this.rbAmbosAmbiente);
-            this.gbAmbiente.Controls.Add(this.rbProducao);
-            this.gbAmbiente.Controls.Add(this.rbInterno);
-            this.gbAmbiente.Location = new System.Drawing.Point(449, 42);
-            this.gbAmbiente.Name = "gbAmbiente";
-            this.gbAmbiente.Size = new System.Drawing.Size(252, 59);
-            this.gbAmbiente.TabIndex = 12;
-            this.gbAmbiente.TabStop = false;
-            this.gbAmbiente.Text = "Ambiente";
-            // 
-            // rbAmbosAmbiente
-            // 
-            this.rbAmbosAmbiente.AutoSize = true;
-            this.rbAmbosAmbiente.Checked = true;
-            this.rbAmbosAmbiente.Location = new System.Drawing.Point(180, 22);
-            this.rbAmbosAmbiente.Name = "rbAmbosAmbiente";
-            this.rbAmbosAmbiente.Size = new System.Drawing.Size(63, 19);
-            this.rbAmbosAmbiente.TabIndex = 5;
-            this.rbAmbosAmbiente.TabStop = true;
-            this.rbAmbosAmbiente.Text = "Ambos";
-            this.rbAmbosAmbiente.UseVisualStyleBackColor = true;
-            // 
-            // rbProducao
-            // 
-            this.rbProducao.AutoSize = true;
-            this.rbProducao.Location = new System.Drawing.Point(98, 22);
-            this.rbProducao.Name = "rbProducao";
-            this.rbProducao.Size = new System.Drawing.Size(76, 19);
-            this.rbProducao.TabIndex = 4;
-            this.rbProducao.Text = "Produção";
-            this.rbProducao.UseVisualStyleBackColor = true;
-            // 
-            // rbInterno
-            // 
-            this.rbInterno.AutoSize = true;
-            this.rbInterno.Location = new System.Drawing.Point(25, 22);
-            this.rbInterno.Name = "rbInterno";
-            this.rbInterno.Size = new System.Drawing.Size(67, 19);
-            this.rbInterno.TabIndex = 3;
-            this.rbInterno.Text = "Internas";
-            this.rbInterno.UseVisualStyleBackColor = true;
-            // 
-            // gbBasesAtivas
-            // 
-            this.gbBasesAtivas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbBasesAtivas.Controls.Add(this.rbAmbasAtiva);
-            this.gbBasesAtivas.Controls.Add(this.rbInativa);
-            this.gbBasesAtivas.Controls.Add(this.rbAtiva);
-            this.gbBasesAtivas.Location = new System.Drawing.Point(720, 42);
-            this.gbBasesAtivas.Name = "gbBasesAtivas";
-            this.gbBasesAtivas.Size = new System.Drawing.Size(227, 59);
-            this.gbBasesAtivas.TabIndex = 11;
-            this.gbBasesAtivas.TabStop = false;
-            this.gbBasesAtivas.Text = "Bases";
-            // 
-            // rbAmbasAtiva
-            // 
-            this.rbAmbasAtiva.AutoSize = true;
-            this.rbAmbasAtiva.Location = new System.Drawing.Point(156, 22);
-            this.rbAmbasAtiva.Name = "rbAmbasAtiva";
-            this.rbAmbasAtiva.Size = new System.Drawing.Size(63, 19);
-            this.rbAmbasAtiva.TabIndex = 2;
-            this.rbAmbasAtiva.Text = "Ambos";
-            this.rbAmbasAtiva.UseVisualStyleBackColor = true;
-            // 
-            // rbInativa
-            // 
-            this.rbInativa.AutoSize = true;
-            this.rbInativa.Location = new System.Drawing.Point(85, 22);
-            this.rbInativa.Name = "rbInativa";
-            this.rbInativa.Size = new System.Drawing.Size(65, 19);
-            this.rbInativa.TabIndex = 1;
-            this.rbInativa.Text = "Inativas";
-            this.rbInativa.UseVisualStyleBackColor = true;
-            // 
-            // rbAtiva
-            // 
-            this.rbAtiva.AutoSize = true;
-            this.rbAtiva.Checked = true;
-            this.rbAtiva.Location = new System.Drawing.Point(22, 22);
-            this.rbAtiva.Name = "rbAtiva";
-            this.rbAtiva.Size = new System.Drawing.Size(57, 19);
-            this.rbAtiva.TabIndex = 0;
-            this.rbAtiva.TabStop = true;
-            this.rbAtiva.Text = "Ativas";
-            this.rbAtiva.UseVisualStyleBackColor = true;
-            // 
             // lvConexoes
             // 
             this.lvConexoes.Activation = System.Windows.Forms.ItemActivation.OneClick;
@@ -344,7 +395,7 @@ namespace SearchInBases.Forms
             this.lvConexoes.Location = new System.Drawing.Point(12, 147);
             this.lvConexoes.MultiSelect = false;
             this.lvConexoes.Name = "lvConexoes";
-            this.lvConexoes.Size = new System.Drawing.Size(158, 279);
+            this.lvConexoes.Size = new System.Drawing.Size(158, 282);
             this.lvConexoes.SmallImageList = this.imageList1;
             this.lvConexoes.TabIndex = 10;
             this.lvConexoes.UseCompatibleStateImageBehavior = false;
@@ -393,7 +444,7 @@ namespace SearchInBases.Forms
             this.txtSQL.RightBracket = ')';
             this.txtSQL.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.txtSQL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtSQL.ServiceColors")));
-            this.txtSQL.Size = new System.Drawing.Size(747, 279);
+            this.txtSQL.Size = new System.Drawing.Size(747, 282);
             this.txtSQL.TabIndex = 9;
             this.txtSQL.Zoom = 100;
             // 
@@ -417,7 +468,7 @@ namespace SearchInBases.Forms
             // lblSQL
             // 
             this.lblSQL.AutoSize = true;
-            this.lblSQL.Location = new System.Drawing.Point(220, 129);
+            this.lblSQL.Location = new System.Drawing.Point(200, 129);
             this.lblSQL.Name = "lblSQL";
             this.lblSQL.Size = new System.Drawing.Size(28, 15);
             this.lblSQL.TabIndex = 7;
@@ -504,7 +555,7 @@ namespace SearchInBases.Forms
             this.txtConsole.Location = new System.Drawing.Point(9, 4);
             this.txtConsole.Name = "txtConsole";
             this.txtConsole.ReadOnly = true;
-            this.txtConsole.Size = new System.Drawing.Size(974, 194);
+            this.txtConsole.Size = new System.Drawing.Size(974, 198);
             this.txtConsole.TabIndex = 2;
             this.txtConsole.Text = "";
             // 
@@ -512,7 +563,7 @@ namespace SearchInBases.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(994, 667);
+            this.ClientSize = new System.Drawing.Size(994, 674);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -529,10 +580,12 @@ namespace SearchInBases.Forms
             this.splitContainer1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.gbAmbiente.ResumeLayout(false);
-            this.gbAmbiente.PerformLayout();
+            this.gbResultado.ResumeLayout(false);
+            this.gbResultado.PerformLayout();
             this.gbBasesAtivas.ResumeLayout(false);
             this.gbBasesAtivas.PerformLayout();
+            this.gbAmbiente.ResumeLayout(false);
+            this.gbAmbiente.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtSQL)).EndInit();
             this.toolBar.ResumeLayout(false);
             this.toolBar.PerformLayout();
@@ -575,5 +628,9 @@ namespace SearchInBases.Forms
         private System.Windows.Forms.Label lblBasesFiltradas;
         private System.Windows.Forms.Button btnParar;
         private System.Windows.Forms.Button btnHelp;
+        private System.Windows.Forms.GroupBox gbResultado;
+        private System.Windows.Forms.RadioButton rbResultadoSemOcorre;
+        private System.Windows.Forms.RadioButton rbResultadoComOcorre;
+        private System.Windows.Forms.RadioButton rbResultadoAmbos;
     }
 }

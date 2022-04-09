@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace SearchInBases.Entity
 {
@@ -36,15 +37,21 @@ namespace SearchInBases.Entity
 
         public enum enuAmbiente
         {
+            [Description("Interno")]
             Interno = 0,
+            [Description("Produção")]
             Producao = 1,
+            [Description("Ambos")]
             Ambos = 2
         }
 
         public enum enuStatusBase
         {
+            [Description("Ativa")]
             Ativa = 0,
+            [Description("Inativa")]
             Inativa = 1,
+            [Description("Ambos")]
             Ambos = 2
         }
     }

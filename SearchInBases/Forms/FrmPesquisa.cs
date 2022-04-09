@@ -1,5 +1,6 @@
 ﻿using FastColoredTextBoxNS;
 using SearchInBases.Entity;
+using SearchInBases.Enum;
 using SearchInBases.Formularios;
 using SearchInBases.Services;
 using System;
@@ -80,15 +81,16 @@ namespace SearchInBases.Forms
             try
             {
                 LimparConsole();
-                validarConexoesSelecionadas();
-                SQLParams sqlParams = montarSQLParams();
-                _pesquisaService.validarComandoSQL(sqlParams);
+                ValidarConexoesSelecionadas();
+                SQLParams sqlParams = MontarSQLParams();
+                _pesquisaService.ValidarComandoSQL(sqlParams);
                 sqlParams.sqlDescript = SQLService.TratarParamCamposCripto(sqlParams.sql);
 
-                if (!_pesquisaService.TestarSQL(atualizaConsole, alterarStatusApp, sqlParams)) return;
-                
+                if (!_pesquisaService.TestarSQL(AtualizaConsole, AlterarStatusApp, sqlParams)) return;
+
+                Vars.resultadoEsperado = GetResultadoEsperado();
                 nomeArquivoResultado = CsvService.CriarArquivo(sqlParams);
-                Task.Run(() => { _pesquisaService.Pesquisar(atualizaConsole, alterarStatusApp, sqlParams, AdicionarResultadoCsv, nomeArquivoResultado); });
+                Task.Run(() => { _pesquisaService.Pesquisar(AtualizaConsole, AlterarStatusApp, sqlParams, AdicionarResultadoCsv, nomeArquivoResultado); });
                 txtConsole.Focus();
 
             }
@@ -102,7 +104,16 @@ namespace SearchInBases.Forms
                 Message.Error("Erro ao executar comando");
             }            
         }
-     
+
+        private EResultado GetResultadoEsperado()
+        {
+            if (rbResultadoComOcorre.Checked)
+                return EResultado.ComOcorre;
+            else if(rbResultadoSemOcorre.Checked)
+                return EResultado.SemOcorre;
+            else
+                return EResultado.Ambos;
+        }
 
         private void AdicionarResultadoCsv(string texto)
         {
@@ -113,7 +124,7 @@ namespace SearchInBases.Forms
             
         }
 
-        private void validarConexoesSelecionadas()
+        private void ValidarConexoesSelecionadas()
         {
             if(!Vars.connections.Exists(c => c.habilitado))
             {
@@ -124,8 +135,7 @@ namespace SearchInBases.Forms
         private void LimparForm()
         {
             txtSQL.Clear();
-            LimparConsole();
-            Vars.basesFiltradas.Clear();
+            LimparConsole();            
             ExibirBaseFiltradas();
 
         }
@@ -141,7 +151,7 @@ namespace SearchInBases.Forms
             txtConsole.Controls.Clear();           
         }
 
-        private SQLParams montarSQLParams()
+        private SQLParams MontarSQLParams()
         {
             enuStatusBase statusBase = enuStatusBase.Ambos;
             if (rbAtiva.Checked)
@@ -159,7 +169,7 @@ namespace SearchInBases.Forms
             return new SQLParams(txtSQL.Text, sqlFiltro, Vars.basesFiltradas);
         }
 
-        private void atualizaConsole(string message)
+        private void AtualizaConsole(string message)
         {
             this.Invoke(new MethodInvoker(() =>
             {                
@@ -179,7 +189,7 @@ namespace SearchInBases.Forms
             progressBar.MarqueeAnimationSpeed = 0;                   
         }
 
-        private void alterarStatusApp()
+        private void AlterarStatusApp()
         {
             this.Invoke(new MethodInvoker(() =>
             {
@@ -300,7 +310,7 @@ namespace SearchInBases.Forms
         private void btnParar_Click(object sender, EventArgs e)
         {
             Vars.pararPesquisa = true;
-            atualizaConsole("Parando threads...");
+            AtualizaConsole("Parando threads...");
         }
 
         private void btnHelp_Click(object sender, EventArgs e)
