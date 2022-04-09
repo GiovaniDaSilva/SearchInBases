@@ -1,5 +1,6 @@
 ﻿
 using SearchInBases.Entity;
+using SearchInBases.Enum;
 using SearchInBases.Services;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace SearchInBases
         //Resultados
         public static string nameFileResultado = "Resultado{0}.csv";
         public static string pathResultados = AppDomain.CurrentDomain.BaseDirectory + @"Resultados\";
+        public static EResultado resultadoEsperado;
 
         //Config
         public static Config config = new Config();

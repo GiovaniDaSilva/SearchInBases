@@ -1,5 +1,10 @@
-﻿using System;
+﻿using SearchInBases.Enum;
+using System;
+using System.ComponentModel;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
 
 namespace SearchInBases
 {
@@ -26,14 +31,38 @@ namespace SearchInBases
             }
 
             if (!File.Exists(arquivo))
-            {
-                File.Create(arquivo).Close();                
-                File.AppendAllText(arquivo, String.Format(padrao, data) + Environment.NewLine);
-                File.AppendAllText(arquivo, "SQL Excutado: " + sqlParams.sql + Environment.NewLine);
-                File.AppendAllText(arquivo, Environment.NewLine);
+            {                                         
+                File.Create(arquivo).Close();
+                using (StreamWriter sw = new StreamWriter(File.Open(arquivo, FileMode.Open), Encoding.UTF8))
+                {                    
+                    sw.WriteLine(String.Format(padrao, data));
+                    sw.WriteLine("SQL Excutado: " + sqlParams.sql);
+                    sw.WriteLine("Resultado Esperado: " + GetEnumDescription(Vars.resultadoEsperado));
+                    sw.WriteLine("Ambiente: " + GetEnumDescription(sqlParams.filtro.ambiente));
+                    sw.WriteLine("Bases: " + GetEnumDescription(sqlParams.filtro.statusBase));
+                    sw.WriteLine(Environment.NewLine);
+                }
+                //File.AppendAllText(arquivo, String.Format(padrao, data) + Environment.NewLine);
+                //File.AppendAllText(arquivo, "SQL Excutado: " + sqlParams.sql + Environment.NewLine);
+                //File.AppendAllText(arquivo, "Resultado Esperado: " + GetEnumDescription(Vars.resultadoEsperado) + Environment.NewLine);
+                //File.AppendAllText(arquivo, Environment.NewLine);
             }
 
             return arquivo;
+        }
+
+        public static string GetEnumDescription(object value)
+        {
+            FieldInfo fi = value.GetType().GetField(value.ToString());
+
+            DescriptionAttribute[] attributes = fi.GetCustomAttributes(typeof(DescriptionAttribute), false) as DescriptionAttribute[];
+
+            if (attributes != null && attributes.Any())
+            {
+                return attributes.First().Description;
+            }
+
+            return value.ToString();
         }
 
     }
