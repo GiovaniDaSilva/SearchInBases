@@ -85,6 +85,8 @@ namespace SearchInBases.Forms
                 _pesquisaService.validarComandoSQL(sqlParams);
                 sqlParams.sqlDescript = SQLService.TratarParamCamposCripto(sqlParams.sql);
 
+                if (!_pesquisaService.TestarSQL(atualizaConsole, alterarStatusApp, sqlParams)) return;
+                
                 nomeArquivoResultado = CsvService.CriarArquivo(sqlParams);
                 Task.Run(() => { _pesquisaService.Pesquisar(atualizaConsole, alterarStatusApp, sqlParams, AdicionarResultadoCsv, nomeArquivoResultado); });
                 txtConsole.Focus();

@@ -94,13 +94,47 @@ namespace SearchInBases.Services
             }
         }
 
+        public bool TestarSQL(Action<string> callbackConsole, Action callbackStatusApp, SQLParams sqlParams)
+        {
+            Vars.isPesquisando = true;
+            callbackStatusApp();
+
+            bool sucesso = true;
+            try
+            {
+                Log.AddMessage("Testando comando SQL...");
+
+                List<Connection> conexoesHabilitadas = Vars.connections.FindAll(c => c.habilitado);
+                tratarConexoesHabilitadas(callbackConsole, conexoesHabilitadas);
+
+                sucesso = ConnectionService.ExecutarTesteSQL(callbackConsole, sqlParams, conexoesHabilitadas[0], conexoesHabilitadas[0].basesAuth[0]);
+
+            }
+            catch (Exception ex)
+            {                
+                ErroService.TratarErro(ex);
+            }
+            finally
+            {
+                if (!sucesso)
+                {
+                    Vars.isPesquisando = false;                
+                    callbackStatusApp();
+                }
+
+                Log.AddMessage("Comando SQL " + (sucesso ? "válido" : "inválido")); ;
+            }
+
+            return sucesso;
+        }
+
         #endregion
 
 
 
         #region "Privados"
 
-        
+
         // Privados
         private static void tratarConexoesHabilitadas(Action<string> callbackConsole, List<Connection> conexoesHabilitadas)
         {

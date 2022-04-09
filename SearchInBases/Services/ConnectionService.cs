@@ -291,5 +291,28 @@ namespace SearchInBases.Services
             return result;
         }
 
+
+        public static bool ExecutarTesteSQL(Action<string> callbackConsole,
+                                              SQLParams sqlParams,                                                                                          
+                                              Connection conn,                                              
+                                              BaseAuth baseAuth)
+        {            
+            try
+            {                
+                using (var threadConn = MySQLConnectorService.GetMySqlConnection(conn.mySqlConnector))
+                {
+                    threadConn.Open();                    
+                    threadConn.ChangeDatabase(baseAuth.databaseName);                                        
+                    MySQLConnectorService.ExecutarSQL(threadConn, sqlParams);
+                    threadConn.Close();
+                }               
+            }
+            catch (Exception ex)
+            {
+                callbackConsole(ComumCallbackConsole(conn.connectionName, baseAuth.databaseName) + " -> " + ex.Message.ToString());                
+                return false;
+            }
+            return true;
+        }
     }
 }
