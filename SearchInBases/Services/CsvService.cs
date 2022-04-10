@@ -1,6 +1,8 @@
 ﻿using MySqlConnector;
+using SearchInBases.Entity;
 using SearchInBases.Enum;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -67,5 +69,29 @@ namespace SearchInBases
             return value.ToString();
         }
 
+        public static void FinalizarArquivo(string nomeArquivoResultado, List<BaseConsulta> listaConsultas, EResultado resultadoEsperado)
+        {
+            
+            //Filtra conforme resultado esperado
+            if (EResultado.ComOcorre.Equals(resultadoEsperado))
+                listaConsultas.RemoveAll(b => !b.encontrouRegistro);
+            else if (EResultado.SemOcorre.Equals(resultadoEsperado))
+                listaConsultas.RemoveAll(b => b.encontrouRegistro);
+
+
+            //Pega o header da base que encontrou registros
+            string headerColumns = "DatabaseName;PossuiDados";
+            bool encontrouDados = listaConsultas.Any(b => b.encontrouRegistro);            
+            if (!EResultado.SemOcorre.Equals(resultadoEsperado) && encontrouDados)
+                headerColumns = listaConsultas.Find(b => b.encontrouRegistro && !String.IsNullOrEmpty(b.headerColumns)).headerColumns;
+            
+            Add(nomeArquivoResultado, headerColumns);
+
+            //Adiciona linhas consultadas no arquivo
+            foreach(var consulta in listaConsultas.OrderBy(b => !b.encontrouRegistro))
+            {
+                consulta.resultadoConsulta.ForEach(r => Add(nomeArquivoResultado,r));
+            }            
+        }
     }
 }
