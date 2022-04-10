@@ -56,7 +56,7 @@ namespace SearchInBases.Services
         }
 
         public static void ExecutarSQL(Action<string> callbackConsole,
-                                        Action<string> callbackCsv,
+                                        Action<BaseConsulta> callbackCsv,
                                         List<Connection> conexoesHabilitadas,
                                         SQLParams sqlParams)
         {
@@ -125,7 +125,7 @@ namespace SearchInBases.Services
             return countThread;
         }
 
-        private static void ExecutarTaskAsync(Action<string> callbackConsole, Action<string> callbackCsv, Action<BaseUltimaConsulta> callbackBaseExecutada, SQLParams sqlParams, Connection conn, List<Task> threadsProcessando, List<MySqlConnection> threadsConn, BaseAuth baseAuth)
+        private static void ExecutarTaskAsync(Action<string> callbackConsole, Action<BaseConsulta> callbackCsv, Action<BaseUltimaConsulta> callbackBaseExecutada, SQLParams sqlParams, Connection conn, List<Task> threadsProcessando, List<MySqlConnection> threadsConn, BaseAuth baseAuth)
         {
             Task task = Task.Run(() =>
             {
@@ -139,7 +139,7 @@ namespace SearchInBases.Services
 
         private static void ExecutarSQLThread(Action<string> callbackConsole,
                                               SQLParams sqlParams,
-                                              Action<string> callbackCsv,
+                                              Action<BaseConsulta> callbackCsv,
                                               Action<BaseUltimaConsulta> callbackBaseExecutada,
                                               Connection conn,
                                               List<MySqlConnection> threadsConn,
@@ -149,62 +149,49 @@ namespace SearchInBases.Services
             {
 
                 bool temRegistro = false;
+                string headerCsv = "";
+                List<string> resultadoConsulta = new List<string>(); 
+
 
                 // Gera uma connection para cada thread
                 using (var threadConn = MySQLConnectorService.GetMySqlConnection(conn.mySqlConnector))
                 {
-                 
                     threadsConn.Add(threadConn);
                     threadConn.Open();
+                                      
+                    if (!ChangeDatabase(callbackConsole, conn, baseAuth, threadConn)) return;
 
-                    try
-                    {
-                        threadConn.ChangeDatabase(baseAuth.databaseName);
-                    }
-                    catch
-                    {
-                        callbackConsole(ComumCallbackConsole(conn.connectionName, baseAuth.databaseName) + " -> " + RichFormatting.FontColor(database_notfound, Color.Red));
-                        // Database not found
-                        Log.addWarnMessage("Base (" + baseAuth.databaseName + ") não encontrado na conexão (" + conn.connectionName + ")");
-                        return;
-                    }
-
-
-                    // Executa o comando e salva o retorno no CSV
+                    // Executa o comando e salva o retorno
                     using (var reader = MySQLConnectorService.ExecutarSQL(threadConn, sqlParams))
-                    {        
+                    {
+
                         temRegistro = reader.HasRows;
                         EResultado resultadoEsperado = Vars.resultadoEsperado;
+                        AtualizarConsoleComSemOcorre(callbackConsole, conn, baseAuth, temRegistro);
 
-                        callbackConsole(ComumCallbackConsole(conn.connectionName, baseAuth.databaseName) +
-                            (temRegistro ? RichFormatting.FontColor(encontrou_ocorrencias, Color.DarkGreen) : RichFormatting.FontColor(nao_encontrou_ocorrencias, Color.DarkViolet)));
-                     
-
-                        if (!EResultado.SemOcorre.Equals(resultadoEsperado)) //com ocorre ou ambos
+                        //Preenche os header das colunas
+                        if (temRegistro && !_controlPrintFieldsName)
                         {
-                            if (temRegistro)                            
-                                PrintFieldsNameCsv(callbackCsv, reader, true);                            
-
-                            if (temRegistro)
-                            {
-                                while (reader.Read())                            
-                                    callbackCsv(FieldsReaderToCsv(baseAuth.databaseName, reader));    
-                                
-                            }else if(EResultado.Ambos.Equals(resultadoEsperado))
-                                callbackCsv(FieldsSemOcorreToCsv(baseAuth));
-
+                            _controlPrintFieldsName = true;
+                            headerCsv = FieldsNameReaderToCsv(reader);                            
                         }
-                        else if(!temRegistro) // somentes sem ocorrencia
-                        {
-                            PrintFieldsNameCsv(callbackCsv, reader, false);
-                            callbackCsv(FieldsSemOcorreToCsv(baseAuth));
-                        }
+
+                        //Preenche o resultado da busca
+                        if (temRegistro)                        
+                            while (reader.Read())
+                                resultadoConsulta.Add(FieldsReaderToCsv(baseAuth.databaseName, reader));
+                        else
+                            resultadoConsulta.Add(FieldsSemOcorreToCsv(baseAuth));
                     }
 
                     threadConn.Close();
 
                     BaseUltimaConsulta baseUltimaConsulta = new BaseUltimaConsulta(baseAuth.instance, baseAuth.databaseName, temRegistro);
                     callbackBaseExecutada(baseUltimaConsulta);
+
+                    BaseConsulta baseConsulta = new BaseConsulta(baseUltimaConsulta, headerCsv, resultadoConsulta);
+                    callbackCsv(baseConsulta);
+
                 }
 
             }
@@ -218,26 +205,31 @@ namespace SearchInBases.Services
             }
         }
 
-        private static void PrintFieldsNameCsv(Action<string> callbackCsv, MySqlDataReader reader, bool comFieldsReader)
+        private static void AtualizarConsoleComSemOcorre(Action<string> callbackConsole, Connection conn, BaseAuth baseAuth, bool temRegistro)
         {
-            if (!_controlPrintFieldsName)
+            callbackConsole(ComumCallbackConsole(conn.connectionName, baseAuth.databaseName) +
+                                        (temRegistro ? RichFormatting.FontColor(encontrou_ocorrencias, Color.DarkGreen) : RichFormatting.FontColor(nao_encontrou_ocorrencias, Color.DarkViolet)));
+        }
+
+        private static bool ChangeDatabase(Action<string> callbackConsole, Connection conn, BaseAuth baseAuth, MySqlConnection threadConn)
+        {
+            try
             {
-                _controlPrintFieldsName = true;
-                if(comFieldsReader)
-                    callbackCsv(FieldsNameReaderToCsv(reader));
-                else
-                    callbackCsv(FieldsNameSemOcorreToCsv());
+                threadConn.ChangeDatabase(baseAuth.databaseName);
+                return true;
+            }
+            catch
+            {
+                callbackConsole(ComumCallbackConsole(conn.connectionName, baseAuth.databaseName) + " -> " + RichFormatting.FontColor(database_notfound, Color.Red));
+                // Database not found
+                Log.addWarnMessage("Base (" + baseAuth.databaseName + ") não encontrado na conexão (" + conn.connectionName + ")");
+                return false;
             }
         }
 
         private static string FieldsSemOcorreToCsv(BaseAuth baseAuth)
         {
             return $"{baseAuth.databaseName};Não";
-        }
-
-        private static string FieldsNameSemOcorreToCsv()
-        {
-            return "DatabaseName;PossuiDados";
         }
 
         private static string ComumCallbackConsole(string connName, string baseName)

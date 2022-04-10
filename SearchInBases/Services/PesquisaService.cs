@@ -25,8 +25,9 @@ namespace SearchInBases.Services
         public void Pesquisar(Action<string> callbackConsole,
                               Action callbackStatusApp, 
                               SQLParams sqlParams,
-                              Action<string> callbackCsv,
-                              string nomeArquivoResultado
+                              Action<BaseConsulta> callbackCsv,
+                              string nomeArquivoResultado,
+                              Action callbackFinalizarBusca
                               )
         {
             DateTime dtInicio = DateTime.Now;
@@ -41,6 +42,8 @@ namespace SearchInBases.Services
 
                 
                 ConnectionService.ExecutarSQL(callbackConsole, callbackCsv,  conexoesHabilitadas, sqlParams);
+
+                callbackFinalizarBusca();
 
                 if (Vars.pararPesquisa)
                 {

@@ -4,6 +4,7 @@ using SearchInBases.Enum;
 using SearchInBases.Formularios;
 using SearchInBases.Services;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -20,7 +21,8 @@ namespace SearchInBases.Forms
 
         private PesquisaService _pesquisaService = new PesquisaService();
         private ConsoleService _consoleService;
-        private string nomeArquivoResultado;
+        private List<BaseConsulta> _listaConsultas = new List<BaseConsulta> { };
+        private string _nomeArquivoResultado;
 
         public FrmPesquisa()
         {
@@ -80,17 +82,14 @@ namespace SearchInBases.Forms
         {                        
             try
             {
-                LimparConsole();
-                ValidarConexoesSelecionadas();
-                SQLParams sqlParams = MontarSQLParams();
-                _pesquisaService.ValidarComandoSQL(sqlParams);
-                sqlParams.sqlDescript = SQLService.TratarParamCamposCripto(sqlParams.sql);
+                InicializarBusca();
+                SQLParams sqlParams = GetSQLParams();
 
                 if (!_pesquisaService.TestarSQL(AtualizaConsole, AlterarStatusApp, sqlParams)) return;
 
                 Vars.resultadoEsperado = GetResultadoEsperado();
-                nomeArquivoResultado = CsvService.CriarArquivo(sqlParams);
-                Task.Run(() => { _pesquisaService.Pesquisar(AtualizaConsole, AlterarStatusApp, sqlParams, AdicionarResultadoCsv, nomeArquivoResultado); });
+                _nomeArquivoResultado = CsvService.CriarArquivo(sqlParams);
+                Task.Run(() => { _pesquisaService.Pesquisar(AtualizaConsole, AlterarStatusApp, sqlParams, AdicionarResultadoCsv, _nomeArquivoResultado, FinalizarBusca); });
                 txtConsole.Focus();
 
             }
@@ -105,6 +104,21 @@ namespace SearchInBases.Forms
             }            
         }
 
+        private void InicializarBusca()
+        {
+            LimparConsole();
+            ValidarConexoesSelecionadas();
+            _listaConsultas.Clear();
+        }
+
+        private SQLParams GetSQLParams()
+        {
+            SQLParams sqlParams = MontarSQLParams();
+            _pesquisaService.ValidarComandoSQL(sqlParams);
+            sqlParams.sqlDescript = SQLService.TratarParamCamposCripto(sqlParams.sql);
+            return sqlParams;
+        }
+
         private EResultado GetResultadoEsperado()
         {
             if (rbResultadoComOcorre.Checked)
@@ -115,11 +129,20 @@ namespace SearchInBases.Forms
                 return EResultado.Ambos;
         }
 
-        private void AdicionarResultadoCsv(string texto)
+        public void FinalizarBusca()
         {
             this.Invoke(new MethodInvoker(() =>
             {
-                CsvService.Add(nomeArquivoResultado, texto);
+                CsvService.FinalizarArquivo(_nomeArquivoResultado, _listaConsultas, Vars.resultadoEsperado);
+            }));
+        }
+
+        private void AdicionarResultadoCsv(BaseConsulta baseConsulta)
+        {
+            this.Invoke(new MethodInvoker(() =>
+            {
+                _listaConsultas.Add(baseConsulta);                
+                //CsvService.Add(nomeArquivoResultado, texto);
             }));
             
         }
@@ -206,9 +229,11 @@ namespace SearchInBases.Forms
                 btnHistorico.Enabled = habilitado;
                 btnFormater.Enabled = habilitado;
                 btnFiltrarBases.Enabled = habilitado;
-                btnHelp.Enabled = habilitado;  
+                btnHelp.Enabled = habilitado;
+                gbResultado.Enabled = habilitado;
 
-                
+
+
                 btnParar.Visible = !habilitado;
 
                 if (!habilitado)
