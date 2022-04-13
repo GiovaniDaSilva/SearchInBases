@@ -223,10 +223,10 @@ namespace SearchInBases.Forms
             this.btnParar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnParar.Image = ((System.Drawing.Image)(resources.GetObject("btnParar.Image")));
             this.btnParar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnParar.Location = new System.Drawing.Point(12, 52);
+            this.btnParar.Location = new System.Drawing.Point(12, 71);
             this.btnParar.Name = "btnParar";
             this.btnParar.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
-            this.btnParar.Size = new System.Drawing.Size(158, 74);
+            this.btnParar.Size = new System.Drawing.Size(158, 77);
             this.btnParar.TabIndex = 17;
             this.btnParar.Text = "Parar";
             this.btnParar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -328,7 +328,7 @@ namespace SearchInBases.Forms
             this.lblBasesFiltradas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBasesFiltradas.AutoSize = true;
             this.lblBasesFiltradas.ForeColor = System.Drawing.Color.Firebrick;
-            this.lblBasesFiltradas.Location = new System.Drawing.Point(200, 101);
+            this.lblBasesFiltradas.Location = new System.Drawing.Point(200, 111);
             this.lblBasesFiltradas.Name = "lblBasesFiltradas";
             this.lblBasesFiltradas.Size = new System.Drawing.Size(118, 15);
             this.lblBasesFiltradas.TabIndex = 16;
@@ -342,10 +342,10 @@ namespace SearchInBases.Forms
             this.btnFiltrarBases.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnFiltrarBases.Image = ((System.Drawing.Image)(resources.GetObject("btnFiltrarBases.Image")));
             this.btnFiltrarBases.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFiltrarBases.Location = new System.Drawing.Point(200, 42);
+            this.btnFiltrarBases.Location = new System.Drawing.Point(200, 49);
             this.btnFiltrarBases.Name = "btnFiltrarBases";
             this.btnFiltrarBases.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnFiltrarBases.Size = new System.Drawing.Size(158, 59);
+            this.btnFiltrarBases.Size = new System.Drawing.Size(140, 59);
             this.btnFiltrarBases.TabIndex = 15;
             this.btnFiltrarBases.Text = "Filtrar Bases";
             this.btnFiltrarBases.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -435,6 +435,7 @@ namespace SearchInBases.Forms
             this.txtSQL.CommentPrefix = "--";
             this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtSQL.IsReplaceMode = false;
             this.txtSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.txtSQL.LeftBracket = '(';
@@ -455,10 +456,10 @@ namespace SearchInBases.Forms
             this.btnPesquisar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnPesquisar.Image = ((System.Drawing.Image)(resources.GetObject("btnPesquisar.Image")));
             this.btnPesquisar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPesquisar.Location = new System.Drawing.Point(12, 42);
+            this.btnPesquisar.Location = new System.Drawing.Point(12, 49);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnPesquisar.Size = new System.Drawing.Size(158, 74);
+            this.btnPesquisar.Size = new System.Drawing.Size(158, 77);
             this.btnPesquisar.TabIndex = 8;
             this.btnPesquisar.Text = "Pesquisar";
             this.btnPesquisar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;

@@ -11,7 +11,7 @@ namespace SearchInBases
     {    
         //App
         public static string appName = "SearchInBases";        
-        public static string appVersion = "1.0.10";
+        public static string appVersion = "1.0.11";
         public static string appNameWithVersion = Vars.appName + "  v." + Vars.appVersion;
         public static string pathApp = AppDomain.CurrentDomain.BaseDirectory;
 
