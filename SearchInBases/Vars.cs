@@ -25,7 +25,8 @@ namespace SearchInBases
         public static string pathLog = AppDomain.CurrentDomain.BaseDirectory + nameFileLog;
 
         //Resultados
-        public static string nameFileResultado = "Resultado{0}.csv";
+        public static string nameFileResultadoCSV = "Resultado{0}.csv";
+        public static string nameFileResultadoSQL = "Resultado{0}.sql";
         public static string pathResultados = AppDomain.CurrentDomain.BaseDirectory + @"Resultados\";
         public static EResultado resultadoEsperado;
 

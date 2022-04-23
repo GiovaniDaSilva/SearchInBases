@@ -36,6 +36,10 @@ namespace SearchInBases.Forms
             this.lblStatus = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnScript = new System.Windows.Forms.Button();
+            this.Scripts = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tgAcao = new CustomControls.RJControls.RJToggleButton();
             this.gbResultado = new System.Windows.Forms.GroupBox();
             this.rbResultadoSemOcorre = new System.Windows.Forms.RadioButton();
             this.rbResultadoComOcorre = new System.Windows.Forms.RadioButton();
@@ -134,6 +138,10 @@ namespace SearchInBases.Forms
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnScript);
+            this.panel2.Controls.Add(this.Scripts);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.tgAcao);
             this.panel2.Controls.Add(this.gbResultado);
             this.panel2.Controls.Add(this.btnHelp);
             this.panel2.Controls.Add(this.btnParar);
@@ -155,13 +163,64 @@ namespace SearchInBases.Forms
             this.panel2.Size = new System.Drawing.Size(992, 437);
             this.panel2.TabIndex = 0;
             // 
+            // btnScript
+            // 
+            this.btnScript.BackColor = System.Drawing.SystemColors.Control;
+            this.btnScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnScript.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnScript.Image = ((System.Drawing.Image)(resources.GetObject("btnScript.Image")));
+            this.btnScript.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnScript.Location = new System.Drawing.Point(12, 256);
+            this.btnScript.Name = "btnScript";
+            this.btnScript.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.btnScript.Size = new System.Drawing.Size(158, 77);
+            this.btnScript.TabIndex = 23;
+            this.btnScript.Text = "Gerar Script";
+            this.btnScript.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnScript.UseVisualStyleBackColor = false;
+            this.btnScript.Click += new System.EventHandler(this.btnScript_Click);
+            // 
+            // Scripts
+            // 
+            this.Scripts.AutoSize = true;
+            this.Scripts.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Scripts.Location = new System.Drawing.Point(130, 414);
+            this.Scripts.Name = "Scripts";
+            this.Scripts.Size = new System.Drawing.Size(40, 15);
+            this.Scripts.TabIndex = 22;
+            this.Scripts.Text = "Script";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(12, 414);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(54, 15);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Consulta";
+            // 
+            // tgAcao
+            // 
+            this.tgAcao.Location = new System.Drawing.Point(71, 411);
+            this.tgAcao.MinimumSize = new System.Drawing.Size(45, 22);
+            this.tgAcao.Name = "tgAcao";
+            this.tgAcao.OffBackColor = System.Drawing.Color.Green;
+            this.tgAcao.OffToggleColor = System.Drawing.Color.Gainsboro;
+            this.tgAcao.OnBackColor = System.Drawing.Color.Crimson;
+            this.tgAcao.OnToggleColor = System.Drawing.Color.WhiteSmoke;
+            this.tgAcao.Size = new System.Drawing.Size(53, 22);
+            this.tgAcao.TabIndex = 20;
+            this.tgAcao.UseVisualStyleBackColor = true;
+            this.tgAcao.CheckedChanged += new System.EventHandler(this.tgAcao_CheckedChanged);
+            // 
             // gbResultado
             // 
             this.gbResultado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.gbResultado.Controls.Add(this.rbResultadoSemOcorre);
             this.gbResultado.Controls.Add(this.rbResultadoComOcorre);
             this.gbResultado.Controls.Add(this.rbResultadoAmbos);
-            this.gbResultado.Location = new System.Drawing.Point(375, 42);
+            this.gbResultado.Location = new System.Drawing.Point(551, 42);
             this.gbResultado.Name = "gbResultado";
             this.gbResultado.Size = new System.Drawing.Size(155, 84);
             this.gbResultado.TabIndex = 19;
@@ -223,7 +282,7 @@ namespace SearchInBases.Forms
             this.btnParar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnParar.Image = ((System.Drawing.Image)(resources.GetObject("btnParar.Image")));
             this.btnParar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnParar.Location = new System.Drawing.Point(12, 71);
+            this.btnParar.Location = new System.Drawing.Point(12, 163);
             this.btnParar.Name = "btnParar";
             this.btnParar.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnParar.Size = new System.Drawing.Size(158, 77);
@@ -239,7 +298,7 @@ namespace SearchInBases.Forms
             this.gbBasesAtivas.Controls.Add(this.rbAmbasAtiva);
             this.gbBasesAtivas.Controls.Add(this.rbInativa);
             this.gbBasesAtivas.Controls.Add(this.rbAtiva);
-            this.gbBasesAtivas.Location = new System.Drawing.Point(676, 42);
+            this.gbBasesAtivas.Location = new System.Drawing.Point(833, 42);
             this.gbBasesAtivas.Name = "gbBasesAtivas";
             this.gbBasesAtivas.Size = new System.Drawing.Size(114, 84);
             this.gbBasesAtivas.TabIndex = 11;
@@ -284,7 +343,7 @@ namespace SearchInBases.Forms
             this.gbAmbiente.Controls.Add(this.rbAmbosAmbiente);
             this.gbAmbiente.Controls.Add(this.rbProducao);
             this.gbAmbiente.Controls.Add(this.rbInterno);
-            this.gbAmbiente.Location = new System.Drawing.Point(546, 42);
+            this.gbAmbiente.Location = new System.Drawing.Point(712, 42);
             this.gbAmbiente.Name = "gbAmbiente";
             this.gbAmbiente.Size = new System.Drawing.Size(115, 84);
             this.gbAmbiente.TabIndex = 12;
@@ -325,10 +384,9 @@ namespace SearchInBases.Forms
             // 
             // lblBasesFiltradas
             // 
-            this.lblBasesFiltradas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBasesFiltradas.AutoSize = true;
             this.lblBasesFiltradas.ForeColor = System.Drawing.Color.Firebrick;
-            this.lblBasesFiltradas.Location = new System.Drawing.Point(200, 111);
+            this.lblBasesFiltradas.Location = new System.Drawing.Point(220, 111);
             this.lblBasesFiltradas.Name = "lblBasesFiltradas";
             this.lblBasesFiltradas.Size = new System.Drawing.Size(118, 15);
             this.lblBasesFiltradas.TabIndex = 16;
@@ -336,13 +394,12 @@ namespace SearchInBases.Forms
             // 
             // btnFiltrarBases
             // 
-            this.btnFiltrarBases.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFiltrarBases.BackColor = System.Drawing.SystemColors.Control;
             this.btnFiltrarBases.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFiltrarBases.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnFiltrarBases.Image = ((System.Drawing.Image)(resources.GetObject("btnFiltrarBases.Image")));
             this.btnFiltrarBases.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFiltrarBases.Location = new System.Drawing.Point(200, 49);
+            this.btnFiltrarBases.Location = new System.Drawing.Point(220, 49);
             this.btnFiltrarBases.Name = "btnFiltrarBases";
             this.btnFiltrarBases.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnFiltrarBases.Size = new System.Drawing.Size(140, 59);
@@ -395,7 +452,7 @@ namespace SearchInBases.Forms
             this.lvConexoes.Location = new System.Drawing.Point(12, 147);
             this.lvConexoes.MultiSelect = false;
             this.lvConexoes.Name = "lvConexoes";
-            this.lvConexoes.Size = new System.Drawing.Size(158, 282);
+            this.lvConexoes.Size = new System.Drawing.Size(158, 258);
             this.lvConexoes.SmallImageList = this.imageList1;
             this.lvConexoes.TabIndex = 10;
             this.lvConexoes.UseCompatibleStateImageBehavior = false;
@@ -633,5 +690,9 @@ namespace SearchInBases.Forms
         private System.Windows.Forms.RadioButton rbResultadoSemOcorre;
         private System.Windows.Forms.RadioButton rbResultadoComOcorre;
         private System.Windows.Forms.RadioButton rbResultadoAmbos;
+        private CustomControls.RJControls.RJToggleButton tgAcao;
+        private System.Windows.Forms.Label Scripts;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnScript;
     }
 }
