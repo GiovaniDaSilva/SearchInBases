@@ -14,13 +14,19 @@ namespace SearchInBases.Forms
 
         private void FrmHelp_Load(object sender, EventArgs e)
         {
-            add(RichFormatting.FontColor(RichFormatting.Sublinhado("Tendo configurada a chave de descriptografia em configurações."), Color.Blue));
+            add(RichFormatting.FontColor("Tendo configurada a chave de descriptografia em configurações.", Color.Blue) +
+                RichFormatting.FontColor(" (Apenas para consultas)", Color.Red));
             add("");
             add("Para descriptografar uma coluna utiliza []");
-            add(tab() + "Ex: select [campo] from tabela");
+            add(tab() + RichFormatting.FontColor("Ex: select [campo] from tabela", Color.Gray));
             add("");
             add("Para descriptografar uma coluna que faz parte da condição where utiliza [:]");
-            add(tab() + "Ex: select campo from tabela where [campo:] ...");
+            add(tab() + RichFormatting.FontColor("Ex: select campo from tabela where [campo:] ...", Color.Gray));
+            add("");
+            add(RichFormatting.FontColor("Script", Color.Blue));
+            add("");
+            add("Utiliza %b antes das tabelas, para substituir pelo nome da base de dados.");
+            add(tab() + RichFormatting.FontColor("Ex: update %b.tabela set campo ...", Color.Gray));
 
         }
 

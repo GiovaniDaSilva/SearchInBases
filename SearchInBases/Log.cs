@@ -16,6 +16,8 @@ namespace SearchInBases
         private static string iniciando_pesquisa = "Iniciando pesquisa..";
         private static string pesquisa_finalizada = "Pesquisa finalizada.";
 
+        private static string iniciando_script = "Iniciando script..";
+        private static string script_finalizado = "Script finalizado.";
 
         // Logs fixos
 
@@ -28,8 +30,18 @@ namespace SearchInBases
         {
             Add(info, pesquisa_finalizada);
         }
-        
-        
+
+        public static void AddIniciandoScript()
+        {
+            Add(info, iniciando_script);
+        }
+
+        public static void AddScriptFinalizada()
+        {
+            Add(info, script_finalizado);
+        }
+
+
         // Logs Tipados
 
         public static void addErroMessage(string message)

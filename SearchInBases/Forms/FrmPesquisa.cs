@@ -249,6 +249,7 @@ namespace SearchInBases.Forms
                 btnFiltrarBases.Enabled = habilitado;
                 btnHelp.Enabled = habilitado;
                 gbResultado.Enabled = habilitado;
+                tgAcao.Enabled = habilitado;
 
 
 
@@ -264,7 +265,9 @@ namespace SearchInBases.Forms
                     PararProgresso();
                     lblStatus.Text = status_parado;
                 }
-                    
+
+                AjustarModoScript();
+
             }));                                   
         }
 

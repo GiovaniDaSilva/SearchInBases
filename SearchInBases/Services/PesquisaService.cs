@@ -84,7 +84,7 @@ namespace SearchInBases.Services
             callbackStatusApp();
             try
             {
-                Log.AddIniciandoPesquisa();
+                Log.AddIniciandoScript();
                 List<Connection> conexoesHabilitadas = Vars.connections.FindAll(c => c.habilitado);
                 tratarConexoesHabilitadas(callbackConsole, conexoesHabilitadas);
 
@@ -108,7 +108,7 @@ namespace SearchInBases.Services
 
 
                 callbackFinalizarScript();  
-                Log.AddMessage("Script: " + nomeArquivoResultado);
+                Log.AddMessage("Arquivo de script: " + nomeArquivoResultado);
                 callbackConsole("Para acessar o script clique " + RichFormatting.Link("aqui", nomeArquivoResultado));
             }
             catch (Exception ex)
@@ -119,10 +119,10 @@ namespace SearchInBases.Services
             finally
             {
                 Vars.isPesquisando = false;
-                Log.AddPesquisaFinalizada();
+                Log.AddScriptFinalizada();
                 AdicionarConsultaHistorico(sqlParams);
                 callbackStatusApp();
-                Message.MessagemPesquisaFinalizada(ocorreuErroNaConsulta, dtInicio);
+                Message.MessagemPesquisaFinalizada(ocorreuErroNaConsulta, dtInicio, true);
             }
         }
 

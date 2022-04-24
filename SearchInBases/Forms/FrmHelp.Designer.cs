@@ -37,10 +37,11 @@
             this.help.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.help.BackColor = System.Drawing.SystemColors.Control;
             this.help.Location = new System.Drawing.Point(12, 12);
             this.help.Name = "help";
             this.help.ReadOnly = true;
-            this.help.Size = new System.Drawing.Size(476, 259);
+            this.help.Size = new System.Drawing.Size(531, 281);
             this.help.TabIndex = 5;
             this.help.Text = "";
             // 
@@ -49,7 +50,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(500, 283);
+            this.ClientSize = new System.Drawing.Size(555, 305);
             this.Controls.Add(this.help);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
