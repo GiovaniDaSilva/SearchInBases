@@ -54,18 +54,29 @@ namespace SearchInBases.Forms
 
         private void FrmPesquisa_Load(object sender, EventArgs e)
         {
+            InicializarForm();
+
+            AjustarModoScript();
+
+            AtualizarListConn();
+            ExibirBaseFiltradas();
+        }
+
+        private void InicializarForm()
+        {
             this.Text = Vars.appNameWithVersion;
             _consoleService = new ConsoleService(txtConsole);
             lblStatus.Text = status_parado;
 
             this.MinimumSize = new System.Drawing.Size(900, 600);
+
             this.btnParar.Top = this.btnPesquisar.Top;
             this.btnParar.Left = this.btnPesquisar.Left;
             this.btnParar.Visible = false;
 
-
-            AtualizarListConn();
-            ExibirBaseFiltradas();
+            this.btnScript.Top = this.btnPesquisar.Top;
+            this.btnScript.Left = this.btnPesquisar.Left;
+            this.btnScript.Visible = false;
         }
 
         private void AtualizarListConn()
@@ -88,8 +99,8 @@ namespace SearchInBases.Forms
                 if (!_pesquisaService.TestarSQL(AtualizaConsole, AlterarStatusApp, sqlParams)) return;
 
                 Vars.resultadoEsperado = GetResultadoEsperado();
-                _nomeArquivoResultado = CsvService.CriarArquivo(sqlParams);
-                Task.Run(() => { _pesquisaService.Pesquisar(AtualizaConsole, AlterarStatusApp, sqlParams, AdicionarResultadoCsv, _nomeArquivoResultado, FinalizarBusca); });
+                _nomeArquivoResultado = CsvService.CriarArquivoCSV(sqlParams);
+                Task.Run(() => { _pesquisaService.Pesquisar(AtualizaConsole, AlterarStatusApp, sqlParams, AdicionarResultado, _nomeArquivoResultado, FinalizarBuscaCsv); });
                 txtConsole.Focus();
 
             }
@@ -111,10 +122,10 @@ namespace SearchInBases.Forms
             _listaConsultas.Clear();
         }
 
-        private SQLParams GetSQLParams()
+        private SQLParams GetSQLParams(bool validarSQL = true)
         {
             SQLParams sqlParams = MontarSQLParams();
-            _pesquisaService.ValidarComandoSQL(sqlParams);
+            if (validarSQL) _pesquisaService.ValidarComandoSQL(sqlParams);
             sqlParams.sqlDescript = SQLService.TratarParamCamposCripto(sqlParams.sql);
             return sqlParams;
         }
@@ -129,20 +140,27 @@ namespace SearchInBases.Forms
                 return EResultado.Ambos;
         }
 
-        public void FinalizarBusca()
+        public void FinalizarBuscaCsv()
         {
             this.Invoke(new MethodInvoker(() =>
             {
-                CsvService.FinalizarArquivo(_nomeArquivoResultado, _listaConsultas, Vars.resultadoEsperado);
+                CsvService.FinalizarArquivoCsv(_nomeArquivoResultado, _listaConsultas, Vars.resultadoEsperado);
             }));
         }
 
-        private void AdicionarResultadoCsv(BaseConsulta baseConsulta)
+        public void FinalizarBuscaSql()
         {
             this.Invoke(new MethodInvoker(() =>
             {
-                _listaConsultas.Add(baseConsulta);                
-                //CsvService.Add(nomeArquivoResultado, texto);
+                CsvService.FinalizarArquivoSql(_nomeArquivoResultado, _listaConsultas);
+            }));
+        }
+
+        private void AdicionarResultado(BaseConsulta baseConsulta)
+        {
+            this.Invoke(new MethodInvoker(() =>
+            {
+                _listaConsultas.Add(baseConsulta);                                
             }));
             
         }
@@ -231,6 +249,7 @@ namespace SearchInBases.Forms
                 btnFiltrarBases.Enabled = habilitado;
                 btnHelp.Enabled = habilitado;
                 gbResultado.Enabled = habilitado;
+                tgAcao.Enabled = habilitado;
 
 
 
@@ -246,7 +265,9 @@ namespace SearchInBases.Forms
                     PararProgresso();
                     lblStatus.Text = status_parado;
                 }
-                    
+
+                AjustarModoScript();
+
             }));                                   
         }
 
@@ -352,6 +373,51 @@ namespace SearchInBases.Forms
                 e.Cancel = true;
             }
                 
+        }
+
+        private void tgAcao_CheckedChanged(object sender, EventArgs e)
+        {
+            AjustarModoScript();
+        }
+
+        private void AjustarModoScript()
+        {
+            bool isScript = tgAcao.Checked;
+
+            btnPesquisar.Visible = !isScript;
+            btnScript.Visible = isScript;
+            gbResultado.Enabled = !isScript;
+            if (isScript)
+            {
+                rbResultadoAmbos.Checked = false;
+                rbResultadoComOcorre.Checked = false;
+                rbResultadoSemOcorre.Checked = false;
+            }
+            else            
+                rbResultadoComOcorre.Checked = true;            
+        }
+
+        private void btnScript_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                InicializarBusca();
+                SQLParams sqlParams = GetSQLParams(false);
+                
+                _nomeArquivoResultado = CsvService.CriarArquivoSQL(sqlParams);
+                Task.Run(() => { _pesquisaService.GerarScript(AtualizaConsole, AlterarStatusApp, sqlParams, AdicionarResultado, _nomeArquivoResultado, FinalizarBuscaSql); });
+                txtConsole.Focus();
+
+            }
+            catch (Message.MessageException ex)
+            {
+                Message.Error(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                ErroService.TratarErro(ex);
+                Message.Error("Erro ao executar comando");
+            }
         }
     }
 }

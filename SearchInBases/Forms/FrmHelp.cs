@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using RichTextBoxHTMLFormat;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SearchInBases.Forms
@@ -15,6 +10,41 @@ namespace SearchInBases.Forms
         public FrmHelp()
         {
             InitializeComponent();
+        }
+
+        private void FrmHelp_Load(object sender, EventArgs e)
+        {
+            add(RichFormatting.FontColor("Tendo configurada a chave de descriptografia em configurações.", Color.Blue) +
+                RichFormatting.FontColor(" (Apenas para consultas)", Color.Red));
+            add("");
+            add("Para descriptografar uma coluna utiliza []");
+            add(tab() + RichFormatting.FontColor("Ex: select [campo] from tabela", Color.Gray));
+            add("");
+            add("Para descriptografar uma coluna que faz parte da condição where utiliza [:]");
+            add(tab() + RichFormatting.FontColor("Ex: select campo from tabela where [campo:] ...", Color.Gray));
+            add("");
+            add(RichFormatting.FontColor("Script", Color.Blue));
+            add("");
+            add("Utiliza %b antes das tabelas, para substituir pelo nome da base de dados.");
+            add(tab() + RichFormatting.FontColor("Ex: update %b.tabela set campo ...", Color.Gray));
+
+        }
+
+        private string tab(int num = 1)
+        {
+            string tab = "   ";
+            string result = tab;
+            if (num <= 0) num = 1;
+
+            for(int i = 0; i < num; i++)            
+                result += tab;
+            
+            return result;
+        }
+
+        private void add(string texto)
+        {
+            RichHTMLFormatting.RichAddLineFmt(help, texto);
         }
     }
 }

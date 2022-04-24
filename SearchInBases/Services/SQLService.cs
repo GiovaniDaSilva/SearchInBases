@@ -69,6 +69,7 @@ namespace SearchInBases.Services
         {
             palavras_proibidas.Clear();
             palavras_proibidas.Add("drop ");
+            palavras_proibidas.Add("update ");
             palavras_proibidas.Add("create ");
             palavras_proibidas.Add("alter ");
             palavras_proibidas.Add("delete ");
@@ -154,6 +155,38 @@ namespace SearchInBases.Services
         private static bool GetExisteCampoCripto(string sql)
         {
             return sql.Contains("[") && sql.Contains("]");
+        }
+
+
+        public static List<BaseAuth> filtrarBasesAuth(List<BaseAuth> basesAuth, SQLParams sqlParams)
+        {
+            var result = new List<BaseAuth>();
+            result.AddRange(basesAuth);
+
+            //Status
+            if (SQLFiltro.enuStatusBase.Ativa.Equals(sqlParams.filtro.statusBase))
+                result.RemoveAll(b => !b.ativo);
+
+            else if (SQLFiltro.enuStatusBase.Inativa.Equals(sqlParams.filtro.statusBase))
+                result.RemoveAll(b => b.ativo);
+
+
+            // Ambiente
+            if (SQLFiltro.enuAmbiente.Interno.Equals(sqlParams.filtro.ambiente))
+                result.RemoveAll(b => !b.interno);
+
+            else if (SQLFiltro.enuAmbiente.Producao.Equals(sqlParams.filtro.ambiente))
+                result.RemoveAll(b => b.interno);
+
+
+            //Bases filtradas
+            if (sqlParams.basesFiltradas.Count > 0)
+            {
+                result.RemoveAll(b => !sqlParams.basesFiltradas.Contains(b.databaseName) &&
+                                    !sqlParams.basesFiltradas.Contains(b.instance));
+            }
+
+            return result;
         }
     }
 }

@@ -68,7 +68,66 @@ namespace SearchInBases.Services
                 callbackStatusApp();
                 Message.MessagemPesquisaFinalizada(ocorreuErroNaConsulta, dtInicio);
             }            
-        }    
+        }
+
+        public void GerarScript(Action<string> callbackConsole,
+                             Action callbackStatusApp,
+                             SQLParams sqlParams,
+                             Action<BaseConsulta> callbackSql,
+                             string nomeArquivoResultado,
+                             Action callbackFinalizarScript
+                             )
+        {
+            DateTime dtInicio = DateTime.Now;
+            bool ocorreuErroNaConsulta = false;
+            Vars.isPesquisando = true;
+            callbackStatusApp();
+            try
+            {
+                Log.AddIniciandoScript();
+                List<Connection> conexoesHabilitadas = Vars.connections.FindAll(c => c.habilitado);
+                tratarConexoesHabilitadas(callbackConsole, conexoesHabilitadas);
+
+                foreach (var conn in conexoesHabilitadas)
+                {                                      
+                    foreach (var baseAuth in SQLService.filtrarBasesAuth(conn.basesAuth, sqlParams))
+                    {                        
+                        string script = sqlParams.sqlDescript.Replace(" %b.", $" {baseAuth.databaseName}.");
+
+                        bool addSeparador = !script.Substring(script.Length - 1, 1).Contains(";");
+                        if(addSeparador) script += ";";
+
+                        List<string> resultado = new List<string>();
+                        resultado.Add(script);
+
+                        BaseUltimaConsulta baseUltimaConsulta = new BaseUltimaConsulta(baseAuth.instance, baseAuth.databaseName, true);                        
+                        BaseConsulta baseConsulta = new BaseConsulta(baseUltimaConsulta, "", resultado);
+                        callbackSql(baseConsulta);
+
+                        callbackConsole(RichFormatting.FontColor(conn.connectionName, Color.DarkMagenta) + RichFormatting.Negrito(" -> ") +
+                                     RichFormatting.FontColor(baseAuth.databaseName, Color.DarkBlue) + RichFormatting.Negrito(" -> ") + " Processado");
+                    }
+                }
+
+
+                callbackFinalizarScript();  
+                Log.AddMessage("Arquivo de script: " + nomeArquivoResultado);
+                callbackConsole("Para acessar o script clique " + RichFormatting.Link("aqui", nomeArquivoResultado));
+            }
+            catch (Exception ex)
+            {
+                ocorreuErroNaConsulta = true;
+                ErroService.TratarErro(ex);
+            }
+            finally
+            {
+                Vars.isPesquisando = false;
+                Log.AddScriptFinalizada();
+                AdicionarConsultaHistorico(sqlParams);
+                callbackStatusApp();
+                Message.MessagemPesquisaFinalizada(ocorreuErroNaConsulta, dtInicio, true);
+            }
+        }
 
         private void AdicionarConsultaHistorico(SQLParams sqlParams)
         {            
