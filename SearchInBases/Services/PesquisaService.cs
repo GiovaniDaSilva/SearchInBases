@@ -91,8 +91,11 @@ namespace SearchInBases.Services
                 foreach (var conn in conexoesHabilitadas)
                 {                                      
                     foreach (var baseAuth in SQLService.filtrarBasesAuth(conn.basesAuth, sqlParams))
-                    {
-                        string script = sqlParams.sqlDescript.Replace(" %b.", $" {baseAuth.databaseName}.") + ";";
+                    {                        
+                        string script = sqlParams.sqlDescript.Replace(" %b.", $" {baseAuth.databaseName}.");
+
+                        bool addSeparador = !script.Substring(script.Length - 1, 1).Contains(";");
+                        if(addSeparador) script += ";";
 
                         List<string> resultado = new List<string>();
                         resultado.Add(script);

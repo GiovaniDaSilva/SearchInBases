@@ -182,6 +182,7 @@ namespace SearchInBases.Forms
             // 
             // Scripts
             // 
+            this.Scripts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Scripts.AutoSize = true;
             this.Scripts.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Scripts.Location = new System.Drawing.Point(130, 414);
@@ -192,6 +193,7 @@ namespace SearchInBases.Forms
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(12, 414);
@@ -202,6 +204,7 @@ namespace SearchInBases.Forms
             // 
             // tgAcao
             // 
+            this.tgAcao.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tgAcao.Location = new System.Drawing.Point(71, 411);
             this.tgAcao.MinimumSize = new System.Drawing.Size(45, 22);
             this.tgAcao.Name = "tgAcao";
@@ -492,7 +495,6 @@ namespace SearchInBases.Forms
             this.txtSQL.CommentPrefix = "--";
             this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtSQL.IsReplaceMode = false;
             this.txtSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.txtSQL.LeftBracket = '(';

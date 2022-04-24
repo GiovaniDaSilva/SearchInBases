@@ -69,6 +69,7 @@ namespace SearchInBases.Services
         {
             palavras_proibidas.Clear();
             palavras_proibidas.Add("drop ");
+            palavras_proibidas.Add("update ");
             palavras_proibidas.Add("create ");
             palavras_proibidas.Add("alter ");
             palavras_proibidas.Add("delete ");
