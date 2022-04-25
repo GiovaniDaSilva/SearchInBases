@@ -92,7 +92,7 @@ namespace SearchInBases.Services
                 {                                      
                     foreach (var baseAuth in SQLService.filtrarBasesAuth(conn.basesAuth, sqlParams))
                     {                        
-                        string script = sqlParams.sqlDescript.Replace(" %b.", $" {baseAuth.databaseName}.");
+                        string script = sqlParams.sqlDescript.Replace(" %b.", $" {baseAuth.databaseName}.").Trim();
 
                         bool addSeparador = !script.Substring(script.Length - 1, 1).Contains(";");
                         if(addSeparador) script += ";";
