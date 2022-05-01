@@ -49,6 +49,9 @@ namespace SearchInBases.Forms
 
         private void btnLimpar_Click(object sender, EventArgs e)
         {
+            rbComOcorre.Checked = false;
+            rbSemOcorre.Checked = false;
+            rbTodos.Checked = false;
             LimparBases();
         }
 
@@ -57,19 +60,37 @@ namespace SearchInBases.Forms
             txtFilter.Clear();
         }
 
-        private void btnImportar_Click(object sender, EventArgs e)
+   
+
+        private void ImportarBasesFiltros()
         {
             if (Vars.basesUltimaConsulta.Count == 0)
                 Message.Info("Realize uma pesquisa antes de importar as bases da última consulta");
 
             LimparBases();
 
-            foreach(var baseUltCon in Vars.basesUltimaConsulta){                
-                if (rbTodos.Checked 
-                    || (rbComOcorre.Checked && baseUltCon.encontrouRegistro) 
+            foreach (var baseUltCon in Vars.basesUltimaConsulta)
+            {
+                if (rbTodos.Checked
+                    || (rbComOcorre.Checked && baseUltCon.encontrouRegistro)
                     || (rbSemOcorre.Checked && !baseUltCon.encontrouRegistro))
-                    AppendBase(baseUltCon.databaseName);                                
+                    AppendBase(baseUltCon.databaseName);
             }
+        }
+
+        private void rbTodos_Click(object sender, EventArgs e)
+        {            
+            ImportarBasesFiltros();
+        }
+
+        private void rbComOcorre_Click(object sender, EventArgs e)
+        {            
+            ImportarBasesFiltros();
+        }
+
+        private void rbSemOcorre_Click(object sender, EventArgs e)
+        {            
+            ImportarBasesFiltros();
         }
     }
 }

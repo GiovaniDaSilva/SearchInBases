@@ -129,7 +129,11 @@ namespace SearchInBases
             //Adiciona linhas consultadas no arquivo
             foreach (var consulta in listaConsultas.OrderBy(b => b.databaseName))
             {
-                consulta.resultadoConsulta.ForEach(r => Add(nomeArquivoResultado, r));
+                consulta.resultadoConsulta.ForEach(r => {
+                    Add(nomeArquivoResultado, $"/* INSTANCIA: {consulta.instance} BASE: {consulta.databaseName} */");
+                    Add(nomeArquivoResultado, r);
+                    Add(nomeArquivoResultado, Environment.NewLine);
+                    });
             }
         }
     }
