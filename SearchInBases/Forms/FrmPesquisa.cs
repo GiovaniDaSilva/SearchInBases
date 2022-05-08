@@ -24,6 +24,8 @@ namespace SearchInBases.Forms
         private List<BaseConsulta> _listaConsultas = new List<BaseConsulta> { };
         private string _nomeArquivoResultado;
 
+        private EResultado _resultadoEsperadoAux;
+
         public FrmPesquisa()
         {
             InitializeComponent();            
@@ -140,6 +142,16 @@ namespace SearchInBases.Forms
                 return EResultado.Ambos;
         }
 
+        private void setResultadoEsperado(EResultado resultado)
+        {
+            if (EResultado.ComOcorre.Equals(resultado))
+                rbResultadoComOcorre.Checked = true;
+            else if (EResultado.SemOcorre.Equals(resultado))
+                rbResultadoSemOcorre.Checked = true;
+            else
+                rbResultadoAmbos.Checked = true;
+        }
+
         public void FinalizarBuscaCsv()
         {
             this.Invoke(new MethodInvoker(() =>
@@ -248,9 +260,8 @@ namespace SearchInBases.Forms
                 btnFormater.Enabled = habilitado;
                 btnFiltrarBases.Enabled = habilitado;
                 btnHelp.Enabled = habilitado;
-                gbResultado.Enabled = habilitado;
+                gbResultado.Enabled = habilitado && !tgAcao.Checked;
                 tgAcao.Enabled = habilitado;
-
 
 
                 btnParar.Visible = !habilitado;
@@ -264,9 +275,7 @@ namespace SearchInBases.Forms
                 {
                     PararProgresso();
                     lblStatus.Text = status_parado;
-                }
-
-                AjustarModoScript();
+                }                
 
             }));                                   
         }
@@ -387,14 +396,26 @@ namespace SearchInBases.Forms
             btnPesquisar.Visible = !isScript;
             btnScript.Visible = isScript;
             gbResultado.Enabled = !isScript;
+
             if (isScript)
             {
+                _resultadoEsperadoAux = GetResultadoEsperado();
+
                 rbResultadoAmbos.Checked = false;
                 rbResultadoComOcorre.Checked = false;
                 rbResultadoSemOcorre.Checked = false;
             }
-            else            
-                rbResultadoComOcorre.Checked = true;            
+            else if(!Vars.isPesquisando)
+            {
+                if (_resultadoEsperadoAux != null)
+                {
+                    setResultadoEsperado(_resultadoEsperadoAux);
+                }
+                else
+                {
+                    setResultadoEsperado(EResultado.ComOcorre);
+                }
+            }                                 
         }
 
         private void btnScript_Click(object sender, EventArgs e)
