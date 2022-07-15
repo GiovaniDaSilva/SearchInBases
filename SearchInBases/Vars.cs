@@ -9,9 +9,9 @@ namespace SearchInBases
 {
     public static class Vars
     {    
-        //App
+        //App - filtro historico, campo autenticador,
         public static string appName = "SearchInBases";        
-        public static string appVersion = "1.0.14";
+        public static string appVersion = "1.0.15";
         public static string appNameWithVersion = Vars.appName + "  v." + Vars.appVersion;
         public static string pathApp = AppDomain.CurrentDomain.BaseDirectory;
 

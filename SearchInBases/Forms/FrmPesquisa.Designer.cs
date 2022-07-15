@@ -356,22 +356,22 @@ namespace SearchInBases.Forms
             // rbAmbosAmbiente
             // 
             this.rbAmbosAmbiente.AutoSize = true;
-            this.rbAmbosAmbiente.Checked = true;
             this.rbAmbosAmbiente.Location = new System.Drawing.Point(17, 21);
             this.rbAmbosAmbiente.Name = "rbAmbosAmbiente";
             this.rbAmbosAmbiente.Size = new System.Drawing.Size(63, 19);
             this.rbAmbosAmbiente.TabIndex = 5;
-            this.rbAmbosAmbiente.TabStop = true;
             this.rbAmbosAmbiente.Text = "Ambos";
             this.rbAmbosAmbiente.UseVisualStyleBackColor = true;
             // 
             // rbProducao
             // 
             this.rbProducao.AutoSize = true;
+            this.rbProducao.Checked = true;
             this.rbProducao.Location = new System.Drawing.Point(17, 67);
             this.rbProducao.Name = "rbProducao";
             this.rbProducao.Size = new System.Drawing.Size(76, 19);
             this.rbProducao.TabIndex = 4;
+            this.rbProducao.TabStop = true;
             this.rbProducao.Text = "Produção";
             this.rbProducao.UseVisualStyleBackColor = true;
             // 

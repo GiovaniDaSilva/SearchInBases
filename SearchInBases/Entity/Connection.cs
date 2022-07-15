@@ -1,6 +1,4 @@
-﻿using MySqlConnector;
-using SearchInBases.Services;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace SearchInBases.Entity
 {
@@ -13,12 +11,12 @@ namespace SearchInBases.Entity
         public List<BaseAuth> basesAuth { get; set; }
 
 
-        public Connection(string conName, string baseAuth, string server, string user, string password)
+        public Connection(string conName, string server, string user, string password)
         {
             this.mySqlConnector = new MySQLConnector(server, user, password);           
-            this.connectionName = conName;
-            this.baseAutenticador = baseAuth;
-            this.habilitado = false;            
+            this.connectionName = conName;            
+            this.habilitado = false;
+            this.baseAutenticador = server != null && server.Contains("alpha") ? "alpha_autenticador" : "autenticador";
         }
 
     }

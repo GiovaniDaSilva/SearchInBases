@@ -42,9 +42,9 @@ namespace SearchInBases.Formularios
         {
             try
             {
-                ConfiguracaoService.ValidarConexao(txtNome, txtAutenticador, txtServer, txtUser, txtSenha);
+                ConfiguracaoService.ValidarConexao(txtNome, txtServer, txtUser, txtSenha);
 
-                ConfiguracaoService.AdicionarConn(txtNome, txtAutenticador, txtServer, txtUser, txtSenha);
+                ConfiguracaoService.AdicionarConn(txtNome, txtServer, txtUser, txtSenha);
 
                 ConfiguracaoService.AtualizarListConn(lvConexoes);
                 LimparCamposConn();
@@ -57,8 +57,7 @@ namespace SearchInBases.Formularios
 
         private void LimparCamposConn()
         {
-            txtNome.Clear();
-            txtAutenticador.Clear();
+            txtNome.Clear();            
             txtServer.Clear();
             txtUser.Clear();
             txtSenha.Clear();
@@ -91,8 +90,7 @@ namespace SearchInBases.Formularios
             ConfigConn? conn = ConfiguracaoService.GetConnFromName(itemView.Text);
             if (conn != null)
             {
-                txtNome.Text = conn.connName;
-                txtAutenticador.Text = conn.baseAuth;
+                txtNome.Text = conn.connName;                
                 txtServer.Text = conn.server;
                 txtUser.Text = conn.user;
                 txtSenha.Text = conn.password;

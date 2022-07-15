@@ -1,11 +1,9 @@
-﻿using FastColoredTextBoxNS;
-using SearchInBases.Entity;
+﻿using SearchInBases.Entity;
 using SearchInBases.Enum;
 using SearchInBases.Formularios;
 using SearchInBases.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,7 +22,7 @@ namespace SearchInBases.Forms
         private List<BaseConsulta> _listaConsultas = new List<BaseConsulta> { };
         private string _nomeArquivoResultado;
 
-        private EResultado _resultadoEsperadoAux;
+        private EResultado _resultadoEsperadoAux = EResultado.ComOcorre;
 
         public FrmPesquisa()
         {

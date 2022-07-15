@@ -1,5 +1,4 @@
-﻿using SearchInBases.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -7,7 +6,7 @@ namespace SearchInBases.Forms
 {
     public partial class FrmHistorico : Form
     {
-        private BindingSource bindingSource;
+        private BindingSource bindingSource;        
         private string sqlSelecionado;
 
         private class ColsGrid
@@ -61,15 +60,10 @@ namespace SearchInBases.Forms
             }
 
             dadosGrid.Sort((x, y) => y.data.CompareTo(x.data));
-        }
 
-        private void dgvHistorico_Click(object sender, EventArgs e)
-        {
-            txtSQL.Clear();
-
-            var item = GetRowSelected();            
-            txtSQL.AppendText(item.sql);            
+            DoFilter();
         }
+  
 
         private void btnUtilizar_Click(object sender, EventArgs e)
         {
@@ -94,6 +88,34 @@ namespace SearchInBases.Forms
             return new ColsGrid(DateTime.Now, "");
         }
 
-      
+        private void dgvHistorico_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            txtSQL.Clear();
+
+            var item = GetRowSelected();
+            txtSQL.AppendText(item.sql);
+        }
+
+        private void DoFilter()
+        {
+            List<ColsGrid> filtrados = new List<ColsGrid>();
+            foreach (var x in dadosGrid) { if (AddFiltro(x)) filtrados.Add(x); };
+
+            dgvHistorico.DataSource = filtrados;
+            dgvHistorico.Update();
+        }
+
+        private bool AddFiltro(ColsGrid x)
+        {
+            if (txtPesquisar.Text == string.Empty) return true;
+
+            return x.sql.Contains(txtPesquisar.Text, StringComparison.InvariantCultureIgnoreCase);
+
+        }
+
+        private void txtPesquisar_TextChanged(object sender, EventArgs e)
+        {
+            DoFilter();
+        }
     }
 }
