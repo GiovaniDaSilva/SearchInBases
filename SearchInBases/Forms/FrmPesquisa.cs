@@ -191,7 +191,7 @@ namespace SearchInBases.Forms
         private void AdicionarResumoPesquisaConsole(List<BaseConsulta>  resultado)
         {
             int qtdComOcorre = resultado.FindAll(r => r.encontrouRegistro).Count;
-            int qtdSemOcorre = resultado.FindAll(r => r.encontrouRegistro).Count;
+            int qtdSemOcorre = resultado.FindAll(r => !r.encontrouRegistro).Count;
 
             int qtdRegistros = 0;
             

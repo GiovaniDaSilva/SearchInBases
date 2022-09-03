@@ -56,6 +56,10 @@ namespace SearchInBases.Forms
                 var item = GetRowSelected();
                 txtSQL.Text = item.sql;
             }
+            else
+            {
+                txtSQL.Text = "";
+            }
         }
 
         private void InicializarDadosGrid()
