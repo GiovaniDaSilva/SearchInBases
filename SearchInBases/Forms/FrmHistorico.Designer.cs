@@ -63,6 +63,7 @@
             this.dgvHistorico.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvHistorico.Size = new System.Drawing.Size(856, 214);
             this.dgvHistorico.TabIndex = 0;
+            this.dgvHistorico.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHistorico_RowEnter);
             this.dgvHistorico.Click += new System.EventHandler(this.dgvHistorico_Click);
             // 
             // data
@@ -118,7 +119,6 @@
             this.txtSQL.CommentPrefix = "--";
             this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtSQL.IsReplaceMode = false;
             this.txtSQL.Language = FastColoredTextBoxNS.Language.SQL;
             this.txtSQL.LeftBracket = '(';

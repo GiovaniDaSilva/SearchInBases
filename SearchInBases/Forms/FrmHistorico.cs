@@ -128,5 +128,10 @@ namespace SearchInBases.Forms
 
             return x.sql.Contains(txtPesquisar.Text, StringComparison.InvariantCultureIgnoreCase);
         }
+
+        private void dgvHistorico_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            atualizarTxtSql();
+        }
     }
 }
