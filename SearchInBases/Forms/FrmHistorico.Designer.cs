@@ -35,6 +35,8 @@
             this.sql = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnUtilizar = new System.Windows.Forms.Button();
             this.txtSQL = new FastColoredTextBoxNS.FastColoredTextBox();
+            this.lblPesquisar = new System.Windows.Forms.Label();
+            this.txtPesquisar = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistorico)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSQL)).BeginInit();
             this.SuspendLayout();
@@ -52,7 +54,7 @@
             this.dgvHistorico.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.data,
             this.sql});
-            this.dgvHistorico.Location = new System.Drawing.Point(30, 29);
+            this.dgvHistorico.Location = new System.Drawing.Point(30, 60);
             this.dgvHistorico.MultiSelect = false;
             this.dgvHistorico.Name = "dgvHistorico";
             this.dgvHistorico.ReadOnly = true;
@@ -83,7 +85,7 @@
             this.btnUtilizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnUtilizar.Image = ((System.Drawing.Image)(resources.GetObject("btnUtilizar.Image")));
             this.btnUtilizar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUtilizar.Location = new System.Drawing.Point(30, 451);
+            this.btnUtilizar.Location = new System.Drawing.Point(30, 498);
             this.btnUtilizar.Name = "btnUtilizar";
             this.btnUtilizar.Size = new System.Drawing.Size(93, 32);
             this.btnUtilizar.TabIndex = 2;
@@ -108,31 +110,56 @@
         '\"',
         '\'',
         '\''};
-            this.txtSQL.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*" +
-    "(?<range>:)\\s*(?<range>[^;]+);";
+            this.txtSQL.AutoIndentCharsPatterns = "";
             this.txtSQL.AutoScrollMinSize = new System.Drawing.Size(27, 14);
             this.txtSQL.BackBrush = null;
             this.txtSQL.CharHeight = 14;
             this.txtSQL.CharWidth = 8;
+            this.txtSQL.CommentPrefix = "--";
             this.txtSQL.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSQL.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtSQL.IsReplaceMode = false;
             this.txtSQL.Language = FastColoredTextBoxNS.Language.SQL;
-            this.txtSQL.Location = new System.Drawing.Point(12, 261);
+            this.txtSQL.LeftBracket = '(';
+            this.txtSQL.Location = new System.Drawing.Point(12, 290);
             this.txtSQL.Name = "txtSQL";
             this.txtSQL.Paddings = new System.Windows.Forms.Padding(0);
             this.txtSQL.ReadOnly = true;
+            this.txtSQL.RightBracket = ')';
             this.txtSQL.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.txtSQL.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtSQL.ServiceColors")));
-            this.txtSQL.Size = new System.Drawing.Size(874, 184);
+            this.txtSQL.Size = new System.Drawing.Size(874, 202);
             this.txtSQL.TabIndex = 10;
-            this.txtSQL.Zoom = 100;            
+            this.txtSQL.Zoom = 100;
+            // 
+            // lblPesquisar
+            // 
+            this.lblPesquisar.AutoSize = true;
+            this.lblPesquisar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblPesquisar.Location = new System.Drawing.Point(30, 13);
+            this.lblPesquisar.Name = "lblPesquisar";
+            this.lblPesquisar.Size = new System.Drawing.Size(59, 15);
+            this.lblPesquisar.TabIndex = 12;
+            this.lblPesquisar.Text = "Pesquisar";
+            // 
+            // txtPesquisar
+            // 
+            this.txtPesquisar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPesquisar.Location = new System.Drawing.Point(30, 31);
+            this.txtPesquisar.Name = "txtPesquisar";
+            this.txtPesquisar.Size = new System.Drawing.Size(856, 23);
+            this.txtPesquisar.TabIndex = 11;
+            this.txtPesquisar.TextChanged += new System.EventHandler(this.txtPesquisar_TextChanged);
             // 
             // FrmHistorico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(898, 486);
+            this.ClientSize = new System.Drawing.Size(898, 533);
+            this.Controls.Add(this.lblPesquisar);
+            this.Controls.Add(this.txtPesquisar);
             this.Controls.Add(this.txtSQL);
             this.Controls.Add(this.btnUtilizar);
             this.Controls.Add(this.dgvHistorico);
@@ -144,6 +171,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistorico)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSQL)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -154,5 +182,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sql;
         private System.Windows.Forms.Button btnUtilizar;
         private FastColoredTextBoxNS.FastColoredTextBox txtSQL;
+        private System.Windows.Forms.Label lblPesquisar;
+        private System.Windows.Forms.TextBox txtPesquisar;
     }
 }

@@ -41,16 +41,21 @@ namespace SearchInBases.Forms
 
             InicializarDadosGrid();
 
-            bindingSource = new();            
+            bindingSource = new();
             bindingSource.DataSource = dadosGrid;
-            dgvHistorico.DataSource = bindingSource;            
-            
+            dgvHistorico.DataSource = bindingSource;
+
+            atualizarTxtSql();
+
+        }
+
+        private void atualizarTxtSql()
+        {
             if (dgvHistorico.SelectedRows.Count > 0)
             {
                 var item = GetRowSelected();
                 txtSQL.Text = item.sql;
             }
-
         }
 
         private void InicializarDadosGrid()
@@ -94,6 +99,34 @@ namespace SearchInBases.Forms
             return new ColsGrid(DateTime.Now, "");
         }
 
-      
+        private void txtPesquisar_TextChanged(object sender, EventArgs e)
+        {
+            DoFilter();
+        }
+
+
+        private void DoFilter()
+        {
+
+            List<ColsGrid> filtrados = new();
+            foreach (var x in dadosGrid) {
+                if (AddFiltro(x)) filtrados.Add(x); 
+            };
+
+            
+            BindingSource bindingSource = new();
+            bindingSource.DataSource = filtrados;
+            dgvHistorico.DataSource = bindingSource;
+            dgvHistorico.Update();
+
+            atualizarTxtSql();
+        }
+
+        private bool AddFiltro(ColsGrid x)
+        {
+            if (txtPesquisar.Text == string.Empty) return true;
+
+            return x.sql.Contains(txtPesquisar.Text, StringComparison.InvariantCultureIgnoreCase);
+        }
     }
 }
