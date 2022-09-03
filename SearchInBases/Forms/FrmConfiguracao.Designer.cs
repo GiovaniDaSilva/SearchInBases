@@ -41,11 +41,9 @@
             this.txtSenha = new System.Windows.Forms.TextBox();
             this.txtUser = new System.Windows.Forms.TextBox();
             this.txtServer = new System.Windows.Forms.TextBox();
-            this.txtAutenticador = new System.Windows.Forms.TextBox();
             this.txtNome = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.lblNome = new System.Windows.Forms.Label();
             this.lvConexoes = new System.Windows.Forms.ListView();
             this.lblConexoes = new System.Windows.Forms.Label();
@@ -115,17 +113,15 @@
             this.tpConexoes.Controls.Add(this.txtSenha);
             this.tpConexoes.Controls.Add(this.txtUser);
             this.tpConexoes.Controls.Add(this.txtServer);
-            this.tpConexoes.Controls.Add(this.txtAutenticador);
             this.tpConexoes.Controls.Add(this.txtNome);
             this.tpConexoes.Controls.Add(this.label7);
             this.tpConexoes.Controls.Add(this.label6);
-            this.tpConexoes.Controls.Add(this.label5);
             this.tpConexoes.Controls.Add(this.lblNome);
             this.tpConexoes.Controls.Add(this.lvConexoes);
             this.tpConexoes.Controls.Add(this.lblConexoes);
             this.tpConexoes.Location = new System.Drawing.Point(4, 24);
             this.tpConexoes.Name = "tpConexoes";
-            this.tpConexoes.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tpConexoes.Padding = new System.Windows.Forms.Padding(3);
             this.tpConexoes.Size = new System.Drawing.Size(566, 335);
             this.tpConexoes.TabIndex = 1;
             this.tpConexoes.Text = "Conexões";
@@ -158,7 +154,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(193, 219);
+            this.label8.Location = new System.Drawing.Point(193, 165);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(39, 15);
             this.label8.TabIndex = 22;
@@ -166,7 +162,7 @@
             // 
             // txtSenha
             // 
-            this.txtSenha.Location = new System.Drawing.Point(193, 237);
+            this.txtSenha.Location = new System.Drawing.Point(193, 183);
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.PasswordChar = '*';
             this.txtSenha.Size = new System.Drawing.Size(347, 23);
@@ -175,24 +171,17 @@
             // 
             // txtUser
             // 
-            this.txtUser.Location = new System.Drawing.Point(193, 186);
+            this.txtUser.Location = new System.Drawing.Point(193, 132);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(347, 23);
             this.txtUser.TabIndex = 19;
             // 
             // txtServer
             // 
-            this.txtServer.Location = new System.Drawing.Point(193, 134);
+            this.txtServer.Location = new System.Drawing.Point(193, 80);
             this.txtServer.Name = "txtServer";
             this.txtServer.Size = new System.Drawing.Size(347, 23);
             this.txtServer.TabIndex = 17;
-            // 
-            // txtAutenticador
-            // 
-            this.txtAutenticador.Location = new System.Drawing.Point(193, 84);
-            this.txtAutenticador.Name = "txtAutenticador";
-            this.txtAutenticador.Size = new System.Drawing.Size(347, 23);
-            this.txtAutenticador.TabIndex = 15;
             // 
             // txtNome
             // 
@@ -204,7 +193,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(193, 168);
+            this.label7.Location = new System.Drawing.Point(193, 114);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(47, 15);
             this.label7.TabIndex = 20;
@@ -213,20 +202,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(193, 116);
+            this.label6.Location = new System.Drawing.Point(193, 62);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 15);
             this.label6.TabIndex = 18;
             this.label6.Text = "Servidor";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(193, 66);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(170, 15);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "Nome da base do autenticador";
             // 
             // lblNome
             // 
@@ -352,11 +332,9 @@
         private System.Windows.Forms.TextBox txtSenha;
         private System.Windows.Forms.TextBox txtUser;
         private System.Windows.Forms.TextBox txtServer;
-        private System.Windows.Forms.TextBox txtAutenticador;
         private System.Windows.Forms.TextBox txtNome;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblNome;
         private System.Windows.Forms.ListView lvConexoes;
         private System.Windows.Forms.Label lblConexoes;

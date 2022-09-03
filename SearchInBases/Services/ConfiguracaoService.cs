@@ -31,15 +31,14 @@ namespace SearchInBases.Services
             return Vars.config.configConn.Find(c => c.connName.Equals(dataBase, StringComparison.OrdinalIgnoreCase));
         }
 
-        public static void AdicionarConn(TextBox nome, TextBox autenticador, TextBox server, TextBox user, TextBox senha)
+        public static void AdicionarConn(TextBox nome, TextBox server, TextBox user, TextBox senha)
         {
             var conn = GetConnFromName(nome.Text);
 
             if (conn != null)
                 Vars.config.configConn.Remove(conn);
 
-            conn = new ConfigConn(nome.Text,
-                                autenticador.Text,
+            conn = new ConfigConn(nome.Text,                                
                                 server.Text,
                                 user.Text,
                                 senha.Text);
@@ -73,13 +72,10 @@ namespace SearchInBases.Services
             }
         }
 
-        public static void ValidarConexao(TextBox nome, TextBox autenticador, TextBox server, TextBox user, TextBox senha)
+        public static void ValidarConexao(TextBox nome, TextBox server, TextBox user, TextBox senha)
         {
             if (String.IsNullOrWhiteSpace(nome.Text))
-                Message.ThrowMsg("Informe o nome da conexão");
-
-            if (String.IsNullOrWhiteSpace(autenticador.Text))
-                Message.ThrowMsg("Informe o nome da base do autenticador");
+                Message.ThrowMsg("Informe o nome da conexão");           
 
             if (String.IsNullOrWhiteSpace(server.Text))
                 Message.ThrowMsg("Informe o servidor");

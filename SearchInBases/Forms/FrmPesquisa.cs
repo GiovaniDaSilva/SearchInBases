@@ -1,4 +1,5 @@
 ﻿using FastColoredTextBoxNS;
+using RichTextBoxHTMLFormat;
 using SearchInBases.Entity;
 using SearchInBases.Enum;
 using SearchInBases.Formularios;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SearchInBases.Entity.SQLFiltro;
@@ -24,7 +26,7 @@ namespace SearchInBases.Forms
         private List<BaseConsulta> _listaConsultas = new List<BaseConsulta> { };
         private string _nomeArquivoResultado;
 
-        private EResultado _resultadoEsperadoAux;
+        private EResultado _resultadoEsperadoAux = EResultado.ComOcorre;
 
         public FrmPesquisa()
         {
@@ -156,6 +158,7 @@ namespace SearchInBases.Forms
         {
             this.Invoke(new MethodInvoker(() =>
             {
+                AdicionarResumoPesquisaConsole(_listaConsultas);
                 CsvService.FinalizarArquivoCsv(_nomeArquivoResultado, _listaConsultas, Vars.resultadoEsperado);
             }));
         }
@@ -183,6 +186,34 @@ namespace SearchInBases.Forms
             {
                 throw new Message.MessageException("Selecione uma conexão para a busca.");
             }
+        }
+
+        private void AdicionarResumoPesquisaConsole(List<BaseConsulta>  resultado)
+        {
+            int qtdComOcorre = resultado.FindAll(r => r.encontrouRegistro).Count;
+            int qtdSemOcorre = resultado.FindAll(r => r.encontrouRegistro).Count;
+
+            int qtdRegistros = 0;
+            
+            if (EResultado.ComOcorre.Equals(Vars.resultadoEsperado))
+                resultado.FindAll(r=> r.encontrouRegistro).ForEach(c => qtdRegistros += c.resultadoConsulta.Count);
+            else if (EResultado.SemOcorre.Equals(Vars.resultadoEsperado))
+                resultado.FindAll(r => !r.encontrouRegistro).ForEach(c => qtdRegistros += c.resultadoConsulta.Count);
+            else
+                resultado.ForEach(c => qtdRegistros += c.resultadoConsulta.Count);
+
+            byte tamanho = 10;
+            _consoleService.AddLine("------------------------------------------------------");
+            _consoleService.AddLine(RichFormatting.FontSize(RichFormatting.Negrito("Resumo:"), tamanho));
+            _consoleService.AddLine(RichFormatting.FontSize(numeroConsole(qtdComOcorre, Color.Green) + " bases com ocorrência", tamanho));
+            _consoleService.AddLine(RichFormatting.FontSize(numeroConsole(qtdSemOcorre, Color.Red) + " bases sem ocorrência", tamanho));
+            _consoleService.AddLine(RichFormatting.FontSize("Total de registros na consulta: " + numeroConsole(qtdRegistros, Color.DarkMagenta), tamanho));
+            _consoleService.AddLine("------------------------------------------------------");
+        }
+
+        private string numeroConsole(int valor, Color color)
+        {
+            return RichFormatting.Negrito(RichFormatting.FontColor(valor.ToString(), color));
         }
 
         private void LimparForm()
@@ -406,15 +437,8 @@ namespace SearchInBases.Forms
                 rbResultadoSemOcorre.Checked = false;
             }
             else if(!Vars.isPesquisando)
-            {
-                if (_resultadoEsperadoAux != null)
-                {
-                    setResultadoEsperado(_resultadoEsperadoAux);
-                }
-                else
-                {
-                    setResultadoEsperado(EResultado.ComOcorre);
-                }
+            {              
+               setResultadoEsperado(_resultadoEsperadoAux);                
             }                                 
         }
 

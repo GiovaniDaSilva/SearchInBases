@@ -13,12 +13,21 @@ namespace SearchInBases.Entity
         public List<BaseAuth> basesAuth { get; set; }
 
 
-        public Connection(string conName, string baseAuth, string server, string user, string password)
+        public Connection(string conName, string server, string user, string password)
         {
             this.mySqlConnector = new MySQLConnector(server, user, password);           
             this.connectionName = conName;
-            this.baseAutenticador = baseAuth;
+            this.baseAutenticador = getBaseAutenticador(server);
             this.habilitado = false;            
+        }
+
+        private string getBaseAutenticador(string server)
+        {
+            if (server.ToLower().Contains("alpha")){
+                return "alpha_autenticador";
+            }
+
+            return "autenticador";
         }
 
     }

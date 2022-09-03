@@ -13,8 +13,7 @@ namespace SearchInBases.Services
 
         public class ConfigConn
         {
-            public string connName = "localhost";
-            public string baseAuth = "";
+            public string connName = "localhost";            
             public string server = "";
             public string user = "";
             public string password = "";
@@ -22,10 +21,9 @@ namespace SearchInBases.Services
             public ConfigConn()
             {
             }
-            public ConfigConn(string connName, string baseAuth, string server, string user, string password)
+            public ConfigConn(string connName, string server, string user, string password)
             {
-                this.connName = connName;
-                this.baseAuth = baseAuth;
+                this.connName = connName;                
                 this.server = server;
                 this.user = user;
                 this.password = password;
@@ -45,8 +43,7 @@ namespace SearchInBases.Services
 
             foreach (var conn in configConn)
             {
-                conns.Add(new Connection(conn.connName,
-                                        conn.baseAuth,
+                conns.Add(new Connection(conn.connName,                                        
                                         conn.server,
                                         conn.user,
                                         conn.password));
