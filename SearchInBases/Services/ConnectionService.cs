@@ -173,13 +173,13 @@ namespace SearchInBases.Services
                         if (temRegistro && !_controlPrintFieldsName)
                         {
                             _controlPrintFieldsName = true;
-                            headerCsv = FieldsNameReaderToCsv(reader);                            
+                            headerCsv = FieldsNameReaderToCsv(reader, resultadoEsperado);                            
                         }
 
                         //Preenche o resultado da busca
                         if (temRegistro)                        
                             while (reader.Read())
-                                resultadoConsulta.Add(FieldsReaderToCsv(baseAuth.databaseName, reader));
+                                resultadoConsulta.Add(FieldsReaderToCsv(baseAuth.databaseName, reader, resultadoEsperado));
                         else
                             resultadoConsulta.Add(FieldsSemOcorreToCsv(baseAuth));
                     }
@@ -238,9 +238,13 @@ namespace SearchInBases.Services
                                         RichFormatting.FontColor(baseName, Color.DarkBlue) + RichFormatting.Negrito(" -> ");
         }
 
-        private static string FieldsNameReaderToCsv(MySqlDataReader reader)
+        private static string FieldsNameReaderToCsv(MySqlDataReader reader, EResultado resultadoEsperado)
         {
-            string lineResult = "DatabaseName;PossuiDados";
+            string lineResult = "DatabaseName";
+
+            if (!EResultado.ComOcorre.Equals(resultadoEsperado)){
+                lineResult += ";PossuiDados";
+            }
 
             for (int i = 0; i < reader.FieldCount; i++)
             {
@@ -273,12 +277,17 @@ namespace SearchInBases.Services
         }
 
 
-        private static string FieldsReaderToCsv(string databaseName, MySqlConnector.MySqlDataReader reader)
+        private static string FieldsReaderToCsv(string databaseName, MySqlConnector.MySqlDataReader reader, EResultado resultadoEsperado)
         {
             string lineResult = databaseName;
 
-            //PossuiResultado
-            lineResult += ";Sim";
+         
+            if (!EResultado.ComOcorre.Equals(resultadoEsperado))
+            {
+                //PossuiResultado
+                lineResult += ";Sim";
+            }
+
 
             for (int i = 0; i < reader.FieldCount; i++)
             {
