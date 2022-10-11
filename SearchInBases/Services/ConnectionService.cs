@@ -109,11 +109,10 @@ namespace SearchInBases.Services
 
         private static SqlConnection getConn(List<SqlConnection> threadsConn, Connection con)
         {
-            if(threadsConn.Count < 20)
+            if(threadsConn.Count < 25)
             {
                 SqlConnection c = new SqlConnection();
-                c.conn = MySQLConnectorService.GetMySqlConnection(con.mySqlConnector);
-                c.conn.Open();
+                c.conn = MySQLConnectorService.GetMySqlConnection(con.mySqlConnector);              
                 c.isDisponivel = true;
                 threadsConn.Add(c);
                 return c;
@@ -123,20 +122,7 @@ namespace SearchInBases.Services
             return conn;
         }
 
-        private static List<SqlConnection> getListaConexoes(Connection conn)
-        {
-            List<SqlConnection> lista = new List<SqlConnection>();
-            for (int i = 0; i < 25; i++)
-            {
-                SqlConnection c = new SqlConnection();
-                c.conn = MySQLConnectorService.GetMySqlConnection(conn.mySqlConnector);
-                c.conn.Open();
-                c.isDisponivel = true;
-                lista.Add(c);
-            }
-            return lista;
-        }
-
+      
         private static void CallbackBaseExecutada(BaseUltimaConsulta baseUltimaConsulta)
         {
             Vars.basesUltimaConsulta.Add(baseUltimaConsulta);
@@ -195,6 +181,11 @@ namespace SearchInBases.Services
                     // Gera uma connection para cada thread
                     if (threadsConn.conn != null)
                     {
+                        if (ConnectionState.Closed.Equals(threadsConn.conn.State))
+                        {
+                            threadsConn.conn.Open();
+                        }
+
                         if (!ChangeDatabase(callbackConsole, conn, baseAuth, threadsConn.conn)) return;
 
                         // Executa o comando e salva o retorno
