@@ -52,11 +52,28 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtKeySQL = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbResultado = new System.Windows.Forms.GroupBox();
+            this.rbResultadoSemOcorre = new System.Windows.Forms.RadioButton();
+            this.rbResultadoComOcorre = new System.Windows.Forms.RadioButton();
+            this.rbResultadoAmbos = new System.Windows.Forms.RadioButton();
+            this.gbBasesAtivas = new System.Windows.Forms.GroupBox();
+            this.rbAmbasAtiva = new System.Windows.Forms.RadioButton();
+            this.rbInativa = new System.Windows.Forms.RadioButton();
+            this.rbAtiva = new System.Windows.Forms.RadioButton();
+            this.gbAmbiente = new System.Windows.Forms.GroupBox();
+            this.rbAmbosAmbiente = new System.Windows.Forms.RadioButton();
+            this.rbProducao = new System.Windows.Forms.RadioButton();
+            this.rbInterno = new System.Windows.Forms.RadioButton();
             this.toolBar.SuspendLayout();
             this.tpConexoes.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tpGeral.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.gbResultado.SuspendLayout();
+            this.gbBasesAtivas.SuspendLayout();
+            this.gbAmbiente.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolBar
@@ -256,6 +273,7 @@
             // 
             // tpGeral
             // 
+            this.tpGeral.Controls.Add(this.groupBox2);
             this.tpGeral.Controls.Add(this.groupBox1);
             this.tpGeral.Location = new System.Drawing.Point(4, 24);
             this.tpGeral.Name = "tpGeral";
@@ -292,6 +310,153 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Chave de descriptografia do banco";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.gbResultado);
+            this.groupBox2.Controls.Add(this.gbBasesAtivas);
+            this.groupBox2.Controls.Add(this.gbAmbiente);
+            this.groupBox2.Location = new System.Drawing.Point(8, 121);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(550, 136);
+            this.groupBox2.TabIndex = 23;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Filtro Padrão";
+            // 
+            // gbResultado
+            // 
+            this.gbResultado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbResultado.Controls.Add(this.rbResultadoSemOcorre);
+            this.gbResultado.Controls.Add(this.rbResultadoComOcorre);
+            this.gbResultado.Controls.Add(this.rbResultadoAmbos);
+            this.gbResultado.Location = new System.Drawing.Point(17, 22);
+            this.gbResultado.Name = "gbResultado";
+            this.gbResultado.Size = new System.Drawing.Size(172, 99);
+            this.gbResultado.TabIndex = 25;
+            this.gbResultado.TabStop = false;
+            this.gbResultado.Text = "Resultado Esperado";
+            // 
+            // rbResultadoSemOcorre
+            // 
+            this.rbResultadoSemOcorre.AutoSize = true;
+            this.rbResultadoSemOcorre.Location = new System.Drawing.Point(25, 68);
+            this.rbResultadoSemOcorre.Name = "rbResultadoSemOcorre";
+            this.rbResultadoSemOcorre.Size = new System.Drawing.Size(109, 19);
+            this.rbResultadoSemOcorre.TabIndex = 5;
+            this.rbResultadoSemOcorre.Text = "Sem Ocorrência";
+            this.rbResultadoSemOcorre.UseVisualStyleBackColor = true;
+            // 
+            // rbResultadoComOcorre
+            // 
+            this.rbResultadoComOcorre.AutoSize = true;
+            this.rbResultadoComOcorre.Checked = true;
+            this.rbResultadoComOcorre.Location = new System.Drawing.Point(25, 45);
+            this.rbResultadoComOcorre.Name = "rbResultadoComOcorre";
+            this.rbResultadoComOcorre.Size = new System.Drawing.Size(112, 19);
+            this.rbResultadoComOcorre.TabIndex = 4;
+            this.rbResultadoComOcorre.TabStop = true;
+            this.rbResultadoComOcorre.Text = "Com Ocorrência";
+            this.rbResultadoComOcorre.UseVisualStyleBackColor = true;
+            // 
+            // rbResultadoAmbos
+            // 
+            this.rbResultadoAmbos.AutoSize = true;
+            this.rbResultadoAmbos.Location = new System.Drawing.Point(25, 22);
+            this.rbResultadoAmbos.Name = "rbResultadoAmbos";
+            this.rbResultadoAmbos.Size = new System.Drawing.Size(63, 19);
+            this.rbResultadoAmbos.TabIndex = 3;
+            this.rbResultadoAmbos.Text = "Ambos";
+            this.rbResultadoAmbos.UseVisualStyleBackColor = true;
+            // 
+            // gbBasesAtivas
+            // 
+            this.gbBasesAtivas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbBasesAtivas.Controls.Add(this.rbAmbasAtiva);
+            this.gbBasesAtivas.Controls.Add(this.rbInativa);
+            this.gbBasesAtivas.Controls.Add(this.rbAtiva);
+            this.gbBasesAtivas.Location = new System.Drawing.Point(325, 22);
+            this.gbBasesAtivas.Name = "gbBasesAtivas";
+            this.gbBasesAtivas.Size = new System.Drawing.Size(126, 99);
+            this.gbBasesAtivas.TabIndex = 23;
+            this.gbBasesAtivas.TabStop = false;
+            this.gbBasesAtivas.Text = "Bases";
+            // 
+            // rbAmbasAtiva
+            // 
+            this.rbAmbasAtiva.AutoSize = true;
+            this.rbAmbasAtiva.Location = new System.Drawing.Point(22, 21);
+            this.rbAmbasAtiva.Name = "rbAmbasAtiva";
+            this.rbAmbasAtiva.Size = new System.Drawing.Size(63, 19);
+            this.rbAmbasAtiva.TabIndex = 2;
+            this.rbAmbasAtiva.Text = "Ambos";
+            this.rbAmbasAtiva.UseVisualStyleBackColor = true;
+            // 
+            // rbInativa
+            // 
+            this.rbInativa.AutoSize = true;
+            this.rbInativa.Location = new System.Drawing.Point(22, 67);
+            this.rbInativa.Name = "rbInativa";
+            this.rbInativa.Size = new System.Drawing.Size(60, 19);
+            this.rbInativa.TabIndex = 1;
+            this.rbInativa.Text = "Inativa";
+            this.rbInativa.UseVisualStyleBackColor = true;
+            // 
+            // rbAtiva
+            // 
+            this.rbAtiva.AutoSize = true;
+            this.rbAtiva.Checked = true;
+            this.rbAtiva.Location = new System.Drawing.Point(22, 45);
+            this.rbAtiva.Name = "rbAtiva";
+            this.rbAtiva.Size = new System.Drawing.Size(52, 19);
+            this.rbAtiva.TabIndex = 0;
+            this.rbAtiva.TabStop = true;
+            this.rbAtiva.Text = "Ativa";
+            this.rbAtiva.UseVisualStyleBackColor = true;
+            // 
+            // gbAmbiente
+            // 
+            this.gbAmbiente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbAmbiente.Controls.Add(this.rbAmbosAmbiente);
+            this.gbAmbiente.Controls.Add(this.rbProducao);
+            this.gbAmbiente.Controls.Add(this.rbInterno);
+            this.gbAmbiente.Location = new System.Drawing.Point(195, 22);
+            this.gbAmbiente.Name = "gbAmbiente";
+            this.gbAmbiente.Size = new System.Drawing.Size(124, 99);
+            this.gbAmbiente.TabIndex = 24;
+            this.gbAmbiente.TabStop = false;
+            this.gbAmbiente.Text = "Ambiente";
+            // 
+            // rbAmbosAmbiente
+            // 
+            this.rbAmbosAmbiente.AutoSize = true;
+            this.rbAmbosAmbiente.Checked = true;
+            this.rbAmbosAmbiente.Location = new System.Drawing.Point(17, 21);
+            this.rbAmbosAmbiente.Name = "rbAmbosAmbiente";
+            this.rbAmbosAmbiente.Size = new System.Drawing.Size(63, 19);
+            this.rbAmbosAmbiente.TabIndex = 5;
+            this.rbAmbosAmbiente.TabStop = true;
+            this.rbAmbosAmbiente.Text = "Ambos";
+            this.rbAmbosAmbiente.UseVisualStyleBackColor = true;
+            // 
+            // rbProducao
+            // 
+            this.rbProducao.AutoSize = true;
+            this.rbProducao.Location = new System.Drawing.Point(17, 67);
+            this.rbProducao.Name = "rbProducao";
+            this.rbProducao.Size = new System.Drawing.Size(76, 19);
+            this.rbProducao.TabIndex = 4;
+            this.rbProducao.Text = "Produção";
+            this.rbProducao.UseVisualStyleBackColor = true;
+            // 
+            // rbInterno
+            // 
+            this.rbInterno.AutoSize = true;
+            this.rbInterno.Location = new System.Drawing.Point(17, 45);
+            this.rbInterno.Name = "rbInterno";
+            this.rbInterno.Size = new System.Drawing.Size(63, 19);
+            this.rbInterno.TabIndex = 3;
+            this.rbInterno.Text = "Interno";
+            this.rbInterno.UseVisualStyleBackColor = true;
+            // 
             // FrmConfiguracao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -315,6 +480,13 @@
             this.tpGeral.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.gbResultado.ResumeLayout(false);
+            this.gbResultado.PerformLayout();
+            this.gbBasesAtivas.ResumeLayout(false);
+            this.gbBasesAtivas.PerformLayout();
+            this.gbAmbiente.ResumeLayout(false);
+            this.gbAmbiente.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -343,5 +515,18 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtKeySQL;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbResultado;
+        private System.Windows.Forms.RadioButton rbResultadoSemOcorre;
+        private System.Windows.Forms.RadioButton rbResultadoComOcorre;
+        private System.Windows.Forms.RadioButton rbResultadoAmbos;
+        private System.Windows.Forms.GroupBox gbBasesAtivas;
+        private System.Windows.Forms.RadioButton rbAmbasAtiva;
+        private System.Windows.Forms.RadioButton rbInativa;
+        private System.Windows.Forms.RadioButton rbAtiva;
+        private System.Windows.Forms.GroupBox gbAmbiente;
+        private System.Windows.Forms.RadioButton rbAmbosAmbiente;
+        private System.Windows.Forms.RadioButton rbProducao;
+        private System.Windows.Forms.RadioButton rbInterno;
     }
 }
