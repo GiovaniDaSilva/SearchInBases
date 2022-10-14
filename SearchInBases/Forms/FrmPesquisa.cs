@@ -26,7 +26,7 @@ namespace SearchInBases.Forms
         private List<BaseConsulta> _listaConsultas = new List<BaseConsulta> { };
         private string _nomeArquivoResultado;
 
-        private EResultado _resultadoEsperadoAux = EResultado.ComOcorre;
+        private EResultado _resultadoEsperadoAux = Vars.config.configFiltros.resultado;
 
         public FrmPesquisa()
         {
@@ -81,6 +81,34 @@ namespace SearchInBases.Forms
             this.btnScript.Top = this.btnPesquisar.Top;
             this.btnScript.Left = this.btnPesquisar.Left;
             this.btnScript.Visible = false;
+
+           
+            switch (Vars.config.configFiltros.sqlFiltro.ambiente)
+            {
+                case SQLFiltro.enuAmbiente.Interno:
+                    rbInterno.Checked = true;
+                    break;
+                case SQLFiltro.enuAmbiente.Producao:
+                    rbProducao.Checked = true;
+                    break;
+                default:
+                    rbAmbosAmbiente.Checked = true;
+                    break;
+            }
+
+            switch (Vars.config.configFiltros.sqlFiltro.statusBase)
+            {
+                case SQLFiltro.enuStatusBase.Ativa:
+                    rbAtiva.Checked = true;
+                    break;
+                case SQLFiltro.enuStatusBase.Inativa:
+                    rbInativa.Checked = true;
+                    break;
+                default:
+                    rbAmbasAtiva.Checked = true;
+                    break;
+            }
+
         }
 
         private void AtualizarListConn()
@@ -370,10 +398,10 @@ namespace SearchInBases.Forms
         {
             FrmHistorico frmHistorico = new FrmHistorico();
             string sql = frmHistorico.RetornaSQLHistorico();
-            
-            txtSQL.Clear();
+                        
             if (!String.IsNullOrEmpty(sql))
             {
+                txtSQL.Clear();
                 txtSQL.Text = sql;  
             }
         }

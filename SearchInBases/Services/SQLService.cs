@@ -188,5 +188,14 @@ namespace SearchInBases.Services
 
             return result;
         }
+
+        public static string TratarParamCamposBase(string sqlDescript, BaseAuth baseAuth)
+        {
+            sqlDescript = sqlDescript.Replace("$i", baseAuth.instance);
+            sqlDescript = sqlDescript.Replace("$b", baseAuth.databaseName);                 
+
+            return sqlDescript;
+        }
+       
     }
 }

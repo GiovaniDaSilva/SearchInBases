@@ -1,6 +1,8 @@
-﻿using SearchInBases.Services;
+﻿using SearchInBases.Enum;
+using SearchInBases.Services;
 using System;
 using System.Windows.Forms;
+using static SearchInBases.Entity.SQLFiltro;
 using static SearchInBases.Services.Config;
 
 namespace SearchInBases.Formularios
@@ -20,8 +22,31 @@ namespace SearchInBases.Formularios
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
+
             Vars.config.sqlSecurity.key_descripto_sql = txtKeySQL.Text.Trim();
             Vars.keySQL = Utils.Decrypt(Vars.config.sqlSecurity.key_descripto_sql);
+
+            enuStatusBase statusBase = enuStatusBase.Ambos;
+            if (rbAtiva.Checked)
+                statusBase = enuStatusBase.Ativa;
+            else if (rbInativa.Checked)
+                statusBase = enuStatusBase.Inativa;
+
+            enuAmbiente ambiente = enuAmbiente.Ambos;
+            if (rbInterno.Checked)
+                ambiente = enuAmbiente.Interno;
+            else if (rbProducao.Checked)
+                ambiente = enuAmbiente.Producao;
+
+            EResultado resultado = EResultado.Ambos;
+            if (rbResultadoComOcorre.Checked)
+                resultado = EResultado.ComOcorre;
+            else if (rbResultadoSemOcorre.Checked)
+                resultado = EResultado.SemOcorre;
+            
+            Vars.config.configFiltros.resultado = resultado;
+            Vars.config.configFiltros.sqlFiltro.ambiente = ambiente;
+            Vars.config.configFiltros.sqlFiltro.statusBase = statusBase;
 
             Vars.config.Save();
             Vars.AtualizarConnections();
@@ -34,6 +59,45 @@ namespace SearchInBases.Formularios
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
             txtKeySQL.Text = Vars.config.sqlSecurity.key_descripto_sql;
+            
+            switch (Vars.config.configFiltros.resultado)
+            {
+                case Enum.EResultado.ComOcorre: 
+                    rbResultadoComOcorre.Checked = true;
+                    break;
+                case Enum.EResultado.SemOcorre: 
+                    rbResultadoSemOcorre.Checked = true;
+                    break;
+                default: rbResultadoAmbos.Checked = true;
+                    break;
+            }
+
+            switch (Vars.config.configFiltros.sqlFiltro.ambiente)
+            {
+                case Entity.SQLFiltro.enuAmbiente.Interno:
+                    rbInterno.Checked = true;
+                    break;
+                case Entity.SQLFiltro.enuAmbiente.Producao:
+                    rbProducao.Checked = true;
+                    break;
+                default:
+                    rbAmbosAmbiente.Checked = true;
+                    break;
+            }
+
+            switch (Vars.config.configFiltros.sqlFiltro.statusBase)
+            {
+                case Entity.SQLFiltro.enuStatusBase.Ativa:
+                    rbAtiva.Checked = true;
+                    break;
+                case Entity.SQLFiltro.enuStatusBase.Inativa:
+                    rbInativa.Checked = true;
+                    break;
+                default:
+                    rbAmbasAtiva.Checked = true;
+                    break;
+            }
+
 
             ConfiguracaoService.AtualizarListConn(lvConexoes);
         }

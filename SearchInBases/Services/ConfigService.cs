@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 using SearchInBases.Entity;
+using SearchInBases.Enum;
 using System.Collections.Generic;
 using System.IO;
+using static SearchInBases.Entity.SQLFiltro;
 
 namespace SearchInBases.Services
 {
@@ -10,6 +12,20 @@ namespace SearchInBases.Services
         public List<ConfigConn> configConn;
 
         public SQLSecurity sqlSecurity;
+
+        public ConfigFiltros configFiltros;
+
+        public class ConfigFiltros
+        {
+            public SQLFiltro sqlFiltro;
+            public EResultado resultado;
+
+            public ConfigFiltros()
+            {
+                this.sqlFiltro = new SQLFiltro(enuStatusBase.Ativa, enuAmbiente.Producao);
+                this.resultado = EResultado.ComOcorre;
+            }
+        }
 
         public class ConfigConn
         {
@@ -63,7 +79,8 @@ namespace SearchInBases.Services
             Config config = new Config();
 
             var path = GetConfigFile();
-            
+            bool save = false;
+
             if (File.Exists(path))
             {
                 var data = File.ReadAllText(path);
@@ -74,14 +91,22 @@ namespace SearchInBases.Services
             {
                 config.configConn = new();
                 config.configConn.Add(new ConfigConn());
-                config.Save();
+                save = true;
             }
 
             if (config.sqlSecurity == null)
             {
                 config.sqlSecurity = new SQLSecurity();
-                config.Save();
+                save = true;
             }
+
+            if(config.configFiltros == null)
+            {
+                config.configFiltros = new ConfigFiltros();
+                save = true;
+            }
+
+            if (save) config.Save();
 
             return config;
         }
