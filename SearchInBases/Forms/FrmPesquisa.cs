@@ -398,10 +398,10 @@ namespace SearchInBases.Forms
         {
             FrmHistorico frmHistorico = new FrmHistorico();
             string sql = frmHistorico.RetornaSQLHistorico();
-            
-            txtSQL.Clear();
+                        
             if (!String.IsNullOrEmpty(sql))
             {
+                txtSQL.Clear();
                 txtSQL.Text = sql;  
             }
         }
