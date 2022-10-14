@@ -27,14 +27,8 @@ namespace SearchInBases.Services
             return new MySqlConnection(connString);
         }
 
-
-        public static MySqlDataReader ExecutarSQL(MySqlConnection conn, SQLParams sqlParams)
-        {  
-            return ExecutarSQL(conn, sqlParams.sqlDescript);
-        }
-
         public static MySqlDataReader ExecutarSQL(MySqlConnection conn, string sql)
-        {
+        {           
             using (var command = new MySqlCommand(sql, conn))
             {
                 return command.ExecuteReader();

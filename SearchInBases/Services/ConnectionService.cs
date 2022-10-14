@@ -188,8 +188,10 @@ namespace SearchInBases.Services
 
                         if (!ChangeDatabase(callbackConsole, conn, baseAuth, threadsConn.conn)) return;
 
+                        
+
                         // Executa o comando e salva o retorno
-                        using (var reader = MySQLConnectorService.ExecutarSQL(threadsConn.conn, sqlParams))
+                        using (var reader = MySQLConnectorService.ExecutarSQL(threadsConn.conn, SQLService.TratarParamCamposBase(sqlParams.sqlDescript, baseAuth)))
                         {
 
                             temRegistro = reader.HasRows;
@@ -341,7 +343,7 @@ namespace SearchInBases.Services
                 {
                     threadConn.Open();
                     threadConn.ChangeDatabase(baseAuth.databaseName);
-                    MySQLConnectorService.ExecutarSQL(threadConn, sqlParams);
+                    MySQLConnectorService.ExecutarSQL(threadConn, SQLService.TratarParamCamposBase(sqlParams.sqlDescript, baseAuth));
                     threadConn.Close();
                 }
             }

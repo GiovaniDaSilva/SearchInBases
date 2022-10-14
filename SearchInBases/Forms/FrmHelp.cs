@@ -23,11 +23,13 @@ namespace SearchInBases.Forms
             add("Para descriptografar uma coluna que faz parte da condição where utiliza [:]");
             add(tab() + RichFormatting.FontColor("Ex: select campo from tabela where [campo:] ...", Color.Gray));
             add("");
-            add(RichFormatting.FontColor("Script", Color.Blue));
+            add(RichFormatting.FontColor("Parâmetros", Color.Blue));
             add("");
-            add("Utiliza %b antes das tabelas, para substituir pelo nome da base de dados.");
-            add(tab() + RichFormatting.FontColor("Ex: update %b.tabela set campo ...", Color.Gray));
-
+            add("Utilize $b para substituir pelo nome da base de dados.");
+            add(tab() + RichFormatting.FontColor("Ex: update $b.tabela set campo ...", Color.Gray));
+            add("");
+            add("Utilize $i, para substituir pela instance da base de dados.");
+            add(tab() + RichFormatting.FontColor("Ex: where instance = '$i'...", Color.Gray));           
         }
 
         private string tab(int num = 1)
