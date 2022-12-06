@@ -56,6 +56,41 @@ namespace SearchInBases.Services
             }
         }
 
+        public static List<String> buscarBasesAgenciaTT(Action<string> callbackConsole, Connection conn)
+        {           
+            try
+            {
+                List<String> bases = new List<String>();
+
+                using (var myConn = MySQLConnectorService.GetMySqlConnection(conn.mySqlConnector))
+                {
+                    myConn.Open();
+                    using (var reader = MySQLConnectorService.ExecutarSQL(myConn, String.Format(SQLEnum.SQLPayScan.select_basesTT)))
+                    {
+                        while (reader.Read())
+                        {
+                            //if (Utils.IsNull(conn.basesAuth)) conn.basesAuth = new();
+
+                            //BaseAuth baseAuth = new BaseAuth(reader.GetString((int)SQLEnum.SQLAuthInstance.ID),
+                            //    reader.GetString((int)SQLEnum.SQLAuthInstance.DATABASE_NAME),
+                            //    reader.GetBoolean((int)SQLEnum.SQLAuthInstance.INTERNAL),
+                            //    reader.GetBoolean((int)SQLEnum.SQLAuthInstance.ACTIVE));
+
+                            //conn.basesAuth.Add(baseAuth);
+                        }
+                    }
+                }
+                return bases;
+            }
+            catch
+            {
+                var messagem = "Não foi possível buscar as bases TT a partir do PayScan (" + conn.connectionName + ")";
+                callbackConsole(messagem);
+                Log.addErroMessage(messagem);
+                throw;
+            }            
+        }
+
         public static void ExecutarSQL(Action<string> callbackConsole,
                                         Action<BaseConsulta> callbackCsv,
                                         List<Connection> conexoesHabilitadas,
@@ -73,7 +108,7 @@ namespace SearchInBases.Services
                 {
                     int qtdMaxThreads = 20;
                     int countThread = 0;
-                    foreach (var baseAuth in SQLService.filtrarBasesAuth(conn.basesAuth, sqlParams))
+                    foreach (var baseAuth in SQLService.filtrarBasesAuth(conn, sqlParams, callbackConsole))
                     {
                         if (countThread < qtdMaxThreads)
                         {

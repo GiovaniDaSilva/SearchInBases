@@ -19,6 +19,7 @@ namespace SearchInBases.Forms
             {
                 Vars.basesFiltradas.ForEach(b => AppendBase(b));
             }
+            cbAgenciaTT.Checked = Vars.apenasAgenciaTT;
         }
 
         private void AppendBase(string b)
@@ -37,6 +38,8 @@ namespace SearchInBases.Forms
 
         private void TratarBasesFiltradas()
         {
+            Vars.apenasAgenciaTT = cbAgenciaTT.Checked;
+
             if (String.IsNullOrEmpty(txtFilter.Text.Trim()))
                 return;
 
@@ -91,6 +94,19 @@ namespace SearchInBases.Forms
         private void rbSemOcorre_Click(object sender, EventArgs e)
         {            
             ImportarBasesFiltros();
+        }
+
+        private void cbAgenciaTT_CheckedChanged(object sender, EventArgs e)
+        {
+            gbUltimaConsulta.Enabled = !cbAgenciaTT.Checked;
+            txtFilter.Enabled = !cbAgenciaTT.Checked;
+            if (cbAgenciaTT.Checked)
+            {
+                rbTodos.Checked = false;
+                rbComOcorre.Checked = false;
+                rbSemOcorre.Checked = false;
+                txtFilter.Clear();
+            }            
         }
     }
 }

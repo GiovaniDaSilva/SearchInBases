@@ -22,7 +22,10 @@ namespace SearchInBases.Enum
             INTERNAL = 3
         }
 
-
+        public class SQLPayScan
+        {
+            public static string select_basesTT { get; } = "SELECT * FROM  payscan.bases";
+        }
 
     }
 

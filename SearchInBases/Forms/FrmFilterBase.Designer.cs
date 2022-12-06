@@ -34,12 +34,13 @@
             this.txtFilter = new FastColoredTextBoxNS.FastColoredTextBox();
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnConfirmar = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbUltimaConsulta = new System.Windows.Forms.GroupBox();
             this.rbSemOcorre = new System.Windows.Forms.RadioButton();
             this.rbComOcorre = new System.Windows.Forms.RadioButton();
             this.rbTodos = new System.Windows.Forms.RadioButton();
+            this.cbAgenciaTT = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilter)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.gbUltimaConsulta.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -116,17 +117,17 @@
             this.btnConfirmar.UseVisualStyleBackColor = true;
             this.btnConfirmar.Click += new System.EventHandler(this.btnUtilizar_Click);
             // 
-            // groupBox1
+            // gbUltimaConsulta
             // 
-            this.groupBox1.Controls.Add(this.rbSemOcorre);
-            this.groupBox1.Controls.Add(this.rbComOcorre);
-            this.groupBox1.Controls.Add(this.rbTodos);
-            this.groupBox1.Location = new System.Drawing.Point(21, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(333, 52);
-            this.groupBox1.TabIndex = 16;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Importar da ultima consulta";
+            this.gbUltimaConsulta.Controls.Add(this.rbSemOcorre);
+            this.gbUltimaConsulta.Controls.Add(this.rbComOcorre);
+            this.gbUltimaConsulta.Controls.Add(this.rbTodos);
+            this.gbUltimaConsulta.Location = new System.Drawing.Point(21, 12);
+            this.gbUltimaConsulta.Name = "gbUltimaConsulta";
+            this.gbUltimaConsulta.Size = new System.Drawing.Size(333, 52);
+            this.gbUltimaConsulta.TabIndex = 16;
+            this.gbUltimaConsulta.TabStop = false;
+            this.gbUltimaConsulta.Text = "Importar da ultima consulta";
             // 
             // rbSemOcorre
             // 
@@ -161,12 +162,24 @@
             this.rbTodos.UseVisualStyleBackColor = true;
             this.rbTodos.Click += new System.EventHandler(this.rbTodos_Click);
             // 
+            // cbAgenciaTT
+            // 
+            this.cbAgenciaTT.AutoSize = true;
+            this.cbAgenciaTT.Location = new System.Drawing.Point(360, 34);
+            this.cbAgenciaTT.Name = "cbAgenciaTT";
+            this.cbAgenciaTT.Size = new System.Drawing.Size(154, 19);
+            this.cbAgenciaTT.TabIndex = 17;
+            this.cbAgenciaTT.Text = "Possui Agencia TT";
+            this.cbAgenciaTT.UseVisualStyleBackColor = true;
+            this.cbAgenciaTT.CheckedChanged += new System.EventHandler(this.cbAgenciaTT_CheckedChanged);
+            // 
             // FrmFilterBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(526, 536);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.cbAgenciaTT);
+            this.Controls.Add(this.gbUltimaConsulta);
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.btnLimpar);
             this.Controls.Add(this.txtFilter);
@@ -180,8 +193,8 @@
             this.Text = "Filtrar Bases";
             this.Load += new System.EventHandler(this.FrmFilterBase_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtFilter)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbUltimaConsulta.ResumeLayout(false);
+            this.gbUltimaConsulta.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -193,9 +206,10 @@
         private FastColoredTextBoxNS.FastColoredTextBox txtFilter;
         private System.Windows.Forms.Button btnLimpar;
         private System.Windows.Forms.Button btnConfirmar;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbUltimaConsulta;
         private System.Windows.Forms.RadioButton rbSemOcorre;
         private System.Windows.Forms.RadioButton rbComOcorre;
         private System.Windows.Forms.RadioButton rbTodos;
+        private System.Windows.Forms.CheckBox cbAgenciaTT;
     }
 }

@@ -46,6 +46,8 @@ namespace SearchInBases
 
 
         //Filter
+        public static bool apenasAgenciaTT = false;
+        public static List<String> basesAgenciaTT = null;
         public static List<string> basesFiltradas { get; set; } = new List<string>();
         public static List<BaseUltimaConsulta> basesUltimaConsulta { get; set; } = new List<BaseUltimaConsulta>();
 
