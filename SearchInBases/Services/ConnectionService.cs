@@ -64,21 +64,23 @@ namespace SearchInBases.Services
 
                 using (var myConn = MySQLConnectorService.GetMySqlConnection(conn.mySqlConnector))
                 {
-                    myConn.Open();
-                    using (var reader = MySQLConnectorService.ExecutarSQL(myConn, String.Format(SQLEnum.SQLPayScan.select_basesTT)))
-                    {
-                        while (reader.Read())
-                        {
-                            //if (Utils.IsNull(conn.basesAuth)) conn.basesAuth = new();
+                    //myConn.Open();
+                    //using (var reader = MySQLConnectorService.ExecutarSQL(myConn, String.Format(SQLEnum.SQLPayScan.select_basesTT)))
+                    //{
+                    //    while (reader.Read())
+                    //    {
+                    //        if (Utils.IsNull(conn.basesAuth)) conn.basesAuth = new();
 
-                            //BaseAuth baseAuth = new BaseAuth(reader.GetString((int)SQLEnum.SQLAuthInstance.ID),
-                            //    reader.GetString((int)SQLEnum.SQLAuthInstance.DATABASE_NAME),
-                            //    reader.GetBoolean((int)SQLEnum.SQLAuthInstance.INTERNAL),
-                            //    reader.GetBoolean((int)SQLEnum.SQLAuthInstance.ACTIVE));
+                    //        BaseAuth baseAuth = new BaseAuth(reader.GetString((int)SQLEnum.SQLAuthInstance.ID),
+                    //            reader.GetString((int)SQLEnum.SQLAuthInstance.DATABASE_NAME),
+                    //            reader.GetBoolean((int)SQLEnum.SQLAuthInstance.INTERNAL),
+                    //            reader.GetBoolean((int)SQLEnum.SQLAuthInstance.ACTIVE));
 
-                            //conn.basesAuth.Add(baseAuth);
-                        }
-                    }
+                    //        conn.basesAuth.Add(baseAuth);
+
+                    //    }
+                    //}
+                    bases.Add("interno_alpha");
                 }
                 return bases;
             }

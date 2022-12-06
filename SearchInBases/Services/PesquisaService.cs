@@ -37,6 +37,7 @@ namespace SearchInBases.Services
             try
             {
                 Log.AddIniciandoPesquisa();
+                callbackConsole("Iniciando pesquisa");
                 List<Connection> conexoesHabilitadas = Vars.connections.FindAll(c => c.habilitado);
                 tratarConexoesHabilitadas(callbackConsole, conexoesHabilitadas);
 
@@ -163,7 +164,9 @@ namespace SearchInBases.Services
             bool sucesso = true;
             try
             {
-                Log.AddMessage("Testando comando SQL...");
+                String log = "Testando comando SQL";
+                Log.AddMessage(log);
+                callbackConsole(log);
 
                 List<Connection> conexoesHabilitadas = Vars.connections.FindAll(c => c.habilitado);
                 tratarConexoesHabilitadas(callbackConsole, conexoesHabilitadas);

@@ -207,11 +207,11 @@ namespace SearchInBases.Services
         {
             if(Vars.basesAgenciaTT != null)
             {
-                callbackConsole("Bases com agência TT pegas em memoria...");
+                callbackConsole("Bases com agência TT pegas em memoria");
                 return Vars.basesAgenciaTT;
             }
 
-            callbackConsole("Iniciando busca das bases da agência TT...");
+            callbackConsole("Buscando bases da agência TT");
             Vars.basesAgenciaTT = carregarBasesAgenciaTT(conn);
             return Vars.basesAgenciaTT;
         }
