@@ -178,11 +178,6 @@ namespace SearchInBases.Services
             else if (SQLFiltro.enuAmbiente.Producao.Equals(sqlParams.filtro.ambiente))
                 result.RemoveAll(b => b.interno);
 
-            // Apenas Agencia TT
-            if (sqlParams.apenasAgenciaTT)
-            {
-                sqlParams.basesFiltradas = filtrarApenasBasesAgenciaTT(conn, callbackConsole);
-            }
 
             //Bases filtradas
             if (sqlParams.basesFiltradas.Count > 0)
@@ -200,25 +195,6 @@ namespace SearchInBases.Services
             sqlDescript = sqlDescript.Replace("$b", baseAuth.databaseName);
 
             return sqlDescript;
-        }
-
-
-        private static List<string> filtrarApenasBasesAgenciaTT(Connection conn, Action<string> callbackConsole)
-        {
-            if(Vars.basesAgenciaTT != null)
-            {
-                callbackConsole("Bases com agência TT pegas em memoria");
-                return Vars.basesAgenciaTT;
-            }
-
-            callbackConsole("Buscando bases da agência TT");
-            Vars.basesAgenciaTT = carregarBasesAgenciaTT(conn);
-            return Vars.basesAgenciaTT;
-        }
-
-        private static List<string> carregarBasesAgenciaTT(Connection conn)
-        {
-            return ConnectionService.buscarBasesAgenciaTT(null, conn);
-        }
+        }       
     }    
 }

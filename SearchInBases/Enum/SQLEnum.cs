@@ -24,7 +24,7 @@ namespace SearchInBases.Enum
 
         public class SQLPayScan
         {
-            public static string select_basesTT { get; } = "SELECT * FROM  payscan.bases";
+            public static string select_basesTT { get; } = "select info_clientes  from payscan.parametros";
         }
 
     }

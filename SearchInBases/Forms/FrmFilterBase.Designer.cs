@@ -38,7 +38,8 @@
             this.rbSemOcorre = new System.Windows.Forms.RadioButton();
             this.rbComOcorre = new System.Windows.Forms.RadioButton();
             this.rbTodos = new System.Windows.Forms.RadioButton();
-            this.cbAgenciaTT = new System.Windows.Forms.CheckBox();
+            this.btnImportarAgenciasTT = new System.Windows.Forms.Button();
+            this.lblPesquisando = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilter)).BeginInit();
             this.gbUltimaConsulta.SuspendLayout();
             this.SuspendLayout();
@@ -71,13 +72,12 @@
         '\''};
             this.txtFilter.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*" +
     "(?<range>:)\\s*(?<range>[^;]+);";
-            this.txtFilter.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.txtFilter.AutoScrollMinSize = new System.Drawing.Size(2, 14);
             this.txtFilter.BackBrush = null;
             this.txtFilter.CharHeight = 14;
             this.txtFilter.CharWidth = 8;
             this.txtFilter.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtFilter.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtFilter.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtFilter.IsReplaceMode = false;
             this.txtFilter.Location = new System.Drawing.Point(21, 94);
             this.txtFilter.Name = "txtFilter";
@@ -162,23 +162,38 @@
             this.rbTodos.UseVisualStyleBackColor = true;
             this.rbTodos.Click += new System.EventHandler(this.rbTodos_Click);
             // 
-            // cbAgenciaTT
+            // btnImportarAgenciasTT
             // 
-            this.cbAgenciaTT.AutoSize = true;
-            this.cbAgenciaTT.Location = new System.Drawing.Point(360, 34);
-            this.cbAgenciaTT.Name = "cbAgenciaTT";
-            this.cbAgenciaTT.Size = new System.Drawing.Size(154, 19);
-            this.cbAgenciaTT.TabIndex = 17;
-            this.cbAgenciaTT.Text = "Possui Agencia TT";
-            this.cbAgenciaTT.UseVisualStyleBackColor = true;
-            this.cbAgenciaTT.CheckedChanged += new System.EventHandler(this.cbAgenciaTT_CheckedChanged);
+            this.btnImportarAgenciasTT.Image = ((System.Drawing.Image)(resources.GetObject("btnImportarAgenciasTT.Image")));
+            this.btnImportarAgenciasTT.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnImportarAgenciasTT.Location = new System.Drawing.Point(360, 19);
+            this.btnImportarAgenciasTT.Name = "btnImportarAgenciasTT";
+            this.btnImportarAgenciasTT.Size = new System.Drawing.Size(126, 43);
+            this.btnImportarAgenciasTT.TabIndex = 17;
+            this.btnImportarAgenciasTT.TabStop = false;
+            this.btnImportarAgenciasTT.Text = "Clientes TT";
+            this.btnImportarAgenciasTT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnImportarAgenciasTT.UseVisualStyleBackColor = true;
+            this.btnImportarAgenciasTT.Click += new System.EventHandler(this.btnImportarAgenciasTT_Click);    
+            // 
+            // lblPesquisando
+            // 
+            this.lblPesquisando.AutoSize = true;
+            this.lblPesquisando.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblPesquisando.ForeColor = System.Drawing.Color.Red;
+            this.lblPesquisando.Location = new System.Drawing.Point(360, 65);
+            this.lblPesquisando.Name = "lblPesquisando";
+            this.lblPesquisando.Size = new System.Drawing.Size(95, 17);
+            this.lblPesquisando.TabIndex = 18;
+            this.lblPesquisando.Text = "Pesquisando... ";
             // 
             // FrmFilterBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(526, 536);
-            this.Controls.Add(this.cbAgenciaTT);
+            this.Controls.Add(this.lblPesquisando);
+            this.Controls.Add(this.btnImportarAgenciasTT);
             this.Controls.Add(this.gbUltimaConsulta);
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.btnLimpar);
@@ -210,6 +225,7 @@
         private System.Windows.Forms.RadioButton rbSemOcorre;
         private System.Windows.Forms.RadioButton rbComOcorre;
         private System.Windows.Forms.RadioButton rbTodos;
-        private System.Windows.Forms.CheckBox cbAgenciaTT;
+        private System.Windows.Forms.Button btnImportarAgenciasTT;
+        private System.Windows.Forms.Label lblPesquisando;
     }
 }

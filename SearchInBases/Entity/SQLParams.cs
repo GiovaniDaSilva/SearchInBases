@@ -8,18 +8,15 @@ namespace SearchInBases.Entity
         public string sql{ get; set; }
         public string sqlDescript { get; set; }
 
-        public bool apenasAgenciaTT { get; set; }
-
         public SQLFiltro filtro{ get; set; }
 
         public List<string> basesFiltradas { get; set; }
 
-        public SQLParams(string sql, SQLFiltro filtro, List<string> basesFiltradas, bool apenasAgenciaTT)
+        public SQLParams(string sql, SQLFiltro filtro, List<string> basesFiltradas)
         {
             this.sql = sql;
             this.filtro = filtro;
-            this.basesFiltradas = basesFiltradas;
-            this.apenasAgenciaTT = apenasAgenciaTT;
+            this.basesFiltradas = basesFiltradas;            
         }
     }
 

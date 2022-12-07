@@ -1,5 +1,8 @@
-﻿using System;
+﻿using SearchInBases.Entity;
+using SearchInBases.Services;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SearchInBases.Forms
@@ -19,7 +22,7 @@ namespace SearchInBases.Forms
             {
                 Vars.basesFiltradas.ForEach(b => AppendBase(b));
             }
-            cbAgenciaTT.Checked = Vars.apenasAgenciaTT;
+            lblPesquisando.Visible = false;
         }
 
         private void AppendBase(string b)
@@ -38,8 +41,6 @@ namespace SearchInBases.Forms
 
         private void TratarBasesFiltradas()
         {
-            Vars.apenasAgenciaTT = cbAgenciaTT.Checked;
-
             if (String.IsNullOrEmpty(txtFilter.Text.Trim()))
                 return;
 
@@ -96,17 +97,81 @@ namespace SearchInBases.Forms
             ImportarBasesFiltros();
         }
 
-        private void cbAgenciaTT_CheckedChanged(object sender, EventArgs e)
+        private void btnImportarAgenciasTT_Click(object sender, EventArgs e)
         {
-            gbUltimaConsulta.Enabled = !cbAgenciaTT.Checked;
-            txtFilter.Enabled = !cbAgenciaTT.Checked;
-            if (cbAgenciaTT.Checked)
+            if (Utils.IsNullOrEmpty(Vars.connections.FindAll(c => c.habilitado)))
             {
-                rbTodos.Checked = false;
-                rbComOcorre.Checked = false;
-                rbSemOcorre.Checked = false;
+                Message.Error("Nenhuma conexão selecionada");
+                return;
+            }
+
+            Pesquisando(true);
+            Task.Run(() => { Pesquisar(); });
+        }
+
+        private void Pesquisar()
+        {
+            try
+            {
+                List<Connection> conexoesHabilitadas = Vars.connections.FindAll(c => c.habilitado);                
+
+                List<string> clientesTT = null;
+
+                conexoesHabilitadas.ForEach(c =>
+                {
+                    if (clientesTT != null) return;
+
+                    try
+                    {
+                        clientesTT = BuscarBasesAgenciaTT(c);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.addErroMessage("Erro ao buscar clientes TT - Conn: " + c.connectionName + " Erro: " + ex.Message);
+                    }
+                });
+
+                if (clientesTT == null)
+                {
+                    Message.Error("Não foi possível buscar os clientes TT, consulte o log.");
+                    return;
+                }
+
                 txtFilter.Clear();
-            }            
+                clientesTT.ForEach(c => AppendBase(c));
+            }
+            finally
+            {
+                finaizarPesquisa();
+            }                        
+        }
+
+        private void finaizarPesquisa()
+        {
+            this.Invoke(new MethodInvoker(() =>
+            {
+                Pesquisando(false);
+            }));
+        }
+
+
+        private void Pesquisando(bool pesquisando)
+        {
+            lblPesquisando.Visible = pesquisando;
+            btnImportarAgenciasTT.Enabled = !pesquisando;
+        }
+
+        private static List<string> BuscarBasesAgenciaTT(Connection conn)
+        {
+            if (Vars.basesAgenciaTT != null)
+            {
+                Log.AddMessage("Bases com agência TT pegas em memoria");
+                return Vars.basesAgenciaTT;
+            }
+
+            Log.AddMessage("Buscando bases da agência TT");
+            Vars.basesAgenciaTT = ConnectionService.buscarBasesAgenciaTT(conn);
+            return Vars.basesAgenciaTT;
         }
     }
 }

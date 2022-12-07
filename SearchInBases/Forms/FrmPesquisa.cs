@@ -254,7 +254,7 @@ namespace SearchInBases.Forms
 
         private void ExibirBaseFiltradas()
         {
-            lblBasesFiltradas.Visible = Vars.basesFiltradas.Count > 0 || Vars.apenasAgenciaTT;
+            lblBasesFiltradas.Visible = Vars.basesFiltradas.Count > 0;
         }
 
         private void LimparConsole()
@@ -278,7 +278,7 @@ namespace SearchInBases.Forms
                 ambiente = enuAmbiente.Producao;
 
             SQLFiltro sqlFiltro = new SQLFiltro(statusBase, ambiente);
-            return new SQLParams(txtSQL.Text, sqlFiltro, Vars.basesFiltradas, Vars.apenasAgenciaTT);
+            return new SQLParams(txtSQL.Text, sqlFiltro, Vars.basesFiltradas);
         }
 
         private void AtualizaConsole(string message)

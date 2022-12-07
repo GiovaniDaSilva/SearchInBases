@@ -1,4 +1,5 @@
 ﻿using MySqlConnector;
+using Newtonsoft.Json;
 using RichTextBoxHTMLFormat;
 using SearchInBases.Entity;
 using SearchInBases.Enum;
@@ -21,6 +22,14 @@ namespace SearchInBases.Services
         private static string database_notfound = "Base de dados não localizada";
         public static bool _controlPrintFieldsName;
         public static bool _ocorreuErroNaConsulta;
+
+        private class InfoCliente
+        {
+            [JsonProperty("base")]
+            public string nomeBase { get; set; }
+            public string instancia { get; set; }
+            public bool temAgenciaPaytrack { get; set; }
+        }
 
         public static void inicializarBasesAuth(Action<string> callbackConsole, Connection conn)
         {
@@ -56,40 +65,34 @@ namespace SearchInBases.Services
             }
         }
 
-        public static List<String> buscarBasesAgenciaTT(Action<string> callbackConsole, Connection conn)
+        public static List<String> buscarBasesAgenciaTT(Connection conn)
         {           
             try
             {
-                List<String> bases = new List<String>();
-
+                String infoClientes = "";
                 using (var myConn = MySQLConnectorService.GetMySqlConnection(conn.mySqlConnector))
                 {
-                    //myConn.Open();
-                    //using (var reader = MySQLConnectorService.ExecutarSQL(myConn, String.Format(SQLEnum.SQLPayScan.select_basesTT)))
-                    //{
-                    //    while (reader.Read())
-                    //    {
-                    //        if (Utils.IsNull(conn.basesAuth)) conn.basesAuth = new();
-
-                    //        BaseAuth baseAuth = new BaseAuth(reader.GetString((int)SQLEnum.SQLAuthInstance.ID),
-                    //            reader.GetString((int)SQLEnum.SQLAuthInstance.DATABASE_NAME),
-                    //            reader.GetBoolean((int)SQLEnum.SQLAuthInstance.INTERNAL),
-                    //            reader.GetBoolean((int)SQLEnum.SQLAuthInstance.ACTIVE));
-
-                    //        conn.basesAuth.Add(baseAuth);
-
-                    //    }
-                    //}
-                    bases.Add("interno_alpha");
+                    myConn.Open();
+                    using (var reader = MySQLConnectorService.ExecutarSQL(myConn, String.Format(SQLEnum.SQLPayScan.select_basesTT)))
+                    {
+                        if (reader.Read())
+                        {                          
+                            infoClientes = reader.GetString("info_clientes");
+                        }
+                    }                    
                 }
-                return bases;
+
+
+                var listInfoClientes = JsonConvert.DeserializeObject<List<InfoCliente>>(infoClientes);
+
+               List<string> bases = new List<string>();
+               listInfoClientes.FindAll(f => f.temAgenciaPaytrack).ForEach(c => bases.Add(c.nomeBase));
+               return bases;
             }
-            catch
-            {
-                var messagem = "Não foi possível buscar as bases TT a partir do PayScan (" + conn.connectionName + ")";
-                callbackConsole(messagem);
-                Log.addErroMessage(messagem);
-                throw;
+            catch(Exception e)
+            {                
+                Log.addErroMessage("Não foi possível buscar as bases TT a partir do PayScan (" + conn.connectionName + ") Erro: " + e.Message);
+                return null;
             }            
         }
 
