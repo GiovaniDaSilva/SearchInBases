@@ -23,14 +23,6 @@ namespace SearchInBases.Services
         public static bool _controlPrintFieldsName;
         public static bool _ocorreuErroNaConsulta;
 
-        private class InfoCliente
-        {
-            [JsonProperty("base")]
-            public string nomeBase { get; set; }
-            public string instancia { get; set; }
-            public bool temAgenciaPaytrack { get; set; }
-        }
-
         public static void inicializarBasesAuth(Action<string> callbackConsole, Connection conn)
         {
             if (!Utils.IsNullOrEmpty(conn.basesAuth)) conn.basesAuth.Clear();
@@ -65,7 +57,7 @@ namespace SearchInBases.Services
             }
         }
 
-        public static List<String> buscarBasesAgenciaTT(Connection conn)
+        public static List<InfoCliente> buscarBasesAgenciaTT(Connection conn)
         {           
             try
             {
@@ -82,12 +74,7 @@ namespace SearchInBases.Services
                     }                    
                 }
 
-
-                var listInfoClientes = JsonConvert.DeserializeObject<List<InfoCliente>>(infoClientes);
-
-               List<string> bases = new List<string>();
-               listInfoClientes.FindAll(f => f.temAgenciaPaytrack).ForEach(c => bases.Add(c.nomeBase));
-               return bases;
+                return JsonConvert.DeserializeObject<List<InfoCliente>>(infoClientes);
             }
             catch(Exception e)
             {                

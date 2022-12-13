@@ -56,6 +56,8 @@ namespace SearchInBases.Forms
             rbComOcorre.Checked = false;
             rbSemOcorre.Checked = false;
             rbTodos.Checked = false;
+            rbComTT.Checked = false;
+            rbSemTT.Checked = false;
             LimparBases();
         }
 
@@ -97,7 +99,19 @@ namespace SearchInBases.Forms
             ImportarBasesFiltros();
         }
 
-        private void btnImportarAgenciasTT_Click(object sender, EventArgs e)
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+           if(!rbComTT.Checked && !rbSemTT.Checked)
+            {
+                Message.Error("Selecione uma opção");
+                return;
+            }
+
+            buscarAgenciasTT();
+        }
+
+
+        private void buscarAgenciasTT()
         {
             if (Utils.IsNullOrEmpty(Vars.connections.FindAll(c => c.habilitado)))
             {
@@ -161,17 +175,25 @@ namespace SearchInBases.Forms
             btnImportarAgenciasTT.Enabled = !pesquisando;
         }
 
-        private static List<string> BuscarBasesAgenciaTT(Connection conn)
+        private List<string> BuscarBasesAgenciaTT(Connection conn)
         {
-            if (Vars.basesAgenciaTT != null)
+            bool comAgenciaTT = rbComTT.Checked;
+            if (Vars.infoClientes != null)
             {
                 Log.AddMessage("Bases com agência TT pegas em memoria");
-                return Vars.basesAgenciaTT;
+                return getListaDatabaseName(Vars.infoClientes, comAgenciaTT);
             }
 
             Log.AddMessage("Buscando bases da agência TT");
-            Vars.basesAgenciaTT = ConnectionService.buscarBasesAgenciaTT(conn);
-            return Vars.basesAgenciaTT;
+            Vars.infoClientes = ConnectionService.buscarBasesAgenciaTT(conn);
+            return getListaDatabaseName(Vars.infoClientes, comAgenciaTT);
+        }
+
+        private static List<string> getListaDatabaseName(List<InfoCliente> infoClientes, bool agenciaTT)
+        {
+            List<string> bases = new List<string>();
+            infoClientes.FindAll(i=> i.temAgenciaPaytrack.Equals(agenciaTT)).ForEach(b => bases.Add(b.nomeBase));
+            return bases;
         }
     }
 }
