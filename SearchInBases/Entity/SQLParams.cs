@@ -16,7 +16,7 @@ namespace SearchInBases.Entity
         {
             this.sql = sql;
             this.filtro = filtro;
-            this.basesFiltradas = basesFiltradas;
+            this.basesFiltradas = basesFiltradas;            
         }
     }
 

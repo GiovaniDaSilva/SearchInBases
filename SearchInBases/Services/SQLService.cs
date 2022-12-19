@@ -13,13 +13,13 @@ namespace SearchInBases.Services
     {
         private static bool somente_consulta = Vars.somenteConsulta;
 
-        private static List<string> palavras_proibidas = new ();
+        private static List<string> palavras_proibidas = new();
 
         private static List<string> palavras_obrigatorias = new();
 
-        public static bool permitirExecutarComando(SQLParams sqlParams) 
+        public static bool permitirExecutarComando(SQLParams sqlParams)
         {
-            Log.Add("Somente Consulta: " + somente_consulta +  "; Comando executado: " + sqlParams.sql);
+            Log.Add("Somente Consulta: " + somente_consulta + "; Comando executado: " + sqlParams.sql);
 
             InicializarListas();
 
@@ -31,7 +31,7 @@ namespace SearchInBases.Services
             return validarComandoSQL(sqlParams);
         }
 
-        
+
 
         private static bool validarComandoSQL(SQLParams sqlParams)
         {
@@ -43,15 +43,15 @@ namespace SearchInBases.Services
         {
             bool sqlValido = true;
             string sql = sqlParams.sql.ToUpper();
-            
-            foreach(var proibido in palavras_proibidas)
+
+            foreach (var proibido in palavras_proibidas)
             {
                 if (sql.Contains(proibido.ToUpper()))
                 {
                     Log.Add("Palavra proibida localizada: " + proibido);
                     sqlValido = false;
                 }
-                    
+
             }
 
             return sqlValido;
@@ -63,7 +63,7 @@ namespace SearchInBases.Services
             InicializarListaPalavrasObrigatorias();
         }
 
-      
+
 
         private static void InicializarListaPalavrasProibidas()
         {
@@ -81,13 +81,13 @@ namespace SearchInBases.Services
             palavras_proibidas.Add("kill ");
             palavras_proibidas.Add("database ");
             palavras_proibidas.Add("execute ");
-            
+
         }
 
         private static void InicializarListaPalavrasObrigatorias()
         {
             palavras_obrigatorias.Add("select");
-            palavras_obrigatorias.Add("from");                       
+            palavras_obrigatorias.Add("from");
         }
 
         public static bool SQLValido(SQLParams sqlParams)
@@ -116,8 +116,8 @@ namespace SearchInBases.Services
                 return nome;
 
             string alias = nome;
-            if (alias.Contains("."))          
-                alias = alias.Substring(alias.IndexOf(".") + 1);          
+            if (alias.Contains("."))
+                alias = alias.Substring(alias.IndexOf(".") + 1);
             alias = $"as {alias}";
 
             return $"CONVERT(AES_DECRYPT(unhex({nome}), '{key}'), char(1000)) {(!isWhere ? alias : "")}";
@@ -141,7 +141,7 @@ namespace SearchInBases.Services
                 bool isWhere = campoCript.Substring(campoCript.Length - 1, 1).Contains(":");
 
                 if (isWhere) campoCript = campoCript.Replace(":", "");
-                
+
                 string campoDescrip = SQLService.GetDescriptoCol(campoCript, isWhere);
 
                 sql = sql.Replace("[" + campoCript + (isWhere ? ":" : "") + "]", campoDescrip);
@@ -158,10 +158,10 @@ namespace SearchInBases.Services
         }
 
 
-        public static List<BaseAuth> filtrarBasesAuth(List<BaseAuth> basesAuth, SQLParams sqlParams)
+        public static List<BaseAuth> filtrarBasesAuth(Connection conn, SQLParams sqlParams, Action<string> callbackConsole)
         {
             var result = new List<BaseAuth>();
-            result.AddRange(basesAuth);
+            result.AddRange(conn.basesAuth);
 
             //Status
             if (SQLFiltro.enuStatusBase.Ativa.Equals(sqlParams.filtro.statusBase))
@@ -192,10 +192,9 @@ namespace SearchInBases.Services
         public static string TratarParamCamposBase(string sqlDescript, BaseAuth baseAuth)
         {
             sqlDescript = sqlDescript.Replace("$i", baseAuth.instance);
-            sqlDescript = sqlDescript.Replace("$b", baseAuth.databaseName);                 
+            sqlDescript = sqlDescript.Replace("$b", baseAuth.databaseName);
 
             return sqlDescript;
-        }
-       
-    }
+        }       
+    }    
 }

@@ -11,7 +11,7 @@ namespace SearchInBases
     {    
         //App
         public static string appName = "SearchInBases";        
-        public static string appVersion = "1.1.1";
+        public static string appVersion = "1.1.2";
         public static string appNameWithVersion = Vars.appName + "  v." + Vars.appVersion;
         public static string pathApp = AppDomain.CurrentDomain.BaseDirectory;
 
@@ -45,7 +45,8 @@ namespace SearchInBases
         public static string url_projeto_git = url_perfil_git + "/SearchInBases";
 
 
-        //Filter
+        //Filter        
+        public static List<InfoCliente> infoClientes = null;
         public static List<string> basesFiltradas { get; set; } = new List<string>();
         public static List<BaseUltimaConsulta> basesUltimaConsulta { get; set; } = new List<BaseUltimaConsulta>();
 

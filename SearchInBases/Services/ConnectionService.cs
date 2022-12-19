@@ -1,4 +1,5 @@
 ﻿using MySqlConnector;
+using Newtonsoft.Json;
 using RichTextBoxHTMLFormat;
 using SearchInBases.Entity;
 using SearchInBases.Enum;
@@ -56,6 +57,32 @@ namespace SearchInBases.Services
             }
         }
 
+        public static List<InfoCliente> buscarBasesAgenciaTT(Connection conn)
+        {           
+            try
+            {
+                String infoClientes = "";
+                using (var myConn = MySQLConnectorService.GetMySqlConnection(conn.mySqlConnector))
+                {
+                    myConn.Open();
+                    using (var reader = MySQLConnectorService.ExecutarSQL(myConn, String.Format(SQLEnum.SQLPayScan.select_basesTT)))
+                    {
+                        if (reader.Read())
+                        {                          
+                            infoClientes = reader.GetString("info_clientes");
+                        }
+                    }                    
+                }
+
+                return JsonConvert.DeserializeObject<List<InfoCliente>>(infoClientes);
+            }
+            catch(Exception e)
+            {                
+                Log.addErroMessage("Não foi possível buscar as bases TT a partir do PayScan (" + conn.connectionName + ") Erro: " + e.Message);
+                return null;
+            }            
+        }
+
         public static void ExecutarSQL(Action<string> callbackConsole,
                                         Action<BaseConsulta> callbackCsv,
                                         List<Connection> conexoesHabilitadas,
@@ -73,7 +100,7 @@ namespace SearchInBases.Services
                 {
                     int qtdMaxThreads = 20;
                     int countThread = 0;
-                    foreach (var baseAuth in SQLService.filtrarBasesAuth(conn.basesAuth, sqlParams))
+                    foreach (var baseAuth in SQLService.filtrarBasesAuth(conn, sqlParams, callbackConsole))
                     {
                         if (countThread < qtdMaxThreads)
                         {

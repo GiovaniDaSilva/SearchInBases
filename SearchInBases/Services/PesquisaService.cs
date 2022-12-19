@@ -37,6 +37,7 @@ namespace SearchInBases.Services
             try
             {
                 Log.AddIniciandoPesquisa();
+                callbackConsole("Iniciando pesquisa");
                 List<Connection> conexoesHabilitadas = Vars.connections.FindAll(c => c.habilitado);
                 tratarConexoesHabilitadas(callbackConsole, conexoesHabilitadas);
 
@@ -90,7 +91,7 @@ namespace SearchInBases.Services
 
                 foreach (var conn in conexoesHabilitadas)
                 {                                      
-                    foreach (var baseAuth in SQLService.filtrarBasesAuth(conn.basesAuth, sqlParams))
+                    foreach (var baseAuth in SQLService.filtrarBasesAuth(conn, sqlParams, callbackConsole))
                     {                        
                         string script = SQLService.TratarParamCamposBase(sqlParams.sqlDescript, baseAuth);
                         bool addSeparador = !script.Substring(script.Length - 1, 1).Contains(";");
@@ -163,7 +164,9 @@ namespace SearchInBases.Services
             bool sucesso = true;
             try
             {
-                Log.AddMessage("Testando comando SQL...");
+                String log = "Testando comando SQL";
+                Log.AddMessage(log);
+                callbackConsole(log);
 
                 List<Connection> conexoesHabilitadas = Vars.connections.FindAll(c => c.habilitado);
                 tratarConexoesHabilitadas(callbackConsole, conexoesHabilitadas);
