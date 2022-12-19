@@ -176,7 +176,7 @@ namespace SearchInBases.Forms
             bool comAgenciaTT = rbComTT.Checked;
             if (Vars.infoClientes != null)
             {
-                Log.AddMessage(String.Format("Bases %s agência TT pegas em memoria", comAgenciaTT ? "com" : "sem"));
+                Log.AddMessage(String.Format("Bases {0} agência TT pegas em memoria", comAgenciaTT ? "com" : "sem"));
                 return getListaDatabaseName(Vars.infoClientes, comAgenciaTT);
             }
 
