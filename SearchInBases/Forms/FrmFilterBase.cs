@@ -101,18 +101,12 @@ namespace SearchInBases.Forms
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-           if(!rbComTT.Checked && !rbSemTT.Checked)
+            if(!rbComTT.Checked && !rbSemTT.Checked)
             {
                 Message.Error("Selecione uma opção");
                 return;
             }
 
-            buscarAgenciasTT();
-        }
-
-
-        private void buscarAgenciasTT()
-        {
             if (Utils.IsNullOrEmpty(Vars.connections.FindAll(c => c.habilitado)))
             {
                 Message.Error("Nenhuma conexão selecionada");
@@ -122,6 +116,8 @@ namespace SearchInBases.Forms
             Pesquisando(true);
             Task.Run(() => { Pesquisar(); });
         }
+
+
 
         private void Pesquisar()
         {
@@ -180,11 +176,11 @@ namespace SearchInBases.Forms
             bool comAgenciaTT = rbComTT.Checked;
             if (Vars.infoClientes != null)
             {
-                Log.AddMessage("Bases com agência TT pegas em memoria");
+                Log.AddMessage(String.Format("Bases %s agência TT pegas em memoria", comAgenciaTT ? "com" : "sem"));
                 return getListaDatabaseName(Vars.infoClientes, comAgenciaTT);
             }
 
-            Log.AddMessage("Buscando bases da agência TT");
+            Log.AddMessage("Buscando info clientes");
             Vars.infoClientes = ConnectionService.buscarBasesAgenciaTT(conn);
             return getListaDatabaseName(Vars.infoClientes, comAgenciaTT);
         }
