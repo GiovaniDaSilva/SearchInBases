@@ -47,6 +47,8 @@ namespace SearchInBases.Formularios
             Vars.config.configFiltros.resultado = resultado;
             Vars.config.configFiltros.sqlFiltro.ambiente = ambiente;
             Vars.config.configFiltros.sqlFiltro.statusBase = statusBase;
+            
+            Vars.config.configFiltros.imprimirCabecalho = cbImprimirCabecalho.Checked;
 
             Vars.config.Save();
             Vars.AtualizarConnections();
@@ -98,6 +100,7 @@ namespace SearchInBases.Formularios
                     break;
             }
 
+            cbImprimirCabecalho.Checked = Vars.config.configFiltros.imprimirCabecalho;
 
             ConfiguracaoService.AtualizarListConn(lvConexoes);
         }

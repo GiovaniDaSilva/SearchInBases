@@ -11,7 +11,7 @@ namespace SearchInBases
     {    
         //App
         public static string appName = "SearchInBases";        
-        public static string appVersion = "1.1.2";
+        public static string appVersion = "1.1.3";
         public static string appNameWithVersion = Vars.appName + "  v." + Vars.appVersion;
         public static string pathApp = AppDomain.CurrentDomain.BaseDirectory;
 
@@ -28,7 +28,7 @@ namespace SearchInBases
         public static string nameFileResultadoCSV = "Resultado{0}.csv";
         public static string nameFileResultadoSQL = "Resultado{0}.sql";
         public static string pathResultados = AppDomain.CurrentDomain.BaseDirectory + @"Resultados\";
-        public static EResultado resultadoEsperado;
+        public static EResultado resultadoEsperado;        
 
         //Config
         public static Config config = new Config();

@@ -49,9 +49,6 @@
             this.lblConexoes = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpGeral = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtKeySQL = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.gbResultado = new System.Windows.Forms.GroupBox();
             this.rbResultadoSemOcorre = new System.Windows.Forms.RadioButton();
@@ -65,15 +62,19 @@
             this.rbAmbosAmbiente = new System.Windows.Forms.RadioButton();
             this.rbProducao = new System.Windows.Forms.RadioButton();
             this.rbInterno = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtKeySQL = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbImprimirCabecalho = new System.Windows.Forms.CheckBox();
             this.toolBar.SuspendLayout();
             this.tpConexoes.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tpGeral.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbResultado.SuspendLayout();
             this.gbBasesAtivas.SuspendLayout();
             this.gbAmbiente.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolBar
@@ -273,6 +274,7 @@
             // 
             // tpGeral
             // 
+            this.tpGeral.Controls.Add(this.cbImprimirCabecalho);
             this.tpGeral.Controls.Add(this.groupBox2);
             this.tpGeral.Controls.Add(this.groupBox1);
             this.tpGeral.Location = new System.Drawing.Point(4, 24);
@@ -282,33 +284,6 @@
             this.tpGeral.TabIndex = 2;
             this.tpGeral.Text = "Geral";
             this.tpGeral.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.txtKeySQL);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(8, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(550, 89);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Segurança";
-            // 
-            // txtKeySQL
-            // 
-            this.txtKeySQL.Location = new System.Drawing.Point(29, 47);
-            this.txtKeySQL.Name = "txtKeySQL";
-            this.txtKeySQL.Size = new System.Drawing.Size(490, 23);
-            this.txtKeySQL.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(191, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Chave de descriptografia do banco";
             // 
             // groupBox2
             // 
@@ -457,6 +432,43 @@
             this.rbInterno.Text = "Interno";
             this.rbInterno.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtKeySQL);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(8, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(550, 89);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Segurança";
+            // 
+            // txtKeySQL
+            // 
+            this.txtKeySQL.Location = new System.Drawing.Point(29, 47);
+            this.txtKeySQL.Name = "txtKeySQL";
+            this.txtKeySQL.Size = new System.Drawing.Size(490, 23);
+            this.txtKeySQL.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(29, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(191, 15);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Chave de descriptografia do banco";
+            // 
+            // cbImprimirCabecalho
+            // 
+            this.cbImprimirCabecalho.AutoSize = true;
+            this.cbImprimirCabecalho.Location = new System.Drawing.Point(25, 276);
+            this.cbImprimirCabecalho.Name = "cbImprimirCabecalho";
+            this.cbImprimirCabecalho.Size = new System.Drawing.Size(242, 19);
+            this.cbImprimirCabecalho.TabIndex = 24;
+            this.cbImprimirCabecalho.Text = "Imprimir cabeçalho na consulta ou script";
+            this.cbImprimirCabecalho.UseVisualStyleBackColor = true;
+            // 
             // FrmConfiguracao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -478,8 +490,7 @@
             this.tpConexoes.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tpGeral.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.tpGeral.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.gbResultado.ResumeLayout(false);
             this.gbResultado.PerformLayout();
@@ -487,6 +498,8 @@
             this.gbBasesAtivas.PerformLayout();
             this.gbAmbiente.ResumeLayout(false);
             this.gbAmbiente.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -528,5 +541,6 @@
         private System.Windows.Forms.RadioButton rbAmbosAmbiente;
         private System.Windows.Forms.RadioButton rbProducao;
         private System.Windows.Forms.RadioButton rbInterno;
+        private System.Windows.Forms.CheckBox cbImprimirCabecalho;
     }
 }
