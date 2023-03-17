@@ -278,7 +278,7 @@ namespace SearchInBases.Forms
                 ambiente = enuAmbiente.Producao;
 
             SQLFiltro sqlFiltro = new SQLFiltro(statusBase, ambiente);
-            return new SQLParams(txtSQL.Text, sqlFiltro, Vars.basesFiltradas);
+            return new SQLParams(txtSQL.Text, sqlFiltro, Vars.basesFiltradas, Vars.config.configFiltros.imprimirCabecalho);
         }
 
         private void AtualizaConsole(string message)

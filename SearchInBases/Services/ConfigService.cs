@@ -19,11 +19,13 @@ namespace SearchInBases.Services
         {
             public SQLFiltro sqlFiltro;
             public EResultado resultado;
+            public bool imprimirCabecalho;
 
             public ConfigFiltros()
             {
                 this.sqlFiltro = new SQLFiltro(enuStatusBase.Ativa, enuAmbiente.Producao);
                 this.resultado = EResultado.ComOcorre;
+                this.imprimirCabecalho = true;
             }
         }
 

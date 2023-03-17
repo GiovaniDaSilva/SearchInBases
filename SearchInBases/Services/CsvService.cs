@@ -35,22 +35,29 @@ namespace SearchInBases
                 File.Create(arquivo).Close();
                 using (StreamWriter sw = new StreamWriter(File.Open(arquivo, FileMode.Open), Encoding.UTF8))
                 {
-                    var sqlLine = sqlParams.sql.Replace(Environment.NewLine, " ");
-                    sw.WriteLine(String.Format(padraoCsv, data));
-                    DadosComuns(sqlParams, data, sw, sqlLine);
-                    sw.WriteLine(Environment.NewLine);
+                    var sqlLine = sqlParams.sql.Replace(Environment.NewLine, " ");                    
+                    DadosComuns(sqlParams, data, sw, sqlLine, padraoCsv);                    
                 }
             }
 
             return arquivo;
         }
 
-        private static void DadosComuns(SQLParams sqlParams, DateTime data, StreamWriter sw, string sqlLine, bool resultadoEsperado = true)
-        {            
+        private static void DadosComuns(SQLParams sqlParams, DateTime data, StreamWriter sw, string sqlLine, String padraoData,  bool resultadoEsperado = true)
+        {
+            if (!sqlParams.imprimirCabecalho) return;
+
+            if(!resultadoEsperado) sw.WriteLine("/*");
+            
+            sw.WriteLine(String.Format(padraoData, data));
             sw.WriteLine("SQL Excutado: " + sqlLine);
-            if(resultadoEsperado)  sw.WriteLine("Resultado Esperado: " + GetEnumDescription(Vars.resultadoEsperado));
+            if (resultadoEsperado) sw.WriteLine("Resultado Esperado: " + GetEnumDescription(Vars.resultadoEsperado));
             sw.WriteLine("Ambiente: " + GetEnumDescription(sqlParams.filtro.ambiente));
             sw.WriteLine("Bases: " + GetEnumDescription(sqlParams.filtro.statusBase));
+
+            if (!resultadoEsperado) sw.WriteLine("*/");
+            
+            sw.WriteLine(Environment.NewLine);
         }
 
         public static string CriarArquivoSQL(Entity.SQLParams sqlParams)
@@ -64,12 +71,9 @@ namespace SearchInBases
                 File.Create(arquivo).Close();
                 using (StreamWriter sw = new StreamWriter(File.Open(arquivo, FileMode.Open), Encoding.UTF8))
                 {
-                    var sqlLine = sqlParams.sql.Replace(Environment.NewLine, " ");
-                    sw.WriteLine("/*");
-                    sw.WriteLine(String.Format(padraoSql, data));
-                    DadosComuns(sqlParams, data, sw, sqlLine, false);
-                    sw.WriteLine("*/");
-                    sw.WriteLine(Environment.NewLine);
+                    var sqlLine = sqlParams.sql.Replace(Environment.NewLine, " ");                                      
+                    DadosComuns(sqlParams, data, sw, sqlLine, padraoSql, false);                    
+                    
                 }
             }
 
